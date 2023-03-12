@@ -35,8 +35,10 @@ function toggleSidebar() {
 
 }
 
-
-function toggleContentPage() {
+let currentPage = document.querySelector("section[data-page='projects']");
+const contentPages = document.querySelectorAll("section#content-dash > section")
+// console.log(contentPages);
+async function toggleContentPage() {
     contentDividerButtons.forEach(button => {
         if (button.hasAttribute("class")) {
             button.removeAttribute("class");
@@ -44,7 +46,14 @@ function toggleContentPage() {
     });
 
     this.classList.add("clicked");
-    // console.log("waw");
+
+    let page = this.dataset.page;
+    let contentPage = document.querySelector(`section[data-page="${page}"]`);
+
+    currentPage.classList.add("swiped");
+    contentPage.classList.remove("swiped");
+    currentPage = contentPage;
+
 }
 
 
@@ -212,8 +221,6 @@ function addUserProject(projectArray) {
 
             // Appends the currently created button to container div
             buttonsContainer.appendChild(button);
-
-            console.log(button);
         }
         
         let commendButton = buttonsContainer.querySelector(`button[data-action="commend"]`);

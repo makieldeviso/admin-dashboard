@@ -350,7 +350,7 @@ section#content-divider button {
     width: 100%;
 }
 
-section#content-divider button#projects {
+section#content-divider button#projects-button {
     -webkit-clip-path: polygon(0 0, 95% 0, 100% 100%, 0 100%);
     clip-path: polygon(0 0, 95% 0, 100% 100%, 0 100%);
 }
@@ -375,10 +375,53 @@ section#content-divider button.clicked {
 
 
 
-
+/* section#content-dash (start)*/
 section#content-dash {
     padding: calc(1px + 1vw);
+    /* transition: transform 1s ease-in-out; */
+    display: flex;
+    min-width: 100vw;
+    overflow: hidden;
+    flex-wrap: nowrap;
 }
+
+section#content-dash > section {
+    transition: transform 0.2s ease-in-out;
+    overflow: hidden;
+    width: 100%;
+    flex: 0 0 100%;
+ 
+} 
+
+section#content-dash > section#projects.swiped {
+    transform: translateX(-110%);
+} 
+
+section#content-dash > section#projects{
+    transform: translateX(0);
+}
+
+section#content-dash > section#announcements.swiped {
+    transform: translateX(-200%);
+} 
+
+section#content-dash > section#announcements{
+    transform: translateX(-100%);
+} 
+
+
+section#content-dash > section#team.swiped {
+    transform: translateX(-300%);
+} 
+
+section#content-dash > section#team {
+    transform: translateX(-200%);
+} 
+
+
+
+
+
 
 section#content-dash.offset {
     padding-top: calc(var(--content-div-height) + calc(1px + 1vw));

@@ -133,13 +133,13 @@
                 <nav>
                     <ul>
                         <li>
-                            <button id="projects" class="clicked"> Your Projects</button>
+                            <button id="projects-button" class="clicked" data-page="projects"> Your Projects</button>
                         </li>
                         <li>
-                            <button id="announcements">Announcements</button>
+                            <button id="announcements-button" data-page="announcements">Announcements</button>
                         </li>
                         <li>
-                            <button>Team</button>
+                            <button id="team-button" data-page="team">Team</button>
                         </li>
                     </ul>
                 </nav>
@@ -153,14 +153,52 @@
 
         <section id="content-dash">
 
-            <section id="projects">
+            <section id="projects" data-page="projects">
                 <!-- <h3>Your projects</h3> -->
                 <div id="projects-grid"></div>
             </section> <!-- #main-content end -->
 
 
+            <section id="announcements" data-page="announcements" class="swiped">
+                <h3>Announcements</h3>
+                <div>
+                    <h4>Subject 1</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat earum sapiente perferendis veritatis corrupti eaque nemo ullam animi et, ut repellat mollitia amet quas beatae, totam temporibus necessitatibus adipisci consequatur.</p>
+                </div>
+                <div>
+                    <h4>Subject 2</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed voluptas ab exercitationem officia iste adipisci numquam sunt, consectetur aut suscipit aperiam ad voluptatum eveniet quia voluptates culpa temporibus fuga fugit.</p>
+                </div>
+                <div>
+                    <h4>Subject 3</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor reprehenderit, iste ipsam cupiditate fuga ipsa suscipit provident, totam quae quasi magnam dignissimos sint praesentium illum natus aperiam rem quos quidem.</p>
+                </div>
+            </section>
 
 
+            <section id="team" data-page="team" class="swiped">
+                <h3>Team</h3>
+                <div>
+                    <div data-icon="profile-pic"></div>
+                    <p>@username</p>
+                    <p>status</p>
+                </div>
+                <div>
+                    <div data-icon="profile-pic"></div>
+                    <p>@username</p>
+                    <p>status</p>
+                </div>
+                <div>
+                    <div data-icon="profile-pic"></div>
+                    <p>@username</p>
+                    <p>status</p>
+                </div>
+                <div>
+                    <div data-icon="profile-pic"></div>
+                    <p>@username</p>
+                    <p>status</p>
+                </div>
+            </section>
 
 
         </section>
@@ -174,45 +212,9 @@
 
         
 
-        <section id="announcements">
-            <h3>Announcements</h3>
-            <div>
-                <h4>Subject 1</h4>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat earum sapiente perferendis veritatis corrupti eaque nemo ullam animi et, ut repellat mollitia amet quas beatae, totam temporibus necessitatibus adipisci consequatur.</p>
-            </div>
-            <div>
-                <h4>Subject 2</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed voluptas ab exercitationem officia iste adipisci numquam sunt, consectetur aut suscipit aperiam ad voluptatum eveniet quia voluptates culpa temporibus fuga fugit.</p>
-            </div>
-            <div>
-                <h4>Subject 3</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor reprehenderit, iste ipsam cupiditate fuga ipsa suscipit provident, totam quae quasi magnam dignissimos sint praesentium illum natus aperiam rem quos quidem.</p>
-            </div>
-        </section>
 
-        <section id="community-stat">
-            <h3>Team</h3>
-            <div>
-                <div data-icon="profile-pic"></div>
-                <p>@username</p>
-                <p>status</p>
-            </div>
-            <div>
-                <div data-icon="profile-pic"></div>
-                <p>@username</p>
-                <p>status</p>
-            </div>
-            <div>
-                <div data-icon="profile-pic"></div>
-                <p>@username</p>
-                <p>status</p>
-            </div>
-            <div>
-                <div data-icon="profile-pic"></div>
-                <p>@username</p>
-                <p>status</p>
-            </div>
-        </section>
+
+      
 
 
         <section id="community">

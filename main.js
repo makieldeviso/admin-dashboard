@@ -346,7 +346,6 @@ function addUserProject(projectArray) {
 
 
 function expandModal() {
-    
     let detailsId = this.getAttribute("id");
     let thisModal = document.querySelector(`dialog#${detailsId}`)
     
@@ -354,9 +353,34 @@ function expandModal() {
 }
 
 function closeModal() {
-    
     let buttonId = this.getAttribute("id");
     let thisModal = document.querySelector(`dialog#${buttonId}`);
     
     thisModal.close();
 }
+
+// These element should be declared after project creation function is run 
+// Isolates hover UI effect to header and description only
+const projectHeader = document.querySelectorAll(`div[data-class="project-box"] h4`);
+const projectDetails = document.querySelectorAll(`div[data-class="project-box"] div[data-detail]`);
+
+projectHeader.forEach(element => {
+    checkElementAddEvent(element, "mouseover", hoverEvent);
+    checkElementAddEvent(element, "mouseout", hoverEvent);
+});
+
+projectDetails.forEach(element => {
+    checkElementAddEvent(element, "mouseover", hoverEvent);
+    checkElementAddEvent(element, "mouseout", hoverEvent);
+});
+
+function hoverEvent(event) {
+    let projectBox = this.parentElement;
+    let e = event.type;
+    
+    if (e === "mouseover") {
+        projectBox.classList.add("hovered");
+    } else if (e === "mouseout") {
+        projectBox.classList.remove("hovered");
+    }
+}   

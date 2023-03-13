@@ -383,7 +383,7 @@ section#content-divider button.clicked {
 /* section#content-dash (start)*/
 section#content-dash {
     padding: calc(1px + 1vw);
-    z-index: var(--content-z);
+    /* z-index: var(--content-z); */
     display: flex;
     min-width: 100vw;
     overflow: hidden;
@@ -392,7 +392,8 @@ section#content-dash {
 }
 
 section#content-dash > section {
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out, 
+        height 0.2s ease-in-out;
     width: 100%;
     flex: 0 0 100%;
     z-index: var(--content-z);
@@ -401,27 +402,33 @@ section#content-dash > section {
 
 section#content-dash > section#projects.swiped {
     transform: translateX(-110%);
+    height: 0;
 } 
 
 section#content-dash > section#projects{
     transform: translateX(0);
+    height: 100%;
 }
 
 section#content-dash > section#announcements.swiped {
-    transform: translateX(-200%);
+    transform: translateX(-210%);
+    height: 0;
 } 
 
 section#content-dash > section#announcements{
     transform: translateX(-100%);
+    border: 1px solid black; 
+    height: 100%; 
 } 
 
-
 section#content-dash > section#team.swiped {
-    transform: translateX(-300%);
+    transform: translateX(-310%);
+    height: 0;
 } 
 
 section#content-dash > section#team {
     transform: translateX(-200%);
+    height: 100%;
 } 
 
 
@@ -456,10 +463,16 @@ div#projects-grid div[data-class="project-box"] {
     flex-direction: column;
 }
 
+div#projects-grid div[data-class="project-box"].hovered {
+    filter: brightness(0.95);
+}
+
+
 div#projects-grid div[data-class="project-box"] h4 {
     font-size: var(--content-header-font-size);
     height: 10%;
 }
+
 div#projects-grid div[data-class="project-box"] div[data-detail="details"] {
     height: 75%;
     display: flex;

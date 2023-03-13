@@ -166,13 +166,17 @@ function addUserProject(projectArray) {
         dialogBox.setAttribute("class", "projectModal");
         dialogBox.setAttribute("id", projectArray[i]["id"]);
 
+        let dialogDiv = document.createElement("div");
+        dialogDiv.setAttribute("class", "modalDiv");
+        dialogBox.appendChild(dialogDiv);
+
     // Project Header
         // Creates an h4 element for the project
         let projectHeader = document.createElement("h4");
         projectHeader.textContent = `${projectArray[i]["projectName"]}`;
 
         // Appends h4 to the projectBox and Dialog box
-        appendMultiple(projectHeader, projectBox, dialogBox);
+        appendMultiple(projectHeader, projectBox, dialogDiv);
 
         // Reusable function to append element to TWO containers
         function appendMultiple(element, container1, container2) {
@@ -233,7 +237,7 @@ function addUserProject(projectArray) {
 
         //Appends the project details div to the project box and dialog box
         projectBox.appendChild(projectDetails);
-        dialogBox.appendChild(projectDetailsModal);
+        dialogDiv.appendChild(projectDetailsModal);
 
 
     // Respond Buttons
@@ -298,12 +302,16 @@ function addUserProject(projectArray) {
 
 // modal Specific Content
         //Adds button at the top of modal
-        let headerText = dialogBox.querySelector("h4");
+        let headerText = dialogDiv.querySelector("h4");
         let closeButton = document.createElement("button");
         let closeButtonIcon = document.createElement("i"); 
+        closeButton.setAttribute("id", `${projectArray[i]["id"]}`);
         closeButtonIcon.setAttribute("class", "fa-solid fa-xmark");
         closeButton.appendChild(closeButtonIcon);
-        dialogBox.insertBefore(closeButton, headerText);
+
+        // Adds Event listener to the Modal
+        closeButton.addEventListener("click", closeModal);
+        dialogDiv.insertBefore(closeButton, headerText);
 
         // Reusable function to Add link to modal
         // dataAttribute -> adds dataset.link attribute, you specify attribute value
@@ -322,7 +330,7 @@ function addUserProject(projectArray) {
             site.textContent = ("Link Here");
             container.appendChild(site);
 
-            dialogBox.appendChild(container);
+            dialogDiv.appendChild(container);
         }
 
         // Adds code link
@@ -343,5 +351,12 @@ function expandModal() {
     let thisModal = document.querySelector(`dialog#${detailsId}`)
     
     thisModal.showModal();
+}
 
+function closeModal() {
+    
+    let buttonId = this.getAttribute("id");
+    let thisModal = document.querySelector(`dialog#${buttonId}`);
+    
+    thisModal.close();
 }

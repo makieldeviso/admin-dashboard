@@ -27,6 +27,7 @@
     --dark-green-contrast: #ADE792;
     --light-green: #89d38f;
     --light-green-contrast: #EDF1D6;
+    --yellow-dark: #FED049;
     --yellow-contrast: #F5DF99;
     --background: #F6FBF4;
     --icon-main-size: calc(35px + 1vw);
@@ -392,7 +393,6 @@ section#content-dash {
 
 section#content-dash > section {
     transition: transform 0.2s ease-in-out;
-    overflow: hidden;
     width: 100%;
     flex: 0 0 100%;
     z-index: var(--content-z);
@@ -443,9 +443,11 @@ div#projects-grid {
 
 div#projects-grid div[data-class="project-box"] {
     padding: var(--common-padding);
+    padding-left: calc(var(--common-padding) * 2);
     border: 1px solid var(--bamboo-green);
+    border-left: 10px double var(--yellow-dark);
     background-color: var(--background);
-    border-radius: 5%;
+    border-radius: 10px 0 0 10px;
     width: 100%;
     min-height: calc(150px + 1vw);
     overflow: hidden;
@@ -475,13 +477,15 @@ div[data-detail="details"] p {
 }
 
 div[data-detail="details"] div[data-preview="preview"] {
-    width: 100%;
+    width: 95%;
     flex: 1;
     /* border: var(--common-padding) solid var(--background); */
     background: url("/images/profile.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    border-left: 10px double var(--dark-green);
+    border-radius: 5px 0 0 5px;
 }
 
 div#projects-grid div[data-class="project-box"] div[data-action="respond"] {
@@ -512,39 +516,96 @@ div#projects-grid div[data-class="project-box"] button i {
 div#projects-grid div[data-class="project-box"] button span {
     width: 30%;
 }
+/* section#content-dash (end)*/
 
 
 
+
+/* Modal styling (start) */
 dialog.projectModal {
     margin: auto;
-    padding: 10px;
-    max-width: 90%;
-    height: 90%;
+    min-width: 250px;
+    width: 90%;
+    min-height: 500px;
+    height: 60%;
+    border: 2px solid var(--dark-green);
+    border-radius: 10px;
+    box-shadow: 0 0 5px var(--light-green);
+    background-color: var(--background);
 }
+
+dialog.projectModal::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+dialog.projectModal div.modalDiv {
+    padding: var(--common-padding);
+    max-width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--common-margin);
+}
+
+dialog.projectModal button {
+    width: calc(var(--brand-font-size) * 1.5);
+    height: calc(var(--brand-font-size) * 1.5);
+    font-size: var(--brand-font-size);
+    border-radius: 50%;
+
+    border: 2px solid var(--bamboo-green);
+    border-radius: 50%;
+    background-color: var(--yellow-contrast); 
+    color: var(--bamboo-green);
+    align-self: flex-end;
+}
+
+dialog.projectModal h4 {
+    font-size: calc(var(--content-header-font-size) * 1.5);
+}
+
+
 dialog.projectModal div[data-detail="details"] {
+    flex: 1;
     display: flex;
     flex-direction: column;
     height: 50%;
+    margin-bottom: calc(var(--common-margin) * 5);
 }
+
+dialog.projectModal div[data-detail="details"] p {
+    font-size: calc(var(--content-main-font-size) * 1.2);
+    margin-bottom: calc(var(--common-margin) * 2);
+}
+
 dialog.projectModal div[data-preview="preview"] {
-    width: 100%;
+    width: 95%;
     height: 50%;
+    margin: auto;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    border-left: 10px double var(--dark-green);
+    border-radius: 5px 0 0 5px;
 }
 
 dialog.projectModal div[data-link] {
     display: flex;
+    height: max-content;
+    align-items: center;
     gap: 1rem;
 }
 
+
 dialog.projectModal div[data-link] > p {
-    width: 40%;
-    height: 20%;
+    font-size: calc(var(--content-main-font-size) * 1.2);
+    height: 100%;
+    min-width: max-content;
+    width: calc(115px + 1vw);
 }
 
 dialog.projectModal div[data-link] > a {
-    width: 60%;
-    height: 20%;
+    font-size: calc(var(--content-main-font-size) * 1.2);
+    height: 100%;
 }
+/* Modal styling (end) */

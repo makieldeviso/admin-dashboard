@@ -25,6 +25,12 @@ const contentDividerButtons = document.querySelectorAll("section#content-divider
         checkElementAddEvent(button, "click", toggleContentPage);
     });
 
+const modalContainer = document.querySelector("div#modal-container");
+
+
+
+
+
 
 function toggleSidebar() {
     if (sidebar.hasAttribute("class")) {
@@ -78,7 +84,8 @@ function checkScroll(event) {
 
 let userProjectsArray = [];
 class UserProjects {
-    constructor(projectName, description, preview, commend, feedback, fork, codeSite, liveSite) {
+    constructor(id, projectName, description, preview, commend, feedback, fork, codeSite, liveSite) {
+        this.id = id;
         this.projectName = projectName;
         this.description = description;
         this.preview = preview;
@@ -97,6 +104,7 @@ class UserProjects {
 // Constructs projects as objects
 // Comments for easier production of objects
 let sampleProject = new UserProjects(
+    "sample-project", //id
     "Sample Project", //projectName
     "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni eaque iste, aliquid hic nemo suscipit fugiat dolorum laborum aliquam impedit facere provident dignissimos esse illum rerum saepe quam sint. Quisquam!", //description
     "profile.png", //preview
@@ -108,6 +116,7 @@ let sampleProject = new UserProjects(
 );
 
 let sampleProject2 = new UserProjects(
+    "sample-project-2", //id
     "Sample Project 2", //projectName
     "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni eaque iste, aliquid hic nemo suscipit fugiat dolorum laborum aliquam impedit facere provident dignissimos esse illum rerum saepe quam sint. Quisquam!", //description
     "profile.png", //preview
@@ -119,6 +128,7 @@ let sampleProject2 = new UserProjects(
 );
 
 let sampleProject3 = new UserProjects(
+    "sample-project-3", //id
     "Sample Project 3", //projectName
     "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni eaque iste, aliquid hic nemo suscipit fugiat dolorum laborum aliquam impedit facere provident dignissimos esse illum rerum saepe quam sint. Quisquam!", //description
     "profile.png", //preview
@@ -130,6 +140,7 @@ let sampleProject3 = new UserProjects(
 );
 
 let sampleProject4 = new UserProjects(
+    "sample-project-4", //id
     "Sample Project 4", //projectName
     "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni eaque iste, aliquid hic nemo suscipit fugiat dolorum laborum aliquam impedit facere provident dignissimos esse illum rerum saepe quam sint. Quisquam!", //description
     "profile.png", //preview
@@ -150,24 +161,55 @@ function addUserProject(projectArray) {
         let projectBox = document.createElement("div");
         projectBox.setAttribute("data-class", "project-box");
 
+    // Dialog
+        let dialogBox = document.createElement("dialog");
+        dialogBox.setAttribute("class", "projectModal");
+        dialogBox.setAttribute("id", projectArray[i]["id"]);
+
     // Project Header
         // Creates an h4 element for the project
         let projectHeader = document.createElement("h4");
         projectHeader.textContent = `${projectArray[i]["projectName"]}`;
 
-        // Appends h4 to the projectBox
-        projectBox.appendChild(projectHeader);
+        // Appends h4 to the projectBox and Dialog box
+        appendMultiple(projectHeader, projectBox, dialogBox);
+
+        // Reusable function to append element to TWO containers
+        function appendMultiple(element, container1, container2) {
+            container1.appendChild(element);
+
+            let elementClone = element.cloneNode(true); //clones element
+            container2.appendChild(elementClone);
+        }
+
 
     // Project details
         // Creates a container div for the project details
         let projectDetails= document.createElement("div");
         projectDetails.setAttribute("data-detail", "details");
+        projectDetails.setAttribute("id", projectArray[i]["id"]);
+
+        // Creates another container for project details modal
+        let projectDetailsModal = projectDetails.cloneNode(true);
+
+
+        // Adds event listener to the project details div
+        projectDetails.addEventListener("click", expandModal);
+
 
         // Creates the p element for the text detail
         let detailText = document.createElement("p");
+
+        // Creates the p element for the text detail (Modal)
+        let detailTextFull = document.createElement("p");
+
         let text = `${projectArray[i]["description"]}`;
 
-        if (text.length > 180) {
+         // Adds content to detail text (modal)
+        detailTextFull.textContent = text;
+
+        // Adds content to detail text project box
+        if (text.length > 180) { 
             let cutText = text.slice(0, 100);
             detailText.textContent = cutText + " ...";
         } else {
@@ -175,18 +217,23 @@ function addUserProject(projectArray) {
         }
         
 
+        //Appends the text to the project details container div
+        projectDetails.appendChild(detailText);
+
+        // Appends full description to details (Modal) 
+        projectDetailsModal.appendChild(detailTextFull);
+
         //Creates div element for preview image
         let preview = document.createElement("div");
         preview.setAttribute("data-preview", "preview");
         preview.style.backgroundImage = `url(./images/${projectArray[i]["preview"]})`;
 
-        //Appends the text to the project details container div
-        projectDetails.appendChild(detailText);
-        // Appends the preview to the details container div
-        projectDetails.appendChild(preview);
+        // Appends the preview to the details container div and modal
+        appendMultiple(preview, projectDetails, projectDetailsModal);
 
-        //Appends the project details div to the project box
+        //Appends the project details div to the project box and dialog box
         projectBox.appendChild(projectDetails);
+        dialogBox.appendChild(projectDetailsModal);
 
 
     // Respond Buttons
@@ -195,20 +242,30 @@ function addUserProject(projectArray) {
         buttonsContainer.setAttribute("data-action", "respond");
         
 
-        let buttonSpec = [
-            ["commend","fa-solid", "fa-leaf"],
-            ["feedback", "fa-regular", "fa-message"],
-            ["fork", "fa-solid", "fa-code-fork"]
-        ];
+        // Creates reusable button creator object
+        let buttonSpec = [];
+        class buttonSpecObj {
+            constructor (action, class1, class2) {
+                this.action = action;
+                this.class1 = class1;
+                this.class2 = class2;
+                buttonSpec.push(this);
+            }
+        }
+
+        let commendSpec = new buttonSpecObj("commend", "fa-solid", "fa-leaf");
+        let feedbackSpec = new buttonSpecObj("feedback", "fa-regular", "fa-message");
+        let forkSpec = new buttonSpecObj("fork", "fa-solid", "fa-code-fork");
+
         for(let j = 0; j < buttonSpec.length; j++) {
 
             // Creates a button element with dataset.action
             let button = document.createElement("button");
-            button.setAttribute("data-action", buttonSpec[j][0]);
+            button.setAttribute("data-action", buttonSpec[j]["action"]);
 
             // Creates i element with class from font awesome
             let buttonIcon = document.createElement("i");
-            buttonIcon.classList.add(buttonSpec[j][1], buttonSpec[j][2]);
+            buttonIcon.classList.add(buttonSpec[j]["class1"], buttonSpec[j]["class2"]);
 
             // Creates a span Element
             let buttonSpan = document.createElement("span");
@@ -236,7 +293,53 @@ function addUserProject(projectArray) {
 
         //Appends the whole project-box on the projects-grid
         projectGrid.appendChild(projectBox);
+
+
+
+// modal Specific Content
+    // Code github 
+        let codeDiv = document.createElement("div");
+        codeDiv.setAttribute("data-link", "code-site");
+
+        let codeLabel = document.createElement("p");
+        codeLabel.textContent = ("Code:")
+        codeDiv.appendChild(codeLabel);
+
+        let codeSite = document.createElement("a");
+        codeSite.setAttribute("href", `${projectArray[i]["codeSite"]}`);
+        codeSite.textContent = ("Link Here");
+        codeDiv.appendChild(codeSite);
+
+    // Live Preview
+        let livePreviewDiv = document.createElement("div");
+        livePreviewDiv.setAttribute("data-link", "live-site");
+
+        let livePreviewLabel = document.createElement("p");
+        livePreviewLabel.textContent = ("Live Preview:")
+        livePreviewDiv.appendChild(livePreviewLabel);
+
+        let livePreviewSite = document.createElement("a");
+        livePreviewSite.setAttribute("href", `${projectArray[i]["liveSite"]}`);
+        livePreviewSite.textContent = ("Link Here");
+        livePreviewDiv.appendChild(livePreviewSite);
+
+        dialogBox.appendChild(codeDiv);
+        dialogBox.appendChild(livePreviewDiv);
+        
+
+
+        // Appends dialog box to modal container
+        modalContainer.appendChild(dialogBox);
     }
 }
 
 
+function expandModal() {
+    
+    let detailsId = this.getAttribute("id");
+    let thisModal = document.querySelector(`dialog#${detailsId}`)
+    
+    thisModal.showModal();
+
+
+}

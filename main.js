@@ -297,36 +297,39 @@ function addUserProject(projectArray) {
 
 
 // modal Specific Content
-    // Code github 
-        let codeDiv = document.createElement("div");
-        codeDiv.setAttribute("data-link", "code-site");
+        //Adds button at the top of modal
+        let headerText = dialogBox.querySelector("h4");
+        let closeButton = document.createElement("button");
+        let closeButtonIcon = document.createElement("i"); 
+        closeButtonIcon.setAttribute("class", "fa-solid fa-xmark");
+        closeButton.appendChild(closeButtonIcon);
+        dialogBox.insertBefore(closeButton, headerText);
 
-        let codeLabel = document.createElement("p");
-        codeLabel.textContent = ("Code:")
-        codeDiv.appendChild(codeLabel);
+        // Reusable function to Add link to modal
+        // dataAttribute -> adds dataset.link attribute, you specify attribute value
+        // labelText -> Specify label for the link eg. "Code:"
+        // thisSite -> get link from object in the Array argument of this function
+        function makeLink(dataAttributeName, labelText, thisSite ) {
+            let container = document.createElement("div");
+            container.setAttribute("data-link", dataAttributeName);
 
-        let codeSite = document.createElement("a");
-        codeSite.setAttribute("href", `${projectArray[i]["codeSite"]}`);
-        codeSite.textContent = ("Link Here");
-        codeDiv.appendChild(codeSite);
+            let label = document.createElement("p");
+            label.textContent = labelText;
+            container.appendChild(label);
 
-    // Live Preview
-        let livePreviewDiv = document.createElement("div");
-        livePreviewDiv.setAttribute("data-link", "live-site");
+            let site = document.createElement("a");
+            site.setAttribute("href", `${thisSite}`);
+            site.textContent = ("Link Here");
+            container.appendChild(site);
 
-        let livePreviewLabel = document.createElement("p");
-        livePreviewLabel.textContent = ("Live Preview:")
-        livePreviewDiv.appendChild(livePreviewLabel);
+            dialogBox.appendChild(container);
+        }
 
-        let livePreviewSite = document.createElement("a");
-        livePreviewSite.setAttribute("href", `${projectArray[i]["liveSite"]}`);
-        livePreviewSite.textContent = ("Link Here");
-        livePreviewDiv.appendChild(livePreviewSite);
+        // Adds code link
+        makeLink("code-site", "View Code:", projectArray[i]["codeSite"]);
 
-        dialogBox.appendChild(codeDiv);
-        dialogBox.appendChild(livePreviewDiv);
-        
-
+        // Adds live site link
+        makeLink("live-site", "Live Preview:", projectArray[i]["liveSite"]);
 
         // Appends dialog box to modal container
         modalContainer.appendChild(dialogBox);
@@ -340,6 +343,5 @@ function expandModal() {
     let thisModal = document.querySelector(`dialog#${detailsId}`)
     
     thisModal.showModal();
-
 
 }

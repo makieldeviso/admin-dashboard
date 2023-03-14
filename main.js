@@ -1,5 +1,5 @@
 
-// Checks element first if it exist, then add event listener
+// Checks element first if it exist, then add event listener (start) ---
 function checkElementAddEvent(element, eventListener, linkedFunction) {
     if (element != null) {
         element.addEventListener(eventListener, linkedFunction);
@@ -7,7 +7,7 @@ function checkElementAddEvent(element, eventListener, linkedFunction) {
         return
     }
 }
-
+// Checks element first if it exist, then add event listener (end) ---
 
 
 const headerBar = document.querySelector("section#header-bar");
@@ -18,6 +18,8 @@ const contentDash = document.querySelector("section#content-dash")
 const hamburger = document.querySelector("#hamburger button");
 const sidebar = document.querySelector("section#sidebar");
     checkElementAddEvent(hamburger, "click", toggleSidebar);
+const closeSideBarButton = document.querySelector("button#exit-side");
+    checkElementAddEvent(closeSideBarButton, "click", toggleSidebar)
 
 const contentDividerBar = document.querySelector("section#content-divider");
 const contentDividerButtons = document.querySelectorAll("section#content-divider button");
@@ -25,26 +27,53 @@ const contentDividerButtons = document.querySelectorAll("section#content-divider
         checkElementAddEvent(button, "click", toggleContentPage);
     });
 
+const projectGrid = document.querySelector("div#projects-grid");
 const modalContainer = document.querySelector("div#modal-container");
 
 
-
-
-
-
+// Hides or Show Side Bar (start) ----
 function toggleSidebar() {
+    console.log(this);
     if (sidebar.hasAttribute("class")) {
         sidebar.removeAttribute("class");
+    
+        // Temporarily removes hamburger click ability
+        if (this === hamburger) {
+            hamburger.removeEventListener("click", toggleSidebar);
+        }
+
     } else {
         sidebar.classList.add("hidden");
+        hamburger.addEventListener("click", toggleSidebar);
     }
-
 }
+// Hides or Show Side Bar (end) ----
 
+
+// Sticks divider button at top (start) ----
+function checkScroll() {
+    let headerBarHeight = Math.ceil(headerBar.clientHeight);
+    let subHeaderHeight = Math.ceil(subHeader.clientHeight);
+    let topOffSet = subHeaderHeight - headerBarHeight; //subHeader has padding-top
+    // console.log(topOffSet);
+    // console.log(window.scrollY);
+
+    if (window.scrollY > topOffSet) {
+        contentDividerBar.classList.add("fixed");
+        contentDash.classList.add("offset");
+    } else {
+        contentDividerBar.classList.remove("fixed");
+        contentDash.classList.remove("offset");
+    }
+}
+// Sticks divider button at top (end) ----
+
+
+// Toggles the content page between projects, announcement and team (start) ---
 let currentPage = document.querySelector("section[data-page='projects']");
-const contentPages = document.querySelectorAll("section#content-dash > section")
-// console.log(contentPages);
-async function toggleContentPage() {
+const contentPages = document.querySelectorAll("section#content-dash > section");
+
+function toggleContentPage() {
     contentDividerButtons.forEach(button => {
         if (button.hasAttribute("class")) {
             button.removeAttribute("class");
@@ -59,29 +88,11 @@ async function toggleContentPage() {
     currentPage.classList.add("swiped");
     contentPage.classList.remove("swiped");
     currentPage = contentPage;
-
 }
+// Toggles the content page between projects, announcement and team (end) ---
 
 
-function checkScroll(event) {
-    let headerBarHeight = Math.ceil(headerBar.clientHeight);
-    let subHeaderHeight = Math.ceil(subHeader.clientHeight);
-    let topOffSet = subHeaderHeight - headerBarHeight; //subHeader has padding-top
-    // console.log(topOffSet);
-    // console.log(window.scrollY);
-
-    if (window.scrollY > topOffSet) {
-        contentDividerBar.classList.add("fixed");
-        contentDash.classList.add("offset");
-    } else {
-        contentDividerBar.classList.remove("fixed");
-        contentDash.classList.remove("offset");
-    }
-
-}
-
-
-
+// Project Constructor function
 let userProjectsArray = [];
 class UserProjects {
     constructor(id, projectName, description, preview, commend, feedback, fork, codeSite, liveSite) {
@@ -101,7 +112,7 @@ class UserProjects {
     }
 }
 
-// Constructs projects as objects
+// Project constructor: Constructs projects as objects
 // Comments for easier production of objects
 let sampleProject = new UserProjects(
     "sample-project", //id
@@ -152,8 +163,11 @@ let sampleProject4 = new UserProjects(
 );
 
 
-const projectGrid = document.querySelector("div#projects-grid");
+// Adds project to the DOM
 addUserProject(userProjectsArray);
+
+
+// Project Maker Function (start) -----------
 function addUserProject(projectArray) {
     for (let i = 0; i < projectArray.length; i++) {
     // Project box (start) ---
@@ -298,8 +312,6 @@ function addUserProject(projectArray) {
         //Appends the whole project-box on the projects-grid
         projectGrid.appendChild(projectBox);
 
-
-
 // modal Specific Content
         //Adds button at the top of modal
         let headerText = dialogDiv.querySelector("h4");
@@ -343,8 +355,10 @@ function addUserProject(projectArray) {
         modalContainer.appendChild(dialogBox);
     }
 }
+// Project Maker Function (end) -----------
 
 
+// Expands and close Modal (start) -------
 function expandModal() {
     let detailsId = this.getAttribute("id");
     let thisModal = document.querySelector(`dialog#${detailsId}`)
@@ -358,12 +372,14 @@ function closeModal() {
     
     thisModal.close();
 }
+// Expands and close Modal (end) -------
+
 
 // These element should be declared after project creation function is run 
-// Isolates hover UI effect to header and description only
 const projectHeader = document.querySelectorAll(`div[data-class="project-box"] h4`);
 const projectDetails = document.querySelectorAll(`div[data-class="project-box"] div[data-detail]`);
 
+// Isolates hover UI effect to header and description only (start) ----
 projectHeader.forEach(element => {
     checkElementAddEvent(element, "mouseover", hoverEvent);
     checkElementAddEvent(element, "mouseout", hoverEvent);
@@ -384,3 +400,20 @@ function hoverEvent(event) {
         projectBox.classList.remove("hovered");
     }
 }   
+
+// Isolates hover UI effect to header and description only (end) ----
+
+
+
+
+// Announcement Constructor
+let announcementsArr = [];
+class Announcements {
+    constructor (subject, content, dateTime, dateText, author) {
+        this.subject = subject;
+        this.content = content;
+        this.dateTime = dateTime;
+        this.dateText = dateText;
+        this.author = author;
+    }
+}

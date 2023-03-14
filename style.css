@@ -66,7 +66,7 @@ section#header-bar {
 
 
 /* div#brand (start) --------------- */
-div#brand, div#brand2 {
+div#brand {
     grid-area: brand;
     display: flex;
     justify-content: flex-start;
@@ -236,24 +236,61 @@ ul#action-buttons button span {
 /* section#sidebar (start) !!!!!!!! */
 
 section#sidebar {
-    padding: var(--common-padding);
-    background-color: var(--dark-green);
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.7);
     font-family: var(--content-font-family);
-    width: 80vw;
+    width: 100vw;
     height: 100vh;
     position: fixed;
     top: 0;
     z-index: var(--side-bar-z);
-    transition: all 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
 }
 
 section#sidebar.hidden {
     transform: translateX(-100%);
 }
 
+div#brand2 {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    align-items: center;
+    width: 80vw;
+    background-color: var(--dark-green);
+    padding : var(--common-padding);
+}
+
+
 section#sidebar h3 {
     font-size: var(--brand-font-size);
     padding: var(--common-padding);
+    padding-right: 0;
+    width: 80vw;
+    background-color: var(--dark-green);
+}
+
+section#sidebar button#exit-side {
+    width: calc(var(--brand-font-size) * 2);
+    height: calc(var(--brand-font-size) * 2);
+    font-size: calc(var(--brand-font-size) * 1.3);
+    border-radius: 50%;
+
+    border: 2px solid var(--bamboo-green);
+    border-radius: 50%;
+    background-color: var(--light-green-contrast); 
+    color: var(--bamboo-green);
+    box-shadow: 0 0 5px var(--yellow-dark);
+    justify-self: end;
+
+    position: absolute;
+    left: 85vw;
+}
+section#sidebar nav {
+    width: 80vw;
+    flex: 1;
+    background-color: var(--dark-green);
 }
 
 section#sidebar ul {
@@ -271,6 +308,7 @@ section#sidebar a {
     text-decoration: none;
     color: black;
     padding: var(--common-padding);
+    padding-right: 0;
     width: 100%;
     display: block;
 }
@@ -417,7 +455,7 @@ section#content-dash > section#announcements.swiped {
 
 section#content-dash > section#announcements{
     transform: translateX(-100%);
-    border: 1px solid black; 
+    /* border: 1px solid black;  */
     height: 100%; 
 } 
 
@@ -635,3 +673,39 @@ dialog.projectModal div[data-link] > a {
     height: 100%;
 }
 /* Modal styling (end) */
+
+
+/* Announcements */
+
+section#announcements {
+    /* padding: var(--common-padding); */
+    display: flex;
+    flex-direction: column;
+    gap: var(--common-margin);
+}
+
+div[data-box="announcement"] {
+    display: flex;
+    flex-direction: column;
+    gap: var(--common-padding);
+    border: 1px solid var(--bamboo-green);
+    padding: var(--common-padding);
+    border-radius: 15px 0 0 0px;
+}
+
+
+div[data-box="announcement"] h4 {
+    font-size: var(--content-header-font-size);
+}
+
+div[data-box="announcement"] p {
+    font-size: var(--content-main-font-size);
+}
+
+div[data-post] {
+    font-size: var(--content-main-font-size);
+    color: #7E97A6;
+    display: flex;
+    justify-content: space-between;
+}
+

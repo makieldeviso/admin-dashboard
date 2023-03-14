@@ -428,11 +428,38 @@ let announcement2 = new Announcement(
 
 let announcement3 = new Announcement(
     "announcement3", // id
-    "Project Tanuki Deadline", // Subject
+    "National Tomodachi Day Celebration", // Subject
     "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat earum sapiente perferendis veritatis corrupti eaque nemo ullam animi et, ut repellat mollitia amet quas beatae, totam temporibus necessitatibus adipisci consequatur.", // Content
     "2023-03-10", // dateTime YYYY-MM-DD
     "March 10, 2023",
     "Joshua A. Hwang"
+);
+
+let announcement4 = new Announcement(
+    "announcement4", // id
+    "General Office Cleaning", // Subject
+    "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat earum sapiente perferendis veritatis corrupti eaque nemo ullam animi et, ut repellat mollitia amet quas beatae, totam temporibus necessitatibus adipisci consequatur.", // Content
+    "2023-03-09", // dateTime YYYY-MM-DD
+    "March 09, 2023",
+    "Arvin R. Noyrin"
+);
+
+let announcement5 = new Announcement(
+    "announcement5", // id
+    "Fred R. Pailjar Birthday!", // Subject
+    "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat earum sapiente perferendis veritatis corrupti eaque nemo ullam animi et, ut repellat mollitia amet quas beatae, totam temporibus necessitatibus adipisci consequatur.", // Content
+    "2023-03-02", // dateTime YYYY-MM-DD
+    "March 02, 2023",
+    "Rain R. Nature"
+);
+
+let announcement6 = new Announcement(
+    "announcement6", // id
+    "New Project - King Gym's App", // Subject
+    "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat earum sapiente perferendis veritatis corrupti eaque nemo ullam animi et, ut repellat mollitia amet quas beatae, totam temporibus necessitatibus adipisci consequatur.", // Content
+    "2023-03-01", // dateTime YYYY-MM-DD
+    "March 01, 2023",
+    "Charles O. Stephen"
 );
 
 
@@ -469,6 +496,8 @@ function addAnnouncement(announcements) {
         closeButtonIcon.setAttribute("class", "fa-solid fa-xmark");
         closeButton.appendChild(closeButtonIcon);
 
+        //  Adds event listener to close buttons
+        closeButton.addEventListener("click", closeModal);
         dialogDiv.appendChild(closeButton);
 
 
@@ -479,15 +508,8 @@ function addAnnouncement(announcements) {
         
         let subjectModal = subject.cloneNode(true);
 
+        subject.textContent = subjectText;
         subjectModal.textContent = subjectText;
-
-            // Limit subject length in the preview
-            if (subjectText.length > 30) {
-                let cutText = subjectText.slice(0, 30);
-                subject.textContent = `${cutText + " ..."}`;
-            } else {
-                subject.textContent = subjectText;
-            }
 
         // Appends subject to container & Appends subjectModal to dialogDiv
         announceBox.appendChild(subject);
@@ -495,9 +517,10 @@ function addAnnouncement(announcements) {
 
         // Creates p for the announcement message
         let message = document.createElement("p");
+        message.setAttribute("data-message", "message");
         let messageText = `${announcements[i]["content"]}`;
 
-        let messageModal = document.createElement("p");
+        let messageModal = message.cloneNode(true);
         messageModal.textContent = messageText;
         
              // Limit subject length in the preview

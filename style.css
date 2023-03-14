@@ -291,6 +291,7 @@ section#sidebar nav {
     width: 80vw;
     flex: 1;
     background-color: var(--dark-green);
+    padding-left: 5%;
 }
 
 section#sidebar ul {
@@ -320,6 +321,7 @@ section#sidebar a:visited {
 section#sidebar a:hover,
 section#sidebar a:focus{
     background-color: var(--light-green);
+    border-radius:  var(--content-header-font-size) 0 0 var(--content-header-font-size);
 }
 
 section#sidebar a:active {
@@ -573,18 +575,25 @@ div#projects-grid div[data-class="project-box"] button span {
 
 
 /* Modal styling (start) */
-dialog.projectModal {
+dialog.projectModal, dialog.announceModal {
     margin: auto;
     min-width: 250px;
-    width: 90%;
+    width: 90%; 
     min-height: 500px;
     height: 60%;
+    overflow: auto;
     border: 2px solid var(--dark-green);
     border-radius: 10px;
     box-shadow: 0 0 5px var(--light-green);
     background-color: var(--background);
 
     animation: 0.3s modal-show;
+}
+
+dialog.announceModal {
+    min-height: 300px;
+    height: 40%;
+    overflow: auto;
 }
 
 @keyframes modal-show {
@@ -598,11 +607,13 @@ dialog.projectModal {
     }
   } 
 
-dialog.projectModal::backdrop {
+dialog.projectModal::backdrop,
+dialog.announceModal::backdrop {
     background: rgba(0, 0, 0, 0.5);
 }
 
-dialog.projectModal div.modalDiv {
+dialog.projectModal div.modalDiv,
+dialog.announceModal div.modalDiv {
     padding: var(--common-padding);
     max-width: 100%;
     height: 100%;
@@ -611,7 +622,13 @@ dialog.projectModal div.modalDiv {
     gap: var(--common-margin);
 }
 
-dialog.projectModal button {
+dialog.announceModal div.modalDiv {
+    min-height: max-content;
+    height: 100%;
+}
+
+dialog.projectModal button,
+dialog.announceModal button {
     width: calc(var(--brand-font-size) * 1.5);
     height: calc(var(--brand-font-size) * 1.5);
     font-size: var(--brand-font-size);
@@ -624,8 +641,12 @@ dialog.projectModal button {
     align-self: flex-end;
 }
 
-dialog.projectModal h4 {
+dialog.projectModal h4,
+dialog.announceModal h4 {
     font-size: calc(var(--content-header-font-size) * 1.5);
+    max-width: 100%;
+    min-height: max-content;
+    word-wrap: break-word;
 }
 
 
@@ -637,10 +658,18 @@ dialog.projectModal div[data-detail="details"] {
     margin-bottom: calc(var(--common-margin) * 5);
 }
 
-dialog.projectModal div[data-detail="details"] p {
+dialog.projectModal div[data-detail="details"] p,
+dialog.announceModal p,
+dialog.announceModal time {
     font-size: calc(var(--content-main-font-size) * 1.2);
     margin-bottom: calc(var(--common-margin) * 2);
 }
+
+dialog.announceModal div.modalDiv p[data-message="message"] {
+    flex: 1;
+}
+
+
 
 dialog.projectModal div[data-preview="preview"] {
     width: 95%;
@@ -672,6 +701,13 @@ dialog.projectModal div[data-link] > a {
     font-size: calc(var(--content-main-font-size) * 1.2);
     height: 100%;
 }
+
+
+/* div[data-post="post"] {
+    justify-content: flex-end;
+    flex: 1;
+} */
+
 /* Modal styling (end) */
 
 
@@ -696,6 +732,7 @@ div[data-box="announcement"] {
 
 div[data-box="announcement"] h4 {
     font-size: var(--content-header-font-size);
+    overflow: hidden;
 }
 
 div[data-box="announcement"] p {

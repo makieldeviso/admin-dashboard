@@ -30,6 +30,9 @@ const contentDividerButtons = document.querySelectorAll("section#content-divider
 const projectGrid = document.querySelector("div#projects-grid");
 const modalContainer = document.querySelector("div#modal-container");
 
+const announcementSection = document.querySelector("section#announcements");
+
+
 
 // Hides or Show Side Bar (start) ----
 function toggleSidebar() {
@@ -178,7 +181,7 @@ function addUserProject(projectArray) {
     // Dialog
         let dialogBox = document.createElement("dialog");
         dialogBox.setAttribute("class", "projectModal");
-        dialogBox.setAttribute("id", projectArray[i]["id"]);
+        dialogBox.setAttribute("data-id", projectArray[i]["id"]);
 
         let dialogDiv = document.createElement("div");
         dialogDiv.setAttribute("class", "modalDiv");
@@ -187,6 +190,8 @@ function addUserProject(projectArray) {
     // Project Header
         // Creates an h4 element for the project
         let projectHeader = document.createElement("h4");
+        projectHeader.setAttribute("data-id", projectArray[i]["id"] )
+        projectHeader.addEventListener("click", expandModal);
         projectHeader.textContent = `${projectArray[i]["projectName"]}`;
 
         // Appends h4 to the projectBox and Dialog box
@@ -205,7 +210,7 @@ function addUserProject(projectArray) {
         // Creates a container div for the project details
         let projectDetails= document.createElement("div");
         projectDetails.setAttribute("data-detail", "details");
-        projectDetails.setAttribute("id", projectArray[i]["id"]);
+        projectDetails.setAttribute("data-id", projectArray[i]["id"]);
 
         // Creates another container for project details modal
         let projectDetailsModal = projectDetails.cloneNode(true);
@@ -317,7 +322,7 @@ function addUserProject(projectArray) {
         let headerText = dialogDiv.querySelector("h4");
         let closeButton = document.createElement("button");
         let closeButtonIcon = document.createElement("i"); 
-        closeButton.setAttribute("id", `${projectArray[i]["id"]}`);
+        closeButton.setAttribute("data-id", `${projectArray[i]["id"]}`);
         closeButtonIcon.setAttribute("class", "fa-solid fa-xmark");
         closeButton.appendChild(closeButtonIcon);
 
@@ -355,24 +360,6 @@ function addUserProject(projectArray) {
         modalContainer.appendChild(dialogBox);
     }
 }
-// Project Maker Function (end) -----------
-
-
-// Expands and close Modal (start) -------
-function expandModal() {
-    let detailsId = this.getAttribute("id");
-    let thisModal = document.querySelector(`dialog#${detailsId}`)
-    
-    thisModal.showModal();
-}
-
-function closeModal() {
-    let buttonId = this.getAttribute("id");
-    let thisModal = document.querySelector(`dialog#${buttonId}`);
-    
-    thisModal.close();
-}
-// Expands and close Modal (end) -------
 
 
 // These element should be declared after project creation function is run 
@@ -402,18 +389,179 @@ function hoverEvent(event) {
 }   
 
 // Isolates hover UI effect to header and description only (end) ----
-
+// Project Maker Function (end) -----------
 
 
 
 // Announcement Constructor
 let announcementsArr = [];
-class Announcements {
-    constructor (subject, content, dateTime, dateText, author) {
+class Announcement {
+    constructor (id, subject, content, dateTime, dateText, author) {
+        this.id = id;
         this.subject = subject;
         this.content = content;
         this.dateTime = dateTime;
         this.dateText = dateText;
         this.author = author;
+        announcementsArr.push(this);
     }
 }
+
+// Announcement Constructor: Creates announcements
+let announcement1 = new Announcement(
+    "announcement1", // id
+    "Site Maintenance", // Subject
+    "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat earum sapiente perferendis veritatis corrupti eaque nemo ullam animi et, ut repellat mollitia amet quas beatae, totam temporibus necessitatibus adipisci consequatur.", // Content
+    "2023-03-14", // dateTime YYYY-MM-DD
+    "March 14, 2023",
+    "Fred R. Pailjar"
+);
+
+let announcement2 = new Announcement(
+    "announcement2", // id
+    "Project Tanuki Deadline", // Subject
+    "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat earum sapiente perferendis veritatis corrupti eaque nemo ullam animi et, ut repellat mollitia amet quas beatae, totam temporibus necessitatibus adipisci consequatur.", // Content
+    "2023-03-13", // dateTime YYYY-MM-DD
+    "March 13, 2023",
+    "Christian J. Bardz"
+);
+
+let announcement3 = new Announcement(
+    "announcement3", // id
+    "Project Tanuki Deadline", // Subject
+    "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat earum sapiente perferendis veritatis corrupti eaque nemo ullam animi et, ut repellat mollitia amet quas beatae, totam temporibus necessitatibus adipisci consequatur.", // Content
+    "2023-03-10", // dateTime YYYY-MM-DD
+    "March 10, 2023",
+    "Joshua A. Hwang"
+);
+
+
+
+// Runs the announcement maker function
+addAnnouncement(announcementsArr);
+
+
+// Announcement Maker function (start) ----
+
+function addAnnouncement(announcements) {
+    for (let i = 0; i< announcementsArr.length; i++) {
+        // Creates container for one announcement
+        let announceBox = document.createElement("div");
+        announceBox.setAttribute("data-box", "announcement");
+        announceBox.setAttribute("data-id", announcements[i]["id"]);
+
+        //Adds event listener to the announceBox
+        announceBox.addEventListener("click", expandModal);
+
+        // Creates corresponding Modal
+        let dialogBox = document.createElement("dialog");
+        dialogBox.setAttribute("class", "announceModal");
+        dialogBox.setAttribute("data-id", announcements[i]["id"]);
+        
+        let dialogDiv = document.createElement("div"); // required for styling
+        dialogDiv.setAttribute("class", "modalDiv");
+        dialogBox.appendChild(dialogDiv);
+
+        // Creates exit Button for the modal
+        let closeButton = document.createElement("button");
+        let closeButtonIcon = document.createElement("i"); 
+        closeButton.setAttribute("data-id", announcements[i]["id"]);
+        closeButtonIcon.setAttribute("class", "fa-solid fa-xmark");
+        closeButton.appendChild(closeButtonIcon);
+
+        dialogDiv.appendChild(closeButton);
+
+
+        // Creates h4 for Subject
+        let subject = document.createElement("h4");
+        subject.setAttribute("data-subject", "subject");
+        let subjectText = `${announcements[i]["subject"]}`;
+        
+        let subjectModal = subject.cloneNode(true);
+
+        subjectModal.textContent = subjectText;
+
+            // Limit subject length in the preview
+            if (subjectText.length > 30) {
+                let cutText = subjectText.slice(0, 30);
+                subject.textContent = `${cutText + " ..."}`;
+            } else {
+                subject.textContent = subjectText;
+            }
+
+        // Appends subject to container & Appends subjectModal to dialogDiv
+        announceBox.appendChild(subject);
+        dialogDiv.appendChild(subjectModal);
+
+        // Creates p for the announcement message
+        let message = document.createElement("p");
+        let messageText = `${announcements[i]["content"]}`;
+
+        let messageModal = document.createElement("p");
+        messageModal.textContent = messageText;
+        
+             // Limit subject length in the preview
+             if (messageText.length > 150) {
+                let cutMessage = messageText.slice(0, 150);
+                message.textContent = `${cutMessage + " ..."}`;
+            } else {
+                message.textContent = messageText;
+            }
+
+        // Appends message to container & Appends messageModal to dialogDiv
+        announceBox.appendChild(message);
+        dialogDiv.appendChild(messageModal);
+
+
+        // Creates author/ post details container
+        let postDiv = document.createElement("div");
+        postDiv.setAttribute("data-post", "post");
+
+        // Creates time for author/post details
+        let date = document.createElement("time");
+        date.setAttribute("datetime", `${announcements[i]["dateTime"]}`);
+        date.textContent = `${announcements[i]["dateText"]}`;
+        //Appends date to author/ post details container
+        postDiv.appendChild(date);
+
+        // Creates p element author for author/post details
+        let author = document.createElement("p");
+        author.setAttribute("data-author", "author");
+        author.textContent = `${announcements[i]["author"]}`;
+        // Appends author to author/ post details container
+        postDiv.appendChild(author);
+
+        // Clones Post Div and Append to dialogDiv
+        let postDivModal = postDiv.cloneNode(true);
+        dialogDiv.appendChild(postDivModal);
+
+        // Appends author/post details (postDiv) to the announceBox
+        announceBox.appendChild(postDiv);
+
+
+        // Appends announceBox to announcement Section
+        announcementSection.appendChild(announceBox);
+
+
+        // Appends the dialogBox to the div#modal-container
+        modalContainer.appendChild(dialogBox);
+    }
+}
+// Announcement Maker function (end) ----
+
+
+
+// Expands and close Modal (start) -------
+function expandModal() {
+    let detailsId = this.getAttribute("data-id");
+    let thisModal = document.querySelector(`dialog[data-id="${detailsId}"]`);
+    thisModal.showModal();
+}
+
+function closeModal() {
+    let buttonId = this.getAttribute("data-id");
+    let thisModal = document.querySelector(`dialog[data-id="${buttonId}"]`);
+    
+    thisModal.close();
+}
+// Expands and close Modal (end) -------

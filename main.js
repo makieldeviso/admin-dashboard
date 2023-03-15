@@ -77,6 +77,7 @@ let currentPage = document.querySelector("section[data-page='projects']");
 const contentPages = document.querySelectorAll("section#content-dash > section");
 
 function toggleContentPage() {
+    subHeader.scrollIntoView({behavior: "smooth", block: "center"});
     contentDividerButtons.forEach(button => {
         if (button.hasAttribute("class")) {
             button.removeAttribute("class");
@@ -91,6 +92,7 @@ function toggleContentPage() {
     currentPage.classList.add("swiped");
     contentPage.classList.remove("swiped");
     currentPage = contentPage;
+
 }
 // Toggles the content page between projects, announcement and team (end) ---
 

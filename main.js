@@ -606,7 +606,7 @@ let member3 = new member(
     "profile.png", // profilePicture
     "Joshua A. Hwang", // userName
     "@joshua", // address
-    "idle" // status
+    "do not disturb" // status
 );
 
 let member4 = new member(
@@ -614,7 +614,7 @@ let member4 = new member(
     "profile.png", // profilePicture
     "Christian J. Bardz", // userName
     "@christian", // address
-    "online" // status
+    "idle" // status
 );
 
 let member5 = new member(
@@ -650,7 +650,7 @@ function addMember(teamArray) {
         // Creates Div for the picture
         let profile = document.createElement("div");
         profile.setAttribute("data-profile", "picture");
-        profile.style.background = `url(./images/${teamArray[i]["profilePicture"]})`;
+        profile.style.backgroundImage = `url(./images/${teamArray[i]["profilePicture"]})`;
 
         // Creates Div for status indicator in picture;
         let indicator = document.createElement("div");
@@ -668,6 +668,10 @@ function addMember(teamArray) {
 
             case "idle":
                 indicator.setAttribute("class", "idle");
+                break;
+            
+            case "do not disturb":
+                indicator.setAttribute("class", "no-disturb");
                 break;
             
             default:
@@ -706,7 +710,7 @@ function addMember(teamArray) {
         sendMessageButton.setAttribute("data-message", "message");
 
         let messageIcon = document.createElement("i");
-        messageIcon.setAttribute("class", "fa-regular fa-message");
+        messageIcon.setAttribute("class", "fa-solid fa-message");
 
         sendMessageButton.appendChild(messageIcon);
 

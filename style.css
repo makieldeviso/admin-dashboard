@@ -741,3 +741,109 @@ div[data-post] {
 
 
 /* Teams (start) */
+
+section#team {
+    border: 1px solid var(--bamboo-green);
+}
+
+div[data-class="member"] {
+    padding: var(--common-padding);
+    border-bottom: 1px solid var(--light-green-contrast);
+    background-color: var(--background);
+
+    display: grid;
+    grid-template-columns: min-content 1fr 20%;
+    grid-template-rows: 1fr 1fr 1fr;
+
+    grid-template-areas: 
+        "picture username message"
+        "picture address message"
+        "picture status message";
+}
+
+div[data-profile="picture"] {
+    grid-area: picture;
+    width: calc(var(--content-header-font-size) * 4);
+    height: calc(var(--content-header-font-size) * 4);
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+div[data-status="status"] {
+    width: 30%;
+    height: 30%;
+    border: calc(2px + 0.3vw) solid var(--background);
+    border-radius: 50%; 
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;  
+}
+
+div[data-status="status"].online {
+    background-color: green;
+}
+
+div[data-status="status"].offline {
+    background-image: url("./images/offline.svg");
+    background-color: var(--background);
+}
+
+div[data-status="status"].idle {
+    background-image: url("./images/idle.svg");
+    background-color: var(--background);
+}
+div[data-status="status"].no-disturb {
+    background-image: url("./images/dont.svg");
+    background-color: rgb(235, 83, 83);
+}
+
+
+p[data-profile] {
+    margin-left: calc(var(--common-margin) * 2);
+}
+
+p[data-profile="username"] {
+    grid-area: username;
+    font-size: var(--content-main-font-size);
+    font-weight: bold;
+}
+
+p[data-profile="address"] {
+    grid-area: address;
+    font-size: var(--content-main-font-size);
+}
+
+p[data-profile="status"] {
+    grid-area: status;
+    font-size: var(--content-main-font-size);
+    color: #7E97A6;
+}
+
+button[data-message="message"] {
+    grid-area: message;
+    font-size: calc(var(--content-header-font-size) * 1.1);
+    width: calc(var(--content-main-font-size) * 3);
+    height: calc(var(--content-main-font-size) * 3);
+    border-radius: 50%;
+    text-align: center;
+    padding: 5px;
+    padding-top: 8px;
+    border: 1px solid var(--bamboo-green);
+    background-color: #EDF1D6;
+    color: var(--light-green);
+    align-self: center;
+    justify-self: center;
+}
+
+button[data-message="message"]:hover,
+button[data-message="message"]:focus {
+    filter: brightness(0.95);
+}
+
+button[data-message="message"]:active {
+    transform: scale(0.95);
+}

@@ -701,18 +701,10 @@ dialog.projectModal div[data-link] > a {
     font-size: calc(var(--content-main-font-size) * 1.2);
     height: 100%;
 }
-
-
-/* div[data-post="post"] {
-    justify-content: flex-end;
-    flex: 1;
-} */
-
 /* Modal styling (end) */
 
 
-/* Announcements */
-
+/* Announcements (start)*/
 section#announcements {
     /* padding: var(--common-padding); */
     display: flex;
@@ -745,4 +737,7 @@ div[data-post] {
     display: flex;
     justify-content: space-between;
 }
+/* Announcements (start)*/
 
+
+/* Teams (start) */

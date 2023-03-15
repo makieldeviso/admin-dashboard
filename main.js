@@ -31,7 +31,7 @@ const projectGrid = document.querySelector("div#projects-grid");
 const modalContainer = document.querySelector("div#modal-container");
 
 const announcementSection = document.querySelector("section#announcements");
-
+const teamSection = document.querySelector("section#team");
 
 
 // Hides or Show Side Bar (start) ----
@@ -467,9 +467,7 @@ let announcement6 = new Announcement(
 // Runs the announcement maker function
 addAnnouncement(announcementsArr);
 
-
 // Announcement Maker function (start) ----
-
 function addAnnouncement(announcements) {
     for (let i = 0; i< announcementsArr.length; i++) {
         // Creates container for one announcement
@@ -571,6 +569,172 @@ function addAnnouncement(announcements) {
     }
 }
 // Announcement Maker function (end) ----
+
+
+// Team Constructor
+let teamMembersArray = [];
+class member {
+    constructor (id, profilePicture, username, address, status) {
+        this.id = id;
+        this.profilePicture = profilePicture;
+        this.username = username;
+        this.address = address;
+        this.status = status;
+        teamMembersArray.push(this);
+    }
+}
+
+// Adds a Member
+let member1 = new member(
+    "member1", // id
+    "profile.png", // profilePicture
+    "Fred R. Pailjar", // userName
+    "@fred", // address
+    "online" // status
+);
+
+let member2 = new member(
+    "member2", // id
+    "profile.png", // profilePicture
+    "Arvin R. Noyrin", // userName
+    "@arvin", // address
+    "offline" // status
+);
+
+let member3 = new member(
+    "member3", // id
+    "profile.png", // profilePicture
+    "Joshua A. Hwang", // userName
+    "@joshua", // address
+    "idle" // status
+);
+
+let member4 = new member(
+    "member4", // id
+    "profile.png", // profilePicture
+    "Christian J. Bardz", // userName
+    "@christian", // address
+    "online" // status
+);
+
+let member5 = new member(
+    "member5", // id
+    "profile.png", // profilePicture
+    "Rain R. Nature", // userName
+    "@rain", // address
+    "online" // status
+);
+
+let member6 = new member(
+    "member6", // id
+    "profile.png", // profilePicture
+    "Charles O. Stephen", // userName
+    "@charles", // address
+    "offline" // status
+);
+
+
+
+
+
+// Runs addMember Function 
+addMember(teamMembersArray);
+
+// Adds Member Function (start) ----
+function addMember(teamArray) {
+    for (let i = 0; i < teamArray.length; i++) {
+        // Creates teamMember container
+        let memberBox = document.createElement("div");
+        memberBox.setAttribute("data-class", "member");
+
+        // Creates Div for the picture
+        let profile = document.createElement("div");
+        profile.setAttribute("data-profile", "picture");
+        profile.style.background = `url(./images/${teamArray[i]["profilePicture"]})`;
+
+        // Creates Div for status indicator in picture;
+        let indicator = document.createElement("div");
+        indicator.setAttribute("data-status", "status");
+
+        // Adjusts indicator depending in member status
+        switch (teamArray[i]["status"]) {
+            case "online":
+                indicator.setAttribute("class", "online");
+                break;
+            
+            case "offline":
+                indicator.setAttribute("class", "offline");
+                break;
+
+            case "idle":
+                indicator.setAttribute("class", "idle");
+                break;
+            
+            default:
+                indicator.setAttribute("class", "offline");
+        }
+
+        // Appends indicator to profile then appends to memberBox
+        profile.appendChild(indicator);
+        memberBox.appendChild(profile);
+
+        // Appends username, address and status
+        let dataEntry = [
+            {dataType: "username",
+            entry: teamArray[i]["username"]},
+
+            {dataType: "address",
+            entry: teamArray[i]["address"]},
+
+            {dataType: "status",
+            entry: teamArray[i]["status"]},
+        ];
+
+        for (let j = 0; j < dataEntry.length; j++ ) {
+            let data = document.createElement("p");
+            data.setAttribute("data-profile", dataEntry[j]["dataType"]);
+
+            data.textContent = `${dataEntry[j]["entry"]}`;
+
+            // Append data to memberBox
+            memberBox.appendChild(data);
+        }
+
+
+        // Create button for message
+        let sendMessageButton = document.createElement("button");
+        sendMessageButton.setAttribute("data-message", "message");
+
+        let messageIcon = document.createElement("i");
+        messageIcon.setAttribute("class", "fa-regular fa-message");
+
+        sendMessageButton.appendChild(messageIcon);
+
+        // Append send message Button to memberBox
+        memberBox.appendChild(sendMessageButton);
+
+        //Appends memberBox(All) to the team Section
+        teamSection.appendChild(memberBox);
+    }
+}
+// Adds Member Function (end) ----
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

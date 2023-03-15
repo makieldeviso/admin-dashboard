@@ -100,7 +100,7 @@ function toggleContentPage() {
 // Project Constructor function
 let userProjectsArray = [];
 class UserProjects {
-    constructor(id, projectName, description, preview, commend, feedback, fork, codeSite, liveSite) {
+    constructor(id, projectName, description, preview, commend, feedback, fork, progress, codeSite, liveSite) {
         this.id = id;
         this.projectName = projectName;
         this.description = description;
@@ -111,6 +111,7 @@ class UserProjects {
         this.feedback = feedback;
         this.forkIcon = `<i class="fa-solid fa-code-fork">`;
         this.fork = fork;
+        this.progress = progress;
         this.codeSite = codeSite;
         this.liveSite = liveSite;
         userProjectsArray.push(this);
@@ -127,6 +128,7 @@ let sampleProject = new UserProjects(
     1, //commend
     20, //feedback
     5, //fork
+    45, // progress
     "https://www.youtube.com/watch?v=FWTNMzK9vG4&t=185s", //code Site
     "https://www.youtube.com/watch?v=dItUGF8GdTw" //live site
 );
@@ -139,6 +141,7 @@ let sampleProject2 = new UserProjects(
     11, //commend
     25, //feedback
     8, //fork
+    80, // progress
     "https://www.youtube.com/watch?v=FWTNMzK9vG4&t=185s", //code Site
     "https://www.youtube.com/watch?v=dItUGF8GdTw" //live site
 );
@@ -151,6 +154,7 @@ let sampleProject3 = new UserProjects(
     8, //commend
     26, //feedback
     9, //fork
+    96, // progress
     "https://www.youtube.com/watch?v=FWTNMzK9vG4&t=185s", //code Site
     "https://www.youtube.com/watch?v=dItUGF8GdTw" //live site
 );
@@ -163,6 +167,7 @@ let sampleProject4 = new UserProjects(
     8, //commend
     26, //feedback
     9, //fork
+    100, // progress
     "https://www.youtube.com/watch?v=FWTNMzK9vG4&t=185s", //code Site
     "https://www.youtube.com/watch?v=dItUGF8GdTw" //live site
 );
@@ -331,6 +336,54 @@ function addUserProject(projectArray) {
         // Adds Event listener to the Modal
         closeButton.addEventListener("click", closeModal);
         dialogDiv.insertBefore(closeButton, headerText);
+
+
+        // Adds progress
+        let progressDiv = document.createElement("div");
+        progressDiv.setAttribute("data-link", "progress");
+
+        let progressLabel = document.createElement("p");
+        progressLabel.textContent = "Progress:";
+        progressDiv.appendChild(progressLabel);
+
+        let completion = projectArray[i]["progress"];
+
+        let progressBar = document.createElement("div");
+        progressBar.setAttribute("data-class", "bar");
+        progressBar.setAttribute("data-content", `${completion}%`);
+
+        let progress = document.createElement("div");
+        progress.setAttribute("data-class", "fill");
+        progressBar.appendChild(progress);
+
+        
+        progress.style.width = `${completion}%`;
+
+        //Adds label inside the progress bar
+        let completionLabel = document.createElement("p");
+        completionLabel.textContent = `${completion}%`;
+        progressBar.appendChild(completionLabel);
+
+        //Adds color coding/indicator to the progress
+
+        if (completion < 50) {
+            progress.setAttribute("class", "low");
+        } else if (completion >= 50 && completion < 90) {
+            progress.setAttribute("class", "mid");
+        } else if (completion >= 90 && completion < 100) {
+            progress.setAttribute("class", "high");
+        } else if (completion === 100) {
+            progress.setAttribute("class", "complete");
+        }
+
+
+
+        progressDiv.appendChild(progressBar);
+
+        //Appends ProgressDiv to dialogDiv
+        dialogDiv.appendChild(progressDiv);
+
+
 
         // Reusable function to Add link to modal
         // dataAttribute -> adds dataset.link attribute, you specify attribute value

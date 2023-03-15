@@ -341,7 +341,7 @@ section#sidebar span {
 /* section#content-divider (start)*/
 section#content-divider {
     width: 100%;
-    height: var(--content-div-height);
+    padding-top: 3px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -352,6 +352,7 @@ section#content-divider {
 
 section#content-divider.fixed {
     position: fixed;
+    top: var(--header-bar-height);
 }
 
 section#content-divider ul {
@@ -478,6 +479,7 @@ section#content-dash > section#team {
 
 section#content-dash.offset {
     padding-top: calc(var(--content-div-height) + calc(1px + 1vw));
+    padding-top: calc(var(--content-div-height))
 }
 
 div#projects-grid {
@@ -700,7 +702,22 @@ dialog.projectModal div[data-link] > p {
 dialog.projectModal div[data-link] > a {
     font-size: calc(var(--content-main-font-size) * 1.2);
     height: 100%;
+    text-decoration: none;
 }
+
+dialog.projectModal div[data-link] > a:visited {
+    color: var(--bamboo-green);
+}
+
+dialog.projectModal div[data-link] > a:hover,
+dialog.projectModal div[data-link] > a:focus {
+    color: var(--dark-green);
+}
+
+dialog.projectModal div[data-link] > a:active {
+    transform: scale(0.95);
+}
+
 
 div[data-class="bar"] {
     height: 115%;
@@ -768,6 +785,12 @@ div[data-box="announcement"] {
     border: 1px solid var(--bamboo-green);
     padding: var(--common-padding);
     border-radius: 15px 0 0 0px;
+    background-color: var(--background);
+}
+
+div[data-box="announcement"]:hover,
+div[data-box="announcement"]:focus {
+    filter: brightness(0.95);
 }
 
 
@@ -895,4 +918,92 @@ button[data-message="message"]:focus {
 
 button[data-message="message"]:active {
     transform: scale(0.95);
+}
+
+
+@media only screen and (max-width: 375px) and (min-height: 500px) {
+
+    :root {
+        --header-bar-height: calc(40px + 2vw);
+    }
+
+    section#content-divider button {
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        font-size: 0.7rem;
+        margin: auto;
+    }
+
+    div#projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    }
+
+    img#icon-logo {
+        width: calc(var(--icon-main-size) * 0.8);
+        height: calc(var(--icon-main-size) * 0.8);
+    }
+
+    h1#company-name{
+        font-size: calc(var(--brand-font-size) * 0.85);
+    }
+
+    div#options-icons button {
+        width: calc(var(--icon-main-size) * 0.8);
+        height: calc(var(--icon-main-size) * 0.8);
+    }
+
+    div#brand2 {
+        grid-template-columns: 1fr 5fr 0.5fr;
+    }
+
+    h1#company-name2 {
+        margin: auto;
+    }
+
+    section#sidebar button#exit-side {
+        width: calc(var(--brand-font-size) * 1.8);
+        height: calc(var(--brand-font-size) * 1.8);
+    }
+
+    section#sub-header {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    div#profiler {
+        gap: 5px;
+    }
+
+    div#profile-picture {
+        width: calc(var(--icon-main-size) * 1.1);
+        height: calc(var(--icon-main-size) * 1.1);
+    }
+
+    div#user-detail h2 {
+        font-size: var(--content-main-font-size)
+    }
+
+    div#user-detail {
+        min-height:unset;
+        padding: 3px;
+    }
+
+    ul#action-buttons {
+        gap: 2px;
+    }
+
+    ul#action-buttons button {
+        transform: scale(0.95);
+}
+}
+
+@media only screen and (max-width: 325px) and (min-width: 320px) {
+
+    ul#action-buttons {
+        gap: 5px;
+    }
+
+    ul#action-buttons button {
+        transform: scale(1);
+}
 }

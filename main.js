@@ -778,25 +778,6 @@ function addMember(teamArray) {
 }
 // Adds Member Function (end) ----
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Expands and close Modal (start) -------
 function expandModal() {
     let detailsId = this.getAttribute("data-id");
@@ -811,3 +792,23 @@ function closeModal() {
     thisModal.close();
 }
 // Expands and close Modal (end) -------
+
+
+
+// Content dash re-position
+
+const body = document.querySelector("body");
+const menuContainer = document.querySelector("div#menu"); 
+const dashContainer = document.querySelector("div#dash-container");
+
+window.addEventListener("resize", reposition);
+window.addEventListener("load", reposition);
+
+function reposition(event) {
+    if (window.innerWidth > 768) {
+        menuContainer.appendChild(contentDash);
+    } else if (window.innerWidth <= 768){
+        dashContainer.insertBefore(contentDash, modalContainer);
+    }
+}
+

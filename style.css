@@ -127,9 +127,9 @@ div#options-icons button { /* buttons*/
 /* div#sub-header (start) !!!!!!!!!!!!!*/
 section#sub-header { 
     width: 100%;
-    background-color: var(--dark-green);
+    background-color: var(--dark-green-contrast);
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-areas:
         "profiler actions";
     align-items: center;
@@ -197,20 +197,27 @@ div#user-detail h3 {
 /* div#actions (start) ---------------------- */
 div#actions {
     grid-area: actions;
-    justify-self: end;
+    justify-self: center;
+    width: 100%;
 }
 
 ul#action-buttons {
     list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+}
+
+ul#action-buttons li {
+    width: 100%;
     display: flex;
-    gap: calc(5px + 1vw);
-    flex-wrap: wrap;
+    justify-content: flex-end;
 }
 
 ul#action-buttons button {
-    width: var(--icon-main-size);
+    min-width: 50px;
+    width: 75%;
     height: calc(var(--icon-main-size) * 1.3);
-    padding: 5px 1px;
     border: 1px solid var(--yellow-contrast);
     border-radius: 5px;
     font-size: var(--brand-font-size);
@@ -218,19 +225,18 @@ ul#action-buttons button {
     color: var(--yellow-contrast);
     text-shadow: 0 0 3px var(--dark-base);
 
-    display: flex;
-    flex-direction: column;
-    align-items:center;
-    justify-content: flex-end;
-    gap: 5px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    justify-content: center;
+    align-items: end;
+    padding: calc(var(--common-padding) * 0.5);
 }
 
 ul#action-buttons button span {
-    font-size: calc(var(--brand-font-size) * 0.45);
+    font-size: calc(var(--brand-font-size) * 0.6);
 }
 
 /* div#actions (end) */
-
 
 
 /* section#sidebar (start) !!!!!!!! */
@@ -577,6 +583,10 @@ div#projects-grid div[data-class="project-box"] button span {
 
 
 /* Modal styling (start) */
+div#modal-container {
+    width: 0;
+}
+
 dialog.projectModal, dialog.announceModal {
     margin: auto;
     min-width: 250px;
@@ -1006,4 +1016,189 @@ button[data-message="message"]:active {
     ul#action-buttons button {
         transform: scale(1);
 }
+}
+
+/* tablet */
+@media only screen and (min-width: 769px) {
+    :root {
+        --sidebar-width: 100%;
+        /* --header-bar-height: 5vh; */
+    }
+
+    div#menu {
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        /* grid-template-rows: 
+            minmax(5vh, max-content) 
+            minmax(8vh, min-content)
+            5vh 
+            1fr; */
+       grid-template-rows: 
+            max-content 
+            max-content
+            max-content 
+            1fr;
+        grid-template-areas: 
+            "sidebar header header"
+            "sidebar sub-header sub-header"
+            "sidebar divider divider"
+            "sidebar contentDash contentDash";
+
+            /* gap: 10px; */
+        max-height: 100vh;
+        overflow: hidden;
+    }
+
+    section#header-bar {
+        grid-area: header;
+        position: unset;
+        height: max-content;
+    }
+
+    section#sub-header {
+        padding: var(--common-padding);
+    }
+
+    div#hamburger {
+       display: none;
+        /* display: none; */
+    }
+    
+    div#brand{
+        visibility: hidden;
+    }
+
+
+    section#content-divider {
+        grid-area: divider;
+        height: 100%;
+    }
+
+    section#content-divider.fixed {
+        position: unset;
+    }
+
+
+    section#sidebar {
+        grid-area: sidebar;
+        width: var(--sidebar-width);
+        position: relative;
+        height: 100vh;
+        background-color: var(--dark-green);
+    }
+
+    section#sidebar.hidden {
+        transform: translateX(0);
+    }
+
+    div#brand2 {
+        /* min-width: max-content; */
+        grid-template-columns: max-content max-content;
+        width: var(--sidebar-width);
+        height: max-content;
+        border-bottom: 3px solid var(--bamboo-green);
+        gap: calc(1px + 1vw);
+    }
+
+    section#sidebar button#exit-side {
+        display: none;
+    }
+
+    section#sidebar h3{
+        width: var(--sidebar-width);
+    }
+
+    section#sidebar nav {
+        width: var(--sidebar-width);
+    }
+
+    section#content-dash.offset,
+    section#content-dash {
+        grid-area: contentDash;
+        padding-top: calc(1px + 1vw);
+        margin-bottom: var(--common-margin);
+        min-width: unset;
+        /* max-height: 50vh; */
+        height: 98%;
+        overflow-y: scroll;
+    }
+
+    div#projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--common-margin);
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    :root {
+        --common-padding: calc(3px + 0.5vw);
+        --icon-main-size: calc(35px + 1.5vw);
+        /* --icon-main-size: calc(100px + 1vw); */
+    }
+
+    section#header-bar {
+        padding-right: calc(var(--common-padding) * 3);
+    }
+
+    /* div#brand {
+        visibility: unset;
+    } */
+
+    div#brand2,
+    section#sidebar h3,
+    section#sidebar nav {
+        padding-left: calc(var(--common-padding) * 3);
+    }
+
+    img#icon-logo, img#icon-logo2 {
+        width: calc(var(--icon-main-size) * 1.3);
+        height: calc(var(--icon-main-size) * 1.3);
+    }
+    
+    section#sub-header {
+        padding: calc(var(--common-padding) * 1);
+        grid-template-columns: 1fr 1fr;
+        padding-right: calc(var(--common-padding) * 3);
+    }
+
+    div#profile-picture {
+        width: calc(var(--icon-main-size) * 1.8);
+        height: calc(var(--icon-main-size) * 1.8);
+        border: 2px solid var(--yellow-contrast);
+    }
+
+    div#actions {
+        justify-self: center;
+        width: 100%;
+    }
+
+    /* ul#action-buttons {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        width: 100%;
+
+    } */
+
+    /* ul#action-buttons li {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    } */
+
+    ul#action-buttons button {
+        min-width: 110px;
+        width: 75%;
+        grid-template-columns: 1fr 2fr;
+        grid-template-rows: 1fr;
+        padding: var(--common-padding);
+        align-items: center;
+        border-radius: calc(5px + 0.3vw);
+    }
+
+    ul#action-buttons button span {
+        font-size: calc(var(--content-main-font-size) * 0.9);
+    }
+
+
+
 }

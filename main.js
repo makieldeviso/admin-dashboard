@@ -31,7 +31,25 @@ const projectGrid = document.querySelector("div#projects-grid");
 const modalContainer = document.querySelector("div#modal-container");
 
 const announcementSection = document.querySelector("section#announcements");
+const announceGrid = document.querySelector("div#announce-grid");
+
 const teamSection = document.querySelector("section#team");
+const teamGrid = document.querySelector("div#team-grid");
+
+const body = document.querySelector("body");
+const menuContainer = document.querySelector("div#menu"); 
+const dashContainer = document.querySelector("div#dash-container");
+
+    window.addEventListener("resize", reposition);
+    window.addEventListener("load", reposition);
+
+
+
+
+
+
+
+
 
 
 // Hides or Show Side Bar (start) ----
@@ -68,6 +86,8 @@ function checkScroll() {
         contentDividerBar.classList.remove("fixed");
         contentDash.classList.remove("offset");
     }
+
+    
 }
 // Sticks divider button at top (end) ----
 
@@ -576,13 +596,32 @@ function addAnnouncement(announcements) {
         let messageModal = message.cloneNode(true);
         messageModal.textContent = messageText;
         
-             // Limit subject length in the preview
-             if (messageText.length > 150) {
-                let cutMessage = messageText.slice(0, 150);
-                message.textContent = `${cutMessage + " ..."}`;
+        // Limit subject length in the preview
+
+        window.addEventListener("load", cutText);
+        window.addEventListener("resize", cutText);
+
+
+        cutText();
+        function cutText() {
+            if (window.innerWidth >= 1024) {
+                if (messageText.length > 80) {
+                    let cutMessage = messageText.slice(0, 80);
+                    message.textContent = `${cutMessage + " ..."}`;
+                } else {
+                    message.textContent = messageText;
+                }
             } else {
-                message.textContent = messageText;
+                
+                if (messageText.length > 150) {
+                    let cutMessage = messageText.slice(0, 150);
+                    message.textContent = `${cutMessage + " ..."}`;
+                } else {
+                    message.textContent = messageText;
+                }
             }
+        }
+
 
         // Appends message to container & Appends messageModal to dialogDiv
         announceBox.appendChild(message);
@@ -616,7 +655,7 @@ function addAnnouncement(announcements) {
 
 
         // Appends announceBox to announcement Section
-        announcementSection.appendChild(announceBox);
+        announceGrid.appendChild(announceBox);
 
 
         // Appends the dialogBox to the div#modal-container
@@ -773,7 +812,7 @@ function addMember(teamArray) {
         memberBox.appendChild(sendMessageButton);
 
         //Appends memberBox(All) to the team Section
-        teamSection.appendChild(memberBox);
+        teamGrid.appendChild(memberBox);
     }
 }
 // Adds Member Function (end) ----
@@ -796,19 +835,26 @@ function closeModal() {
 
 
 // Content dash re-position
+function reposition() {
+    let headerBarHeight = Math.ceil(headerBar.clientHeight);
+    let subHeaderHeight = Math.ceil(subHeader.clientHeight);
+    let dividerHeight = Math.ceil(contentDividerBar.clientHeight);
+    let topHeightPlus = headerBarHeight + subHeaderHeight + dividerHeight;
+    let topHeight = headerBarHeight + subHeaderHeight;
 
-const body = document.querySelector("body");
-const menuContainer = document.querySelector("div#menu"); 
-const dashContainer = document.querySelector("div#dash-container");
 
-window.addEventListener("resize", reposition);
-window.addEventListener("load", reposition);
+    
 
-function reposition(event) {
     if (window.innerWidth > 768) {
         menuContainer.appendChild(contentDash);
+        contentDash.style.height = `calc(99vh - ${topHeightPlus}px)`;
     } else if (window.innerWidth <= 768){
         dashContainer.insertBefore(contentDash, modalContainer);
+        contentDash.style.height = "";
+    }
+
+    if (window.innerWidth >= 1024) {
+        contentDash.style.height = `calc(99vh - ${topHeight}px)`;
     }
 }
 

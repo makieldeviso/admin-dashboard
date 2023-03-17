@@ -43,6 +43,7 @@
     --common-margin: calc(3px + 1vw);
 }
 
+
 /* section#header-bar (start) !!!!!!!!!!!!!!*/
 section#header-bar { 
     position: fixed;
@@ -433,7 +434,7 @@ section#content-dash {
     /* z-index: var(--content-z); */
     display: flex;
     min-width: 100vw;
-    overflow: hidden;
+    overflow-x: hidden;
     flex-wrap: nowrap;
     background-color: var(--background);
 }
@@ -488,12 +489,21 @@ section#content-dash.offset {
     padding-top: calc(var(--content-div-height))
 }
 
+section#projects {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+
 div#projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-template-rows: 300px;
     grid-auto-rows: 300px;
     gap: calc(var(--common-margin) * 3);
+    flex: 1;
 }
 
 div#projects-grid div[data-class="project-box"] {
@@ -788,6 +798,26 @@ section#announcements {
     gap: var(--common-margin);
 }
 
+section#announcements > div#announce-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--common-margin);
+    border-bottom: 1px solid var(--light-green);
+}
+
+section#announcements h3, section#team h3, section#projects h3 {
+    font-size: calc(var(--content-header-font-size) * 0.9);
+    padding: 3px;
+    border-radius: 0px;
+    background-color: var(--light-green);
+    -webkit-clip-path: polygon(0 0, 95% 0, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 95% 0, 100% 100%, 0 100%);
+    min-width: 150px;
+    width: 200px;
+    display: none; 
+    /* does not display on small screens */
+}
+
 div[data-box="announcement"] {
     display: flex;
     flex-direction: column;
@@ -825,13 +855,25 @@ div[data-post] {
 /* Teams (start) */
 
 section#team {
-    border: 1px solid var(--bamboo-green);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
+
+div#team-grid {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--light-green);
+}
+
+
 
 div[data-class="member"] {
     padding: var(--common-padding);
-    border-bottom: 1px solid var(--light-green-contrast);
-    background-color: var(--background);
+    /* border-right: 1px solid var(--bamboo-green);
+    border-left: 1px solid var(--bamboo-green); */
+    border-bottom: 1px solid var(--light-green);
+    background-color: #dceddd;
 
     display: grid;
     grid-template-columns: min-content 1fr 20%;
@@ -961,6 +1003,7 @@ button[data-message="message"]:active {
     div#options-icons button {
         width: calc(var(--icon-main-size) * 0.8);
         height: calc(var(--icon-main-size) * 0.8);
+        font-size: calc(var(--brand-font-size) * 0.8);
     }
 
     div#brand2 {
@@ -978,6 +1021,8 @@ button[data-message="message"]:active {
 
     section#sub-header {
         grid-template-columns: 1fr 1fr;
+        padding-left: 3px;
+        padding-right: 3px;
     }
 
     div#profiler {
@@ -1003,8 +1048,14 @@ button[data-message="message"]:active {
     }
 
     ul#action-buttons button {
-        transform: scale(0.95);
-}
+        min-width: unset;
+        width: 90%;
+        font-size: calc(var(--brand-font-size) * 0.8);
+    }
+
+    ul#action-buttons button span {
+        font-size: calc(var(--brand-font-size) * 0.5);
+    }
 }
 
 @media only screen and (max-width: 325px) and (min-width: 320px) {
@@ -1020,33 +1071,32 @@ button[data-message="message"]:active {
 
 /* tablet */
 @media only screen and (min-width: 769px) {
-    :root {
-        --sidebar-width: 100%;
-        /* --header-bar-height: 5vh; */
+    /* :root {
+        --sidebar-width: calc(200px + 1vw);
+    } */
+    div#dash-container {
+        height: 100vh;
+        overflow: hidden;
     }
+
 
     div#menu {
         display: grid;
         grid-template-columns: max-content 1fr;
-        /* grid-template-rows: 
-            minmax(5vh, max-content) 
-            minmax(8vh, min-content)
-            5vh 
-            1fr; */
-       grid-template-rows: 
+        grid-template-rows: 
             max-content 
             max-content
             max-content 
             1fr;
         grid-template-areas: 
-            "sidebar header header"
+            "header header header"
             "sidebar sub-header sub-header"
             "sidebar divider divider"
             "sidebar contentDash contentDash";
 
             /* gap: 10px; */
-        max-height: 100vh;
-        overflow: hidden;
+        /* max-height: 100vh;
+        overflow: hidden; */
     }
 
     section#header-bar {
@@ -1061,12 +1111,11 @@ button[data-message="message"]:active {
 
     div#hamburger {
        display: none;
-        /* display: none; */
     }
     
-    div#brand{
+    /* div#brand{
         visibility: hidden;
-    }
+    } */
 
 
     section#content-divider {
@@ -1081,10 +1130,10 @@ button[data-message="message"]:active {
 
     section#sidebar {
         grid-area: sidebar;
-        width: var(--sidebar-width);
         position: relative;
         height: 100vh;
         background-color: var(--dark-green);
+        width: 25vw;
     }
 
     section#sidebar.hidden {
@@ -1092,12 +1141,7 @@ button[data-message="message"]:active {
     }
 
     div#brand2 {
-        /* min-width: max-content; */
-        grid-template-columns: max-content max-content;
-        width: var(--sidebar-width);
-        height: max-content;
-        border-bottom: 3px solid var(--bamboo-green);
-        gap: calc(1px + 1vw);
+        display: none;
     }
 
     section#sidebar button#exit-side {
@@ -1105,11 +1149,12 @@ button[data-message="message"]:active {
     }
 
     section#sidebar h3{
-        width: var(--sidebar-width);
+        width: 100%;
+        
     }
 
     section#sidebar nav {
-        width: var(--sidebar-width);
+        width:100%;
     }
 
     section#content-dash.offset,
@@ -1119,7 +1164,7 @@ button[data-message="message"]:active {
         margin-bottom: var(--common-margin);
         min-width: unset;
         /* max-height: 50vh; */
-        height: 98%;
+        height: 100%;
         overflow-y: scroll;
     }
 
@@ -1129,20 +1174,47 @@ button[data-message="message"]:active {
     }
 }
 
-@media only screen and (min-width: 1024px) {
+
+
+
+@media only screen and (min-width: 1023px) {
     :root {
-        --common-padding: calc(3px + 0.5vw);
+        /* --sidebar-width: 20vw; */
+        --common-padding: calc(4px + 0.4vw);
+        --common-margin: calc(3px + 0.5vw);
         --icon-main-size: calc(35px + 1.5vw);
-        /* --icon-main-size: calc(100px + 1vw); */
+        
+        --brand-font-size: calc(0.5rem + 1vw);
+        --content-main-font-size: calc(0.3rem + 0.8vw);
     }
 
+    div#menu {
+        grid-template-columns: minmax(200px, 15vw) 1fr;
+    }
+    
+
     section#header-bar {
+        padding: calc(var(--common-padding) * 0.5);
         padding-right: calc(var(--common-padding) * 3);
     }
 
-    /* div#brand {
-        visibility: unset;
-    } */
+    div#brand {
+        padding-left: calc(var(--common-padding) * 3);
+    }
+
+
+    section#sidebar {
+        width: 100%;
+    }
+
+    div#user-detail {
+        min-height: unset;
+    }
+
+    section#content-divider {
+        display: none;
+    }
+
 
     div#brand2,
     section#sidebar h3,
@@ -1151,46 +1223,63 @@ button[data-message="message"]:active {
     }
 
     img#icon-logo, img#icon-logo2 {
-        width: calc(var(--icon-main-size) * 1.3);
-        height: calc(var(--icon-main-size) * 1.3);
+        width: calc(var(--icon-main-size) * 0.8);
+        height: calc(var(--icon-main-size) * 0.8);
+    }
+
+    div#options-icons button {
+        width: calc(var(--icon-main-size) * 0.6);
+        height: calc(var(--icon-main-size) * 0.6);
+        font-size: calc(var(--brand-font-size) * 0.7);
     }
     
     section#sub-header {
-        padding: calc(var(--common-padding) * 1);
+        padding: calc(var(--common-padding) * 0.5);
         grid-template-columns: 1fr 1fr;
         padding-right: calc(var(--common-padding) * 3);
     }
 
     div#profile-picture {
-        width: calc(var(--icon-main-size) * 1.8);
-        height: calc(var(--icon-main-size) * 1.8);
+        width: calc(var(--icon-main-size) * 1);
+        height: calc(var(--icon-main-size) * 1);
         border: 2px solid var(--yellow-contrast);
     }
 
-    div#actions {
-        justify-self: center;
-        width: 100%;
+    div#user-detail h2 {
+        font-size: calc(var(--content-header-font-size) * 0.8);
     }
 
-    /* ul#action-buttons {
+    div#user-detail h3 {
+        font-size: calc(var(--content-main-font-size) * 0.8);
+    }
+
+    div#actions {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        width: 100%;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        height: 100%;
+    }
 
-    } */
+    ul#action-buttons {
+        align-items: center;
+        justify-self: center;
+        width: 70%;
+    }
 
-    /* ul#action-buttons li {
+    ul#action-buttons li {
+        height: 100%;
         width: 100%;
-        display: flex;
-        justify-content: flex-end;
-    } */
+        align-items: center;
+        justify-content: center;
+    }
 
     ul#action-buttons button {
-        min-width: 110px;
-        width: 75%;
-        grid-template-columns: 1fr 2fr;
+        /* min-width: max-content; */
+        width: 85%;
+        height: 70%;
+        grid-template-columns: 33% 67%;
         grid-template-rows: 1fr;
-        padding: var(--common-padding);
+        padding: calc(var(--common-padding) * 0.5);
         align-items: center;
         border-radius: calc(5px + 0.3vw);
     }
@@ -1200,5 +1289,178 @@ button[data-message="message"]:active {
     }
 
 
+    section#content-dash {
+        display: grid;
+        grid-template-columns: 1fr minmax(20%, 300px);
+        grid-template-rows: 50% 50%;
+        grid-template-areas: 
+            "projects announcements"
+            "projects team";
+        gap: 1vw;
+        height:78vh;
+        overflow: unset;
+    }
+    
+    section#announcements h3, section#team h3, section#projects h3 {
+        display: unset;
+    }
 
+    section#content-dash > section#projects,
+    section#content-dash > section#projects.swiped {
+        grid-area: projects;
+        transform: translateX(0);
+        height: 100%;
+    }
+
+
+    section#content-dash > section#announcements.swiped,
+    section#content-dash > section#announcements {
+        grid-area: announcements;
+        transform: translateX(0);
+        height: 100%;
+        gap: 5px;
+        overflow-y: auto;
+    }
+
+    section#announcements > div#announce-grid {
+        overflow-y: auto;
+    }
+
+
+    div[data-box="announcement"] {
+        gap: 5px;
+        height: max-content;
+        padding: calc(var(--common-padding)* 0.8);
+        width: 98%;
+    }
+
+
+    div[data-box="announcement"] h4 {
+        font-size: calc(var(--content-header-font-size) * 0.7);
+    }
+
+    div[data-box="announcement"] p {
+        font-size: calc(var(--content-main-font-size) * 0.7);
+    }
+ 
+    div[data-post] {
+        font-size: calc(var(--content-main-font-size) * 0.7);
+    }
+
+    section#content-dash > section#team.swiped,
+    section#content-dash > section#team {
+        grid-area: team;
+        transform: translateX(0);
+        height: 100%;
+    }
+
+    section#team > div#team-grid {
+        overflow-y: auto;
+    }
+
+
+    div[data-class="member"] {
+        padding: 5px;
+        width: 98%;
+
+    }
+
+    div[data-profile="picture"] {
+        width: calc(var(--content-header-font-size) * 2);
+        height: calc(var(--content-header-font-size) * 2);
+    }
+
+    div[data-status="status"] {
+        border: calc(1px + 0.1vw) solid var(--background);
+    }
+
+
+    p[data-profile="username"] {
+        font-size: calc(var(--content-main-font-size) * 0.7);
+    }
+
+    p[data-profile="address"] {
+        font-size: calc(var(--content-main-font-size) * 0.7);
+    }
+
+    p[data-profile="status"] {
+        font-size: calc(var(--content-main-font-size) * 0.7);
+    }
+
+    button[data-message="message"] {
+        font-size: calc(var(--content-header-font-size) * 0.7);
+        width: calc(var(--content-main-font-size) * 2);
+        height: calc(var(--content-main-font-size) * 2);
+        padding: 1px;
+    }
+
+
+    div#projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-rows: 250px;
+        grid-auto-rows: 250px;
+        width: 98%;
+        overflow-y: auto;
+    }
+
+
+    div#projects-grid div[data-class="project-box"] h4 {
+        font-size: calc(var(--content-header-font-size) * 0.8);
+        height: 10%;
+    }
+
+    div[data-detail="details"] p {
+        font-size: calc(var(--content-main-font-size) * 0.8);
+    }
+    
+
+    div#projects-grid div[data-class="project-box"] button {
+        height: calc(var(--content-main-font-size) * 2 * 0.8);
+        width: calc(var(--content-main-font-size) * 5 * 0.8);
+        font-size: calc(var(--content-main-font-size) * 0.8);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* scroll-bar styling */
+
+    /* Hide scrollbar by default */
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+  
+  /* Show scrollbar on hover */
+    ::-webkit-scrollbar:hover {
+        background-color: var(--dark-green);
+        /* width: 1%; */
+    }
+  
+  /* Style the scrollbar track */
+    ::-webkit-scrollbar-track {
+        background-color: var(--dark-base)
+    }
+  
+  /* Style the scrollbar thumb */
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--light-green);
+        border-radius: 10px;
+    }
+    
+}
+
+
+body::content {
+    background-color: var(--background);
 }

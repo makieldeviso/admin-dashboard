@@ -43,6 +43,9 @@
     --common-margin: calc(3px + 1vw);
 }
 
+div#menu {
+    position: relative;
+}
 
 /* section#header-bar (start) !!!!!!!!!!!!!!*/
 section#header-bar { 
@@ -433,7 +436,6 @@ section#content-dash {
     padding: calc(1px + 1vw);
     /* z-index: var(--content-z); */
     display: flex;
-    min-width: 100vw;
     overflow-x: hidden;
     flex-wrap: nowrap;
     background-color: var(--background);
@@ -1172,7 +1174,7 @@ button[data-message="message"]:active {
     }
 
     div#projects-grid {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: var(--common-margin);
     }
 }
@@ -1399,9 +1401,9 @@ button[data-message="message"]:active {
 
 
     div#projects-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        grid-template-rows: minmax(250px, 400px);
-        grid-auto-rows:  minmax(250px, 400px);
+        grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+        grid-template-rows: minmax(250px, 45%);
+        grid-auto-rows:  minmax(250px, 45%);
         width: 98%;
         overflow-y: auto;
     }
@@ -1423,18 +1425,16 @@ button[data-message="message"]:active {
         font-size: calc(var(--content-main-font-size) * 0.8);
     }
 
+    dialog.projectModal, dialog.announceModal {
+        width: 50vw;
+        max-width: 700px;
+        height: 80vh;
+        max-height: 1000px;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
+    dialog.projectModal h4, dialog.announceModal h4 {
+        font-size: calc(var(--content-header-font-size) * 1.3);
+    }
 
     /* scroll-bar styling */
 

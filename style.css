@@ -337,7 +337,36 @@ section#sidebar li {
     font-weight: bold;
 }
 
-section#sidebar a {
+
+
+section#sidebar button {
+    font-size: var(--content-header-font-size);
+    font-weight: bold;
+
+    color: black;
+    text-decoration: none;
+    
+    padding: var(--common-padding);
+    padding-right: 0;
+
+    display: flex;
+    width: 100%; 
+
+    border: none;
+    border-radius:  var(--content-header-font-size) 0 0 var(--content-header-font-size);
+    background-color: transparent;
+}
+
+section#sidebar button:hover,
+section#sidebar button:focus {
+    background-color: var(--light-green);
+}
+
+section#sidebar button:active {
+    background-color: var(--background);
+}
+
+/* section#sidebar a {
     color: black;
     text-decoration: none;
     
@@ -360,7 +389,7 @@ section#sidebar a:focus{
 
 section#sidebar a:active {
     color: var(--dark-base);
-}
+} */
 
 section#sidebar span {
     margin-left: var(--common-margin);

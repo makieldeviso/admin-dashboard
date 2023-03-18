@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&family=Tilt+Neon&display=swap');
 
+/* Note: spaces inside each element styling is intentional to show style grouping */
+/* Note: I tried to as much as possible order the styling according to order of how they appear in the DOM  */
+
 * {
     margin: 0;
     padding: 0;
@@ -7,19 +10,15 @@
     font-family: var(--content-font-family);
 }
 
-/* body {
-    
-} */
-
 :root {
+    --content-div-height: 5.5vh;
     --header-bar-height: calc(55px + 2vw);
     --header-bar-z: 2;
     --sub-header-z: 1;
+    
     --side-bar-z: 3;
     --divider-z: calc(var(--header-bar-z) - 1);
     --content-z: calc(var(--divider-z) - 1);
-
-    --content-div-height: 5.5vh;
 
     --dark-base: #40513B;
     --bamboo-green: #609966;
@@ -30,7 +29,6 @@
     --yellow-dark: #FED049;
     --yellow-contrast: #F5DF99;
     --background: #F6FBF4;
-    --icon-main-size: calc(35px + 1vw);
 
     --brand-font: 'Tilt Neon', cursive;
     --brand-font-size: calc(1rem + 1vw);
@@ -38,7 +36,8 @@
     --content-font-family: 'Nunito', sans-serif;
     --content-main-font-size: calc(0.6rem + 1vw);
     --content-header-font-size: calc(var(--content-main-font-size) * 1.1);
-    
+   
+    --icon-main-size: calc(35px + 1vw);
     --common-padding: calc(5px + 1vw);
     --common-margin: calc(3px + 1vw);
 }
@@ -47,63 +46,68 @@ div#menu {
     position: relative;
 }
 
-/* section#header-bar (start) !!!!!!!!!!!!!!*/
+/* section#header-bar (start) ----- */
 section#header-bar { 
+    background-color: var(--dark-green);
+    border-bottom: 3px solid var(--bamboo-green);
+    padding: var(--common-padding) var(--common-padding);
+    height: var(--header-bar-height);
+    width: 100%;
+
     position: fixed;
     top: 0;
-    width: 100%;
-    height: var(--header-bar-height);
-    /* min-height: max-content; */
-
-    z-index: var(--header-bar-z);
-    background-color: var(--dark-green);
+    
     display: grid;
     grid-template-columns: 1.5fr 1fr;
     grid-template-areas:
         "brand options-icons";
     align-items: center;
     justify-items: start;
-    padding: var(--common-padding) var(--common-padding);
-
-    border-bottom: 3px solid var(--bamboo-green);
+    
+    z-index: var(--header-bar-z);
 }
 
 
-/* div#brand (start) --------------- */
+/* div#brand (start) ----- */
 div#brand {
     grid-area: brand;
+
+    width: max-content;
+
     display: flex;
     justify-content: flex-start;
     align-items: center;
     gap: calc(5px + 1vw);
-    width: max-content;
 }
-
 
 img#icon-logo, img#icon-logo2 {
     display: inline-block;
-    width: var(--icon-main-size);
+
     height: var(--icon-main-size);
-    padding: 3px;
-    border-radius: 50%;
-    border: 1px solid var(--bamboo-green);
+    width: var(--icon-main-size);
+    
     background-color: var(--dark-green-contrast);
+    border: 1px solid var(--bamboo-green);
+    border-radius: 50%;
+    padding: 3px;
 }
 
 h1#company-name, h1#company-name2 {
-    font-size: var(--brand-font-size);
-    font-family: var(--brand-font);
     color: var(--light-green-contrast);
+    font-family: var(--brand-font);
+    font-size: var(--brand-font-size);
     text-shadow: 0 0 5px var(--bamboo-green);
 }
 /* div#brand (end) */
 
-/* div#options-icons (start) -----------------------*/
+/* div#options-icons (start) -----*/
 div#options-icons {
     grid-area: options-icons;
+
+    width: max-content;
+    
     display: flex;
     gap: calc(5px + 1vw);
-    width: max-content;
     justify-self: end;
 }
 
@@ -111,27 +115,26 @@ div#options-icons button { /* buttons*/
     width: var(--icon-main-size);
     height: var(--icon-main-size);
 
-    padding: 5px;
+    background-color: var(--bamboo-green);
     border: 1px solid var(--yellow-contrast);
     border-radius: 50%;
-    font-size: var(--brand-font-size);
-    background-color: var(--bamboo-green);
+    padding: 5px;
+
     color: var(--yellow-contrast);
+    font-size: var(--brand-font-size);
     text-shadow: 0 0 3px var(--dark-base); 
 }
 /* div#options-icons (end)*/
 /* section#header-bar (end)*/
 
 
-
-
-
-
-
-/* div#sub-header (start) !!!!!!!!!!!!!*/
+/* div#sub-header (start) -----*/
 section#sub-header { 
     width: 100%;
     background-color: var(--dark-green-contrast);
+    padding: 0 var(--common-padding) var(--common-padding);
+    padding-top: calc(var(--header-bar-height) + var(--common-padding));
+
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
@@ -139,14 +142,13 @@ section#sub-header {
     align-items: center;
     justify-items: start;
 
-    padding: 0 var(--common-padding) var(--common-padding);
-    padding-top: calc(var(--header-bar-height) + var(--common-padding));
     z-index: var(--sub-header-z);
 }
 
 /* div#profiler (start) --------------------- */
 div#profiler {
     grid-area: profiler;
+
     width: 100%;
     
     display: flex;
@@ -156,10 +158,12 @@ div#profiler {
 }
 
 div#profile-picture {
-    width: calc(var(--icon-main-size) * 1.3);
     height: calc(var(--icon-main-size) * 1.3);
+    width: calc(var(--icon-main-size) * 1.3);
+    
     border-radius: 50%;
     border: 1px solid var(--yellow-contrast);
+    
     background-image: url("./images/profile.png");
     background-position: center;
     background-size: cover;
@@ -168,95 +172,106 @@ div#profile-picture {
 } 
 
 div#user-detail {
+    background-color: var(--light-green-contrast);
+    border: 1px solid var(--yellow-contrast);
+    border-radius: 10px;
+    padding: 5px;
+
     min-width: max-content;
     width: calc(60% + 2vw);
-    padding: 5px;
     min-height: calc(var(--icon-main-size) * 1.3);
-    background-color: var(--light-green-contrast);
-    border-radius: 10px;
-
+    
     display: flex;
     flex-direction: column;
     row-gap: 1px;
-    border: 1px solid var(--yellow-contrast);
 }
 
 div#user-detail h2 {
-    font-size: var(--content-header-font-size);
-    font-family: var(--content-font-family);
     display: inline-block;
+
+    font-family: var(--content-font-family);
+    font-size: var(--content-header-font-size);
 }
 
 div#user-detail h3 {
-    font-size: var(--content-main-font-size);
-    font-family: var(--content-font-family);
     display: inline-block;
+
+    font-family: var(--content-font-family);
+    font-size: var(--content-main-font-size);
 }
 
 div#user-detail h3 {
     grid-column: 1/3;
 }
-/* div#profiler (start) */
 
-/* div#actions (start) ---------------------- */
+/* div#profiler (start) ----- */
+/* div#actions (start) ----- */
 div#actions {
     grid-area: actions;
     justify-self: center;
+
     width: 100%;
 }
 
 ul#action-buttons {
-    list-style-type: none;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+
     width: 100%;
+    list-style-type: none;
 }
 
 ul#action-buttons li {
-    width: 100%;
     display: flex;
     justify-content: flex-end;
+
+    width: 100%;
 }
 
 ul#action-buttons button {
+    height: calc(var(--icon-main-size) * 1.3);
     min-width: 50px;
     width: 75%;
-    height: calc(var(--icon-main-size) * 1.3);
+    
     border: 1px solid var(--yellow-contrast);
     border-radius: 5px;
-    font-size: var(--brand-font-size);
+    padding: calc(var(--common-padding) * 0.5);
+
     background-color: var(--bamboo-green);
     color: var(--yellow-contrast);
+    font-size: var(--brand-font-size);
     text-shadow: 0 0 3px var(--dark-base);
-
+    
     display: grid;
     grid-template-rows: 1fr 1fr;
     justify-content: center;
     align-items: end;
-    padding: calc(var(--common-padding) * 0.5);
 }
 
 ul#action-buttons button span {
     font-size: calc(var(--brand-font-size) * 0.6);
 }
+/* div#actions (end) ----- */
 
-/* div#actions (end) */
 
-
-/* section#sidebar (start) !!!!!!!! */
+/* section#sidebar (start) ----- */
 
 section#sidebar {
-    padding: 0;
     background-color: rgba(0, 0, 0, 0.7);
     font-family: var(--content-font-family);
+    padding: 0;
+
     width: 100vw;
     height: 100vh;
+
     position: fixed;
     top: 0;
     z-index: var(--side-bar-z);
-    transition: transform 0.2s ease-in-out;
+
     display: flex;
     flex-direction: column;
+
+    transition: transform 0.2s ease-in-out;
 }
 
 section#sidebar.hidden {
@@ -267,41 +282,48 @@ div#brand2 {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
     align-items: center;
+
     width: 80vw;
+
     background-color: var(--dark-green);
     padding : var(--common-padding);
 }
 
-
 section#sidebar h3 {
+    background-color: var(--dark-green);
     font-size: var(--brand-font-size);
+
     padding: var(--common-padding);
     padding-right: 0;
+
     width: 80vw;
-    background-color: var(--dark-green);
 }
 
 section#sidebar button#exit-side {
     width: calc(var(--brand-font-size) * 2);
     height: calc(var(--brand-font-size) * 2);
-    font-size: calc(var(--brand-font-size) * 1.3);
-    border-radius: 50%;
 
+    color: var(--bamboo-green);
+    font-size: calc(var(--brand-font-size) * 1.3);
+
+    background-color: var(--light-green-contrast);
     border: 2px solid var(--bamboo-green);
     border-radius: 50%;
-    background-color: var(--light-green-contrast); 
-    color: var(--bamboo-green);
     box-shadow: 0 0 5px var(--yellow-dark);
+     
     justify-self: end;
 
     position: absolute;
     left: 85vw;
 }
+
 section#sidebar nav {
     width: 80vw;
-    flex: 1;
+
     background-color: var(--dark-green);
     padding-left: 5%;
+
+    flex: 1;
 }
 
 section#sidebar ul {
@@ -316,12 +338,14 @@ section#sidebar li {
 }
 
 section#sidebar a {
-    text-decoration: none;
     color: black;
+    text-decoration: none;
+    
     padding: var(--common-padding);
     padding-right: 0;
-    width: 100%;
+
     display: block;
+    width: 100%; 
 }
 
 section#sidebar a:visited {
@@ -341,22 +365,20 @@ section#sidebar a:active {
 section#sidebar span {
     margin-left: var(--common-margin);
 }
-/* section#sidebar (end)*/
+/* section#sidebar (end) -----*/
 
-
- 
-
-
-
-/* section#content-divider (start)*/
+/* section#content-divider (start) -----*/
 section#content-divider {
     width: 100%;
     padding-top: 3px;
+
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    top: var(--header-bar-height);
+    
     background-color: var(--background);
+    
+    top: var(--header-bar-height);
     z-index: var(--divider-z);
 }
 
@@ -367,28 +389,31 @@ section#content-divider.fixed {
 
 section#content-divider ul {
     display: flex;
-    list-style-type: none;
+
     border-bottom: 3px solid var(--bamboo-green);
+    list-style-type: none;
 }
 
 section#content-divider li {
-    padding: 2px;
     background-color: var(--bamboo-green);
-    width: 33%;
+
     min-width: max-content;
+    width: 33%;
+    padding: 2px;
+
     -webkit-clip-path: polygon(0 0, 95% 0, 100% 100%, 5% 100%);
     clip-path: polygon(0 0, 95% 0, 100% 100%, 5% 100%);
-    /* transform: translate(-5%); */
 }
 
 section#content-divider li:first-of-type {
     -webkit-clip-path: polygon(0 0, 95% 0, 100% 100%, 0 100%);
     clip-path: polygon(0 0, 95% 0, 100% 100%, 0 100%);
-    /* transform: translate(5%); */
 }
+
 section#content-divider li:nth-of-type(2) {
     transform: translateX(-5%);
 }
+
 section#content-divider li:nth-of-type(3) {
     transform: translateX(-10%);
 }
@@ -396,14 +421,15 @@ section#content-divider li:nth-of-type(3) {
 
 section#content-divider button {
     font-size: var(--content-main-font-size);
-    padding: calc(1px + 1vw) calc(10px + 1vw ) calc(1px + 1vw);
+    background-color: var(--light-green-contrast);
+    
     border-radius: 0;
     border: none;
-    background-color: var(--light-green-contrast);
-    /* border-radius: 10px; */
+    padding: calc(1px + 1vw) calc(10px + 1vw ) calc(1px + 1vw);
+    width: 100%;
+
     -webkit-clip-path: polygon(0 0, 95% 0, 100% 100%, 5% 100%);
     clip-path: polygon(0 0, 95% 0, 100% 100%, 5% 100%);
-    width: 100%;
 }
 
 section#content-divider button#projects-button {
@@ -424,70 +450,62 @@ section#content-divider button.clicked {
     background-color: var(--dark-green-contrast);
     font-weight: bold;
 }
-/* section#content-divider (end)*/
+/* section#content-divider (end) -----*/
 
 
-
-
-
-
-/* section#content-dash (start)*/
+/* section#content-dash (start) -----*/
 section#content-dash {
-    padding: calc(1px + 1vw);
-    /* z-index: var(--content-z); */
-    display: flex;
-    overflow-x: hidden;
-    flex-wrap: nowrap;
     background-color: var(--background);
+    padding: calc(1px + 1vw);
+
+    display: flex;
+    flex-wrap: nowrap;
+
+    overflow-x: hidden; 
 }
 
 section#content-dash > section {
+    flex: 0 0 100%;
+
+    width: 100%;
+
+    z-index: var(--content-z);
+
     transition: transform 0.2s ease-in-out, 
         height 0.2s ease-in-out;
-    width: 100%;
-    flex: 0 0 100%;
-    z-index: var(--content-z);
- 
 } 
 
 section#content-dash > section#projects.swiped {
-    transform: translateX(-110%);
     height: 0;
+    transform: translateX(-110%);
 } 
 
 section#content-dash > section#projects{
-    transform: translateX(0);
     height: 100%;
+    transform: translateX(0);
 }
 
 section#content-dash > section#announcements.swiped {
-    transform: translateX(-210%);
     height: 0;
+    transform: translateX(-210%);
 } 
 
 section#content-dash > section#announcements{
+    height: 100%;
     transform: translateX(-100%);
-    /* border: 1px solid black;  */
-    height: 100%; 
 } 
 
 section#content-dash > section#team.swiped {
-    transform: translateX(-310%);
     height: 0;
+    transform: translateX(-310%);
 } 
 
 section#content-dash > section#team {
-    transform: translateX(-200%);
     height: 100%;
+    transform: translateX(-200%);
 } 
 
-
-
-
-
-
 section#content-dash.offset {
-    padding-top: calc(var(--content-div-height) + calc(1px + 1vw));
     padding-top: calc(var(--content-div-height))
 }
 
@@ -497,24 +515,26 @@ section#projects {
     gap: 5px;
 }
 
-
-
 div#projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-template-rows: 300px;
     grid-auto-rows: 300px;
     gap: calc(var(--common-margin) * 3);
+
     flex: 1;
 }
 
 div#projects-grid div[data-class="project-box"] {
-    padding: var(--common-padding);
-    padding-left: calc(var(--common-padding) * 2);
+    
     border: 1px solid var(--bamboo-green);
     border-left: 10px double var(--yellow-dark);
-    background-color: var(--background);
     border-radius: 10px 0 0 10px;
+    padding: var(--common-padding);
+    padding-left: calc(var(--common-padding) * 2);
+
+    background-color: var(--background);
+    
     width: 100%;
     min-height: calc(150px + 1vw);
     overflow: hidden;
@@ -526,7 +546,6 @@ div#projects-grid div[data-class="project-box"] {
 div#projects-grid div[data-class="project-box"].hovered {
     filter: brightness(0.95);
 }
-
 
 div#projects-grid div[data-class="project-box"] h4 {
     font-size: var(--content-header-font-size);
@@ -541,39 +560,42 @@ div#projects-grid div[data-class="project-box"] div[data-detail="details"] {
 
 div[data-detail="details"] p {
     height: max-content;
-    /* flex: 1 1 30%; */
-    /* height: max-content; */
     width: 100%;
+
     font-size: calc(0.6rem + 1vw);
-    /* padding-bottom: var(--common-padding); */
+
     margin-bottom: var(--common-margin);
 }
 
 div[data-detail="details"] div[data-preview="preview"] {
-    width: 95%;
     flex: 1;
-    /* border: var(--common-padding) solid var(--background); */
+
     background: url("/images/profile.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+
     border-left: 10px double var(--dark-green);
     border-radius: 5px 0 0 5px;
+
+    width: 95%;
 }
 
 div#projects-grid div[data-class="project-box"] div[data-action="respond"] {
-    height: 15%;
     display: flex;
     justify-content: flex-end;
     align-items: end;
     gap: calc(5px + 1vw);
+
+    height: 15%;
 }
 
 div#projects-grid div[data-class="project-box"] button {
     height: calc(var(--content-main-font-size) * 2);
     width: calc(var(--content-main-font-size) * 5);
-    /* padding: calc(1px + 1vw); */
+    
     font-size: var(--content-main-font-size);
+
     background-color: var(--light-green-contrast);
     border: none;
     border-radius: 10%;
@@ -589,10 +611,7 @@ div#projects-grid div[data-class="project-box"] button i {
 div#projects-grid div[data-class="project-box"] button span {
     width: 30%;
 }
-/* section#content-dash (end)*/
-
-
-
+/* section#content-dash (end) ----*/
 
 /* Modal styling (start) */
 div#modal-container {
@@ -600,24 +619,20 @@ div#modal-container {
 }
 
 dialog.projectModal, dialog.announceModal {
-    margin: auto;
+    height: 60%;
     min-width: 250px;
     width: 90%; 
     min-height: 500px;
-    height: 60%;
     overflow: auto;
+
     border: 2px solid var(--dark-green);
     border-radius: 10px;
     box-shadow: 0 0 5px var(--light-green);
+    margin: auto;
+
     background-color: var(--background);
 
     animation: 0.3s modal-show;
-}
-
-dialog.announceModal {
-    min-height: 300px;
-    height: 40%;
-    overflow: auto;
 }
 
 @keyframes modal-show {
@@ -626,10 +641,17 @@ dialog.announceModal {
         transform: scale(0.1);
     }
 
-    to {opacity: 1;
+    to {
+        opacity: 1;
         transform: scale(1);
     }
   } 
+
+dialog.announceModal {
+    min-height: 300px;
+    height: 40%;
+    overflow: auto;
+}
 
 dialog.projectModal::backdrop,
 dialog.announceModal::backdrop {
@@ -639,8 +661,10 @@ dialog.announceModal::backdrop {
 dialog.projectModal div.modalDiv,
 dialog.announceModal div.modalDiv {
     padding: var(--common-padding);
-    max-width: 100%;
+
     height: 100%;
+    max-width: 100%;
+    
     display: flex;
     flex-direction: column;
     gap: var(--common-margin);
@@ -653,32 +677,37 @@ dialog.announceModal div.modalDiv {
 
 dialog.projectModal button,
 dialog.announceModal button {
-    width: calc(var(--brand-font-size) * 1.5);
     height: calc(var(--brand-font-size) * 1.5);
+    width: calc(var(--brand-font-size) * 1.5);
+    
+    background-color: var(--yellow-contrast);
+    color: var(--bamboo-green);
     font-size: var(--brand-font-size);
+    
     border-radius: 50%;
-
     border: 2px solid var(--bamboo-green);
     border-radius: 50%;
-    background-color: var(--yellow-contrast); 
-    color: var(--bamboo-green);
+
     align-self: flex-end;
 }
 
 dialog.projectModal h4,
 dialog.announceModal h4 {
     font-size: calc(var(--content-header-font-size) * 1.5);
+    word-wrap: break-word;
+
     max-width: 100%;
     min-height: max-content;
-    word-wrap: break-word;
 }
-
 
 dialog.projectModal div[data-detail="details"] {
     flex: 1;
+
     display: flex;
     flex-direction: column;
+
     height: 50%;
+
     margin-bottom: calc(var(--common-margin) * 5);
 }
 
@@ -693,29 +722,31 @@ dialog.announceModal div.modalDiv p[data-message="message"] {
     flex: 1;
 }
 
-
-
 dialog.projectModal div[data-preview="preview"] {
-    width: 95%;
     height: 50%;
-    margin: auto;
+    width: 95%;
+    
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+
     border-left: 10px double var(--dark-green);
     border-radius: 5px 0 0 5px;
+    margin: auto;
 }
 
 dialog.projectModal div[data-link] {
     display: flex;
-    height: max-content;
     align-items: center;
     gap: 1rem;
+
+    height: max-content;
 }
 
 
 dialog.projectModal div[data-link] > p {
     font-size: calc(var(--content-main-font-size) * 1.2);
+
     height: 100%;
     min-width: max-content;
     width: calc(115px + 1vw);
@@ -740,21 +771,21 @@ dialog.projectModal div[data-link] > a:active {
     transform: scale(0.95);
 }
 
-
 div[data-class="bar"] {
     height: 115%;
     max-width: 250px;
     width: 50%;
-    border: 3px solid var(--light-green);
-    /* padding: 1px; */
-    border-radius: var(--content-main-font-size);
-    position: relative;
-    background-color: var(--light-green-contrast);
-}
 
+    background-color: var(--light-green-contrast);
+    border: 3px solid var(--light-green);
+    border-radius: var(--content-main-font-size);
+
+    position: relative; 
+}
 
 div[data-class="fill"] {
     height: 100%;
+
     border-radius: var(--content-main-font-size);
 }
 
@@ -774,27 +805,20 @@ div[data-class="fill"].complete {
     background-color: var(--dark-green);
 }
 
-
-
-
-
 div[data-class="bar"] p {
     width: 100%;
-    text-align: center;
+    
     position: absolute;
     bottom: 0;
+
     font-size: calc(var(--content-header-font-size) * 0.95);
+    text-align: center;
 }
-
-
-
-
-/* Modal styling (end) */
+/* Modal styling (end) ----- */
 
 
 /* Announcements (start)*/
 section#announcements {
-    /* padding: var(--common-padding); */
     display: flex;
     flex-direction: column;
     gap: var(--common-margin);
@@ -804,18 +828,23 @@ section#announcements > div#announce-grid {
     display: flex;
     flex-direction: column;
     gap: var(--common-margin);
+
     border-bottom: 1px solid var(--light-green);
 }
 
 section#announcements h3, section#team h3, section#projects h3 {
+    background-color: var(--light-green);
     font-size: calc(var(--content-header-font-size) * 0.9);
+
     padding: 3px;
     border-radius: 0px;
-    background-color: var(--light-green);
+    
     -webkit-clip-path: polygon(0 0, 95% 0, 100% 100%, 0 100%);
     clip-path: polygon(0 0, 95% 0, 100% 100%, 0 100%);
+
     min-width: 150px;
     width: 200px;
+
     display: none; 
     /* does not display on small screens */
 }
@@ -824,9 +853,11 @@ div[data-box="announcement"] {
     display: flex;
     flex-direction: column;
     gap: var(--common-padding);
+
     border: 1px solid var(--bamboo-green);
     padding: var(--common-padding);
     border-radius: 15px 0 0 0px;
+
     background-color: var(--background);
 }
 
@@ -835,9 +866,9 @@ div[data-box="announcement"]:focus {
     filter: brightness(0.95);
 }
 
-
 div[data-box="announcement"] h4 {
     font-size: var(--content-header-font-size);
+
     overflow: hidden;
 }
 
@@ -846,16 +877,15 @@ div[data-box="announcement"] p {
 }
 
 div[data-post] {
-    font-size: var(--content-main-font-size);
     color: #7E97A6;
+    font-size: var(--content-main-font-size);
+   
     display: flex;
     justify-content: space-between;
 }
-/* Announcements (start)*/
+/* Announcements (start) -----*/
 
-
-/* Teams (start) */
-
+/* Teams (start) ----- */
 section#team {
     display: flex;
     flex-direction: column;
@@ -868,19 +898,15 @@ div#team-grid {
     border-bottom: 1px solid var(--light-green);
 }
 
-
-
 div[data-class="member"] {
-    padding: var(--common-padding);
-    /* border-right: 1px solid var(--bamboo-green);
-    border-left: 1px solid var(--bamboo-green); */
-    border-bottom: 1px solid var(--light-green);
     background-color: #dceddd;
-
+    
+    border-bottom: 1px solid var(--light-green);
+    padding: var(--common-padding);
+    
     display: grid;
     grid-template-columns: min-content 1fr 20%;
     grid-template-rows: 1fr 1fr 1fr;
-
     grid-template-areas: 
         "picture username message"
         "picture address message"
@@ -889,21 +915,27 @@ div[data-class="member"] {
 
 div[data-profile="picture"] {
     grid-area: picture;
-    width: calc(var(--content-header-font-size) * 4);
+
     height: calc(var(--content-header-font-size) * 4);
+    width: calc(var(--content-header-font-size) * 4);
+    
     border-radius: 50%;
+
     background-position: center;
     background-size: cover;
+
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
 }
 
 div[data-status="status"] {
-    width: 30%;
     height: 30%;
+    width: 30%;
+    
     border: calc(2px + 0.3vw) solid var(--background);
     border-radius: 50%; 
+
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;  
@@ -927,42 +959,47 @@ div[data-status="status"].no-disturb {
     background-color: rgb(235, 83, 83);
 }
 
-
 p[data-profile] {
     margin-left: calc(var(--common-margin) * 2);
 }
 
 p[data-profile="username"] {
     grid-area: username;
+
     font-size: var(--content-main-font-size);
     font-weight: bold;
 }
 
 p[data-profile="address"] {
     grid-area: address;
+
     font-size: var(--content-main-font-size);
 }
 
 p[data-profile="status"] {
     grid-area: status;
-    font-size: var(--content-main-font-size);
+
     color: #7E97A6;
+    font-size: var(--content-main-font-size);
 }
 
 button[data-message="message"] {
     grid-area: message;
-    font-size: calc(var(--content-header-font-size) * 1.1);
-    width: calc(var(--content-main-font-size) * 3);
-    height: calc(var(--content-main-font-size) * 3);
-    border-radius: 50%;
-    text-align: center;
-    padding: 5px;
-    padding-top: 8px;
-    border: 1px solid var(--bamboo-green);
-    background-color: #EDF1D6;
-    color: var(--light-green);
     align-self: center;
     justify-self: center;
+
+    color: var(--light-green);
+    background-color: #EDF1D6;
+    font-size: calc(var(--content-header-font-size) * 1.1);
+    text-align: center;
+
+    height: calc(var(--content-main-font-size) * 3);
+    width: calc(var(--content-main-font-size) * 3);
+    
+    border: 1px solid var(--bamboo-green);
+    border-radius: 50%;
+    padding: 5px;
+    padding-top: 8px;
 }
 
 button[data-message="message"]:hover,
@@ -974,19 +1011,20 @@ button[data-message="message"]:active {
     transform: scale(0.95);
 }
 
-
+/* Small screen-size, galaxy fold as reference */
 @media only screen and (max-width: 375px) and (min-height: 500px) {
-
     :root {
         --header-bar-height: calc(40px + 2vw);
     }
 
     section#content-divider button {
         padding: 0;
+        margin: auto;
+
         height: 100%;
         width: 100%;
+
         font-size: 0.7rem;
-        margin: auto;
     }
 
     div#projects-grid {
@@ -994,8 +1032,8 @@ button[data-message="message"]:active {
     }
 
     img#icon-logo {
-        width: calc(var(--icon-main-size) * 0.8);
         height: calc(var(--icon-main-size) * 0.8);
+        width: calc(var(--icon-main-size) * 0.8);
     }
 
     h1#company-name{
@@ -1003,8 +1041,9 @@ button[data-message="message"]:active {
     }
 
     div#options-icons button {
-        width: calc(var(--icon-main-size) * 0.8);
         height: calc(var(--icon-main-size) * 0.8);
+        width: calc(var(--icon-main-size) * 0.8);
+        
         font-size: calc(var(--brand-font-size) * 0.8);
     }
 
@@ -1017,12 +1056,13 @@ button[data-message="message"]:active {
     }
 
     section#sidebar button#exit-side {
-        width: calc(var(--brand-font-size) * 1.8);
         height: calc(var(--brand-font-size) * 1.8);
+        width: calc(var(--brand-font-size) * 1.8);
     }
 
     section#sub-header {
         grid-template-columns: 1fr 1fr;
+
         padding-left: 3px;
         padding-right: 3px;
     }
@@ -1032,8 +1072,8 @@ button[data-message="message"]:active {
     }
 
     div#profile-picture {
-        width: calc(var(--icon-main-size) * 1.1);
         height: calc(var(--icon-main-size) * 1.1);
+        width: calc(var(--icon-main-size) * 1.1);
     }
 
     div#user-detail h2 {
@@ -1042,6 +1082,7 @@ button[data-message="message"]:active {
 
     div#user-detail {
         min-height:unset;
+
         padding: 3px;
     }
 
@@ -1052,6 +1093,7 @@ button[data-message="message"]:active {
     ul#action-buttons button {
         min-width: unset;
         width: 90%;
+
         font-size: calc(var(--brand-font-size) * 0.8);
     }
 
@@ -1060,6 +1102,7 @@ button[data-message="message"]:active {
     }
 }
 
+/* Smaller Screen Iphone SE as reference */
 @media only screen and (max-width: 325px) and (min-width: 320px) {
 
     ul#action-buttons {
@@ -1071,19 +1114,16 @@ button[data-message="message"]:active {
 }
 }
 
-/* tablet */
+/* Tablet Ipad Air reference*/
 @media only screen and (min-width: 769px) {
-    /* :root {
-        --sidebar-width: calc(200px + 1vw);
-    } */
     div#dash-container {
-        width: 100vw;
         height: 100vh;
-        /* overflow: hidden; */
-        position: fixed;
+        width: 100vw;
+        
         background-color: var(--background);
-    }
 
+        position: fixed;
+    }
 
     div#menu {
         display: grid;
@@ -1098,16 +1138,14 @@ button[data-message="message"]:active {
             "sidebar sub-header sub-header"
             "sidebar divider divider"
             "sidebar contentDash contentDash";
-
-            /* gap: 10px; */
-        /* max-height: 100vh;
-        overflow: hidden; */
     }
 
     section#header-bar {
         grid-area: header;
-        position: unset;
+
         height: max-content;
+
+        position: unset;
     }
 
     section#sub-header {
@@ -1118,13 +1156,9 @@ button[data-message="message"]:active {
        display: none;
     }
     
-    /* div#brand{
-        visibility: hidden;
-    } */
-
-
     section#content-divider {
         grid-area: divider;
+
         height: 100%;
     }
 
@@ -1132,13 +1166,15 @@ button[data-message="message"]:active {
         position: unset;
     }
 
-
     section#sidebar {
         grid-area: sidebar;
+
         position: relative;
+
         height: 100vh;
-        background-color: var(--dark-green);
         width: 25vw;
+
+        background-color: var(--dark-green);
     }
 
     section#sidebar.hidden {
@@ -1155,7 +1191,6 @@ button[data-message="message"]:active {
 
     section#sidebar h3{
         width: 100%;
-        
     }
 
     section#sidebar nav {
@@ -1165,11 +1200,12 @@ button[data-message="message"]:active {
     section#content-dash.offset,
     section#content-dash {
         grid-area: contentDash;
+
         padding-top: calc(1px + 1vw);
         margin-bottom: var(--common-margin);
-        min-width: unset;
-        /* max-height: 50vh; */
+
         height: 100%;
+        min-width: unset;
         overflow-y: scroll;
     }
 
@@ -1179,12 +1215,9 @@ button[data-message="message"]:active {
     }
 }
 
-
-
-
+/* Desktop */
 @media only screen and (min-width: 1023px) {
     :root {
-        /* --sidebar-width: 20vw; */
         --common-padding: calc(4px + 0.4vw);
         --common-margin: calc(3px + 0.5vw);
         --icon-main-size: calc(35px + 1.5vw);
@@ -1197,7 +1230,6 @@ button[data-message="message"]:active {
         grid-template-columns: minmax(200px, 15vw) 1fr;
     }
     
-
     section#header-bar {
         padding: calc(var(--common-padding) * 0.5);
         padding-right: calc(var(--common-padding) * 3);
@@ -1206,7 +1238,6 @@ button[data-message="message"]:active {
     div#brand {
         padding-left: calc(var(--common-padding) * 3);
     }
-
 
     section#sidebar {
         width: 100%;
@@ -1219,7 +1250,6 @@ button[data-message="message"]:active {
     section#content-divider {
         display: none;
     }
-
 
     div#brand2,
     section#sidebar h3,
@@ -1262,6 +1292,7 @@ button[data-message="message"]:active {
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 1fr;
+
         height: 100%;
     }
 
@@ -1274,25 +1305,26 @@ button[data-message="message"]:active {
     ul#action-buttons li {
         height: 100%;
         width: 100%;
+
         align-items: center;
         justify-content: center;
     }
 
     ul#action-buttons button {
-        /* min-width: max-content; */
-        width: 85%;
         height: 70%;
+        width: 85%;
+        
         grid-template-columns: 33% 67%;
         grid-template-rows: 1fr;
-        padding: calc(var(--common-padding) * 0.5);
         align-items: center;
+
         border-radius: calc(5px + 0.3vw);
+        padding: calc(var(--common-padding) * 0.5);
     }
 
     ul#action-buttons button span {
         font-size: calc(var(--content-main-font-size) * 0.9);
     }
-
 
     section#content-dash {
         display: grid;
@@ -1302,6 +1334,7 @@ button[data-message="message"]:active {
             "projects announcements"
             "projects team";
         gap: 1vw;
+
         height:78vh;
         overflow: unset;
     }
@@ -1313,32 +1346,35 @@ button[data-message="message"]:active {
     section#content-dash > section#projects,
     section#content-dash > section#projects.swiped {
         grid-area: projects;
-        transform: translateX(0);
-        height: 100%;
-    }
 
+        height: 100%;
+
+        transform: translateX(0);
+    }
 
     section#content-dash > section#announcements.swiped,
     section#content-dash > section#announcements {
         grid-area: announcements;
-        transform: translateX(0);
-        height: 100%;
         gap: 5px;
+
+        height: 100%;
         overflow-y: auto;
+
+        transform: translateX(0);
     }
 
     section#announcements > div#announce-grid {
         overflow-y: auto;
     }
 
-
     div[data-box="announcement"] {
         gap: 5px;
-        height: max-content;
-        padding: calc(var(--common-padding)* 0.8);
-        width: 98%;
-    }
 
+        height: max-content;
+        width: 98%;
+
+        padding: calc(var(--common-padding)* 0.8);
+    }
 
     div[data-box="announcement"] h4 {
         font-size: calc(var(--content-header-font-size) * 0.7);
@@ -1355,7 +1391,9 @@ button[data-message="message"]:active {
     section#content-dash > section#team.swiped,
     section#content-dash > section#team {
         grid-area: team;
+
         transform: translateX(0);
+
         height: 100%;
     }
 
@@ -1363,22 +1401,20 @@ button[data-message="message"]:active {
         overflow-y: auto;
     }
 
-
     div[data-class="member"] {
         padding: 5px;
-        width: 98%;
 
+        width: 98%;
     }
 
     div[data-profile="picture"] {
-        width: calc(var(--content-header-font-size) * 2);
         height: calc(var(--content-header-font-size) * 2);
+        width: calc(var(--content-header-font-size) * 2);
     }
 
     div[data-status="status"] {
         border: calc(1px + 0.1vw) solid var(--background);
     }
-
 
     p[data-profile="username"] {
         font-size: calc(var(--content-main-font-size) * 0.7);
@@ -1394,8 +1430,10 @@ button[data-message="message"]:active {
 
     button[data-message="message"] {
         font-size: calc(var(--content-header-font-size) * 0.7);
-        width: calc(var(--content-main-font-size) * 2);
+
         height: calc(var(--content-main-font-size) * 2);
+        width: calc(var(--content-main-font-size) * 2);
+        
         padding: 1px;
     }
 
@@ -1404,10 +1442,10 @@ button[data-message="message"]:active {
         grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
         grid-template-rows: minmax(250px, 45%);
         grid-auto-rows:  minmax(250px, 45%);
+
         width: 98%;
         overflow-y: auto;
     }
-
 
     div#projects-grid div[data-class="project-box"] h4 {
         font-size: calc(var(--content-header-font-size) * 0.8);
@@ -1418,47 +1456,61 @@ button[data-message="message"]:active {
         font-size: calc(var(--content-main-font-size) * 0.8);
     }
     
-
     div#projects-grid div[data-class="project-box"] button {
         height: calc(var(--content-main-font-size) * 2 * 0.8);
         width: calc(var(--content-main-font-size) * 5 * 0.8);
+
         font-size: calc(var(--content-main-font-size) * 0.8);
     }
 
     dialog.projectModal, dialog.announceModal {
-        width: 50vw;
-        max-width: 700px;
         height: 80vh;
         max-height: 1000px;
+        width: 50vw;
+        max-width: 700px;
     }
 
     dialog.projectModal h4, dialog.announceModal h4 {
         font-size: calc(var(--content-header-font-size) * 1.3);
     }
-
-    /* scroll-bar styling */
-
-    /* Hide scrollbar by default */
-    ::-webkit-scrollbar {
-        width: 5px;
-    }
-
-  
-  /* Show scrollbar on hover */
-    ::-webkit-scrollbar:hover {
-        background-color: var(--dark-green);
-        /* width: 1%; */
-    }
-  
-  /* Style the scrollbar track */
-    ::-webkit-scrollbar-track {
-        background-color: var(--dark-base)
-    }
-  
-  /* Style the scrollbar thumb */
-    ::-webkit-scrollbar-thumb {
-        background-color: var(--light-green);
-        border-radius: 10px;
-    }
     
+}
+
+
+
+/* scroll-bar styling */
+
+/* Initially hides scroll-bar */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--bamboo-green);
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--dark-base);
+    visibility: hidden;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--light-green);
+    border-radius: 10px;
+    visibility: hidden;
+}
+
+/* Shows scroll-bar on hover */
+section#content-dash:hover::-webkit-scrollbar-track,
+div#projects-grid:hover::-webkit-scrollbar-track,
+div#announce-grid:hover::-webkit-scrollbar-track,
+div#team-grid:hover::-webkit-scrollbar-track {
+    visibility: visible;
+}
+
+section#content-dash:hover::-webkit-scrollbar-thumb,
+div#projects-grid:hover::-webkit-scrollbar-thumb,
+div#announce-grid:hover::-webkit-scrollbar-thumb,
+div#team-grid:hover::-webkit-scrollbar-thumb {
+    visibility: visible;
 }

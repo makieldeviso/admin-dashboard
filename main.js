@@ -1,19 +1,8 @@
 
-// Checks element first if it exist, then add event listener (start) ---
-function checkElementAddEvent(element, eventListener, linkedFunction) {
-    if (element != null) {
-        element.addEventListener(eventListener, linkedFunction);
-    } else {
-        return
-    }
-}
-// Checks element first if it exist, then add event listener (end) ---
-
 
 const headerBar = document.querySelector("section#header-bar");
+
 const subHeader = document.querySelector("section#sub-header");
-const contentDash = document.querySelector("section#content-dash")
-    window.addEventListener("scroll", checkScroll);
 
 const hamburger = document.querySelector("#hamburger button");
 const sidebar = document.querySelector("section#sidebar");
@@ -26,6 +15,9 @@ const contentDividerButtons = document.querySelectorAll("section#content-divider
     contentDividerButtons.forEach(button => {
         checkElementAddEvent(button, "click", toggleContentPage);
     });
+
+const contentDash = document.querySelector("section#content-dash")
+    window.addEventListener("scroll", checkScroll);
 
 const projectGrid = document.querySelector("div#projects-grid");
 const modalContainer = document.querySelector("div#modal-container");
@@ -44,6 +36,11 @@ const dashContainer = document.querySelector("div#dash-container");
     window.addEventListener("load", reposition);
 
 
+class sections {
+    constructor (sectionElement) {
+        this.sectionElement = sectionElement;
+    }
+}
 
 
 
@@ -51,6 +48,22 @@ const dashContainer = document.querySelector("div#dash-container");
 
 
 
+
+
+
+
+
+
+
+// Checks element first if it exist, then add event listener (start) ---
+function checkElementAddEvent(element, eventListener, linkedFunction) {
+    if (element != null) {
+        element.addEventListener(eventListener, linkedFunction);
+    } else {
+        return
+    }
+}
+// Checks element first if it exist, then add event listener (end) ---
 
 // Hides or Show Side Bar (start) ----
 function toggleSidebar() {
@@ -70,7 +83,6 @@ function toggleSidebar() {
 }
 // Hides or Show Side Bar (end) ----
 
-
 // Sticks divider button at top (start) ----
 function checkScroll() {
     let headerBarHeight = Math.ceil(headerBar.clientHeight);
@@ -87,7 +99,6 @@ function checkScroll() {
         contentDash.classList.remove("offset");
     }
 
-    
 }
 // Sticks divider button at top (end) ----
 
@@ -115,6 +126,31 @@ function toggleContentPage() {
 
 }
 // Toggles the content page between projects, announcement and team (end) ---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Project Constructor function

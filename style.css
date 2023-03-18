@@ -1011,6 +1011,183 @@ button[data-message="message"]:active {
     transform: scale(0.95);
 }
 
+/* Profile (start) ------ */
+
+/* section#content-divider.fixed,
+section#content-divider,
+section#content-dash,
+section#sub-header {
+    display: none;
+} */
+
+/* section#content-divider.fixed,
+section#content-divider,
+section#content-dash {
+    display: unset;
+} */
+
+
+
+section#profile {
+    padding-top: 10vh;
+    height: 100vh;
+    /* width: 100vw; */
+    position: relative;
+    /* overflow: hidden; */
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: var(--background);
+}
+
+section#profile.minimized {
+    display: none;
+}
+
+
+section#profile h3 {
+    background-color: var(--light-green);
+    font-size: calc(var(--content-header-font-size) * 1.2);
+    padding: 3px;
+    clip-path: polygon(0px 0px, 95% 0px, 100% 100%, 0px 100%);
+    min-width: 150px;
+    width: 200px;
+}
+
+
+
+section#profile img {
+    height: 30vw;
+    max-height: 150px;
+    width: 30vw;
+    max-width: 150px;
+    
+    border: 2px solid var(--yellow-dark);
+    border-radius: 100%;
+    margin: auto;
+    margin-bottom: calc(var(--common-margin) * 2);
+
+    text-align: center;
+
+    object-fit: cover;
+}
+
+
+div#profile-grid > div {
+    padding: var(--common-padding);
+    margin-bottom: var(--common-margin);
+
+    display: grid;
+    grid-template-rows: max-content;
+}
+
+div#profile-grid > div#main-identify {
+    width: 95%;
+
+    text-align: center;
+
+    border-bottom: 3px solid var(--light-green-contrast);
+    margin: auto;
+    padding: var(--common-padding) 0;
+}
+
+
+div#profile-grid > div h4{
+    font-size: calc(var(--content-header-font-size) * 1.2);
+
+    margin-bottom: var(--common-margin);
+}
+
+
+div#profile-grid > div p {
+    display: inline-block;
+
+    font-size: calc(var(--content-main-font-size) * 1.2);
+
+    width: 100%;
+}
+
+div#contacts p span[data-class="label"] {
+    display: inline-block;
+
+    min-width: max-content;
+    width: 15vw;
+}
+
+div#contacts p, 
+div#work-stats p,
+div#time-record p {
+    padding-left: 2vw;
+}
+
+div#contacts i, 
+div#work-stats i,
+div#time-record i {
+    width: calc(15px + 1vw);
+
+    padding-right: 2vw;
+
+    color: var(--bamboo-green);
+}
+
+div#time-record p[data-class="month"] {
+    font-weight: bold;
+}
+
+section#profile a {
+    text-decoration: none;
+    color: black;
+}
+
+section#profile a:visited {
+    color: black;
+}
+
+section#profile a:hover,
+section#profile a:focus {
+    color: var(--dark-green);
+}
+
+section#profile a:active {
+    color: var(--dark-green);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Small screen-size, galaxy fold as reference */
 @media only screen and (max-width: 375px) and (min-height: 500px) {
     :root {

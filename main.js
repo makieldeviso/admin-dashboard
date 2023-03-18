@@ -35,17 +35,103 @@ const dashContainer = document.querySelector("div#dash-container");
     window.addEventListener("resize", reposition);
     window.addEventListener("load", reposition);
 
+const sideBarButtons = document.querySelectorAll("section#sidebar nav button");
+    sideBarButtons.forEach(button => {
+        checkElementAddEvent(button, "click", toggleSection);
+        checkElementAddEvent(button, "click", toggleSidebar);
+    });
 
-class sections {
-    constructor (sectionElement) {
+const profile = document.querySelector("section#profile");
+const completedTally = document.querySelector("span#completed-task");
+const ongoingTally = document.querySelector("span#ongoing-task");
+const nysTally = document.querySelector("span#nys-task");
+
+
+
+// toggle content Sections (start) -----
+
+// Sections Object Constructor (start) ----
+let sectionsArray = [];
+let screenWidth;
+
+class Sections {
+    constructor (id, sectionElement) {
+        this.id = id;
         this.sectionElement = sectionElement;
+        this.minimize = function() {
+            sectionElement.classList.add("minimized");
+
+            if (id === "content-dash") {
+                if (screenWidth <= 768) {
+                    subHeader.classList.add("minimized");
+                    contentDividerBar.classList.add("minimized");
+                }
+                
+            }
+        }
+
+        this.maximize = function() {
+            sectionElement.classList.remove("minimized");
+
+            if (id === "content-dash") {
+                if (screenWidth <= 768) {
+                    subHeader.classList.remove("minimized");
+                    contentDividerBar.classList.remove("minimized");
+                }
+                
+            }
+        }
+
+        sectionsArray.push(this);
     }
 }
+// Sections Object Constructor (start) ----
+
+// Creates Section Object Area (start) -----
+let homeSection = new Sections ("content-dash", contentDash);
+let profileSection = new Sections ("profile", profile);
+// Creates Section Object Area (start) -----
+
+// Toggle content section function (start) ----
+function toggleSection() {
+    let buttonId = this.dataset.id;
+    console.log(buttonId);
+
+    let targetObject;
+
+    // Searches for the array of Section objects that match the 
+    // button and save it into the targetObject variable
+    sectionsArray.some(section => {
+        if (section["id"] === buttonId){
+            targetObject = section;
+            return true;
+        }
+    });
+
+    // Minimize all sections first
+    // Note: Home is the default maximized on load
+    sectionsArray.forEach(section => {
+        section.minimize();
+    })
+
+    // Then maximize corresponding section
+    targetObject.maximize();
+
+    //Adds styling to clicked sidebar button 
+    //Checks if there are clicked button first
+
+    sideBarButtons.forEach(button => {
+        if (button.hasAttribute("class")) {
+            button.removeAttribute("class");
+        }
+    });
+
+    this.classList.add("clicked");
 
 
-
-
-
+}
+// Toggle content section function (end) ----
+// toggle content Sections (end) -----
 
 
 
@@ -67,7 +153,7 @@ function checkElementAddEvent(element, eventListener, linkedFunction) {
 
 // Hides or Show Side Bar (start) ----
 function toggleSidebar() {
-    console.log(this);
+    // console.log(this);
     if (sidebar.hasAttribute("class")) {
         sidebar.removeAttribute("class");
     
@@ -128,32 +214,12 @@ function toggleContentPage() {
 // Toggles the content page between projects, announcement and team (end) ---
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Project Constructor function
+// Saves project work stats
+let completedProjects = 0;
+let ongoingProjects = 0;
+let nysProjects = 0;
+
 let userProjectsArray = [];
 class UserProjects {
     constructor(id, projectName, description, preview, commend, feedback, fork, progress, codeSite, liveSite) {
@@ -231,7 +297,8 @@ let sampleProject4 = new UserProjects(
 
 // Adds project to the DOM
 addUserProject(userProjectsArray);
-
+// Tallies the work stats in profile section
+workStatsTally();
 
 // Project Maker Function (start) -----------
 function addUserProject(projectArray) {
@@ -432,7 +499,15 @@ function addUserProject(projectArray) {
             progress.setAttribute("class", "complete");
         }
 
-
+        // Tallies the work stats of the user
+        // Note: does not appear in modal, used for profile section
+        if (completion === 0) {
+            nysProjects += 1;
+        } else if(completion > 0 && completion < 100) {
+            ongoingProjects += 1;
+        } else if (completion === 100) {
+            completedProjects += 1;
+        }
 
         progressDiv.appendChild(progressBar);
 
@@ -764,9 +839,6 @@ let member6 = new member(
 );
 
 
-
-
-
 // Runs addMember Function 
 addMember(teamMembersArray);
 
@@ -870,7 +942,7 @@ function closeModal() {
 
 
 
-// Content dash re-position
+// Content dash re-position (start) -----
 function reposition() {
     let headerBarHeight = Math.ceil(headerBar.clientHeight);
     let subHeaderHeight = Math.ceil(subHeader.clientHeight);
@@ -878,8 +950,8 @@ function reposition() {
     let topHeightPlus = headerBarHeight + subHeaderHeight + dividerHeight;
     let topHeight = headerBarHeight + subHeaderHeight;
 
-
-    
+    //Saves window width to global variable
+    screenWidth = window.innerWidth;
 
     if (window.innerWidth > 768) {
         menuContainer.appendChild(contentDash);
@@ -893,4 +965,12 @@ function reposition() {
         contentDash.style.height = `calc(99vh - ${topHeight}px)`;
     }
 }
+// Content dash re-position (end) -----
 
+// Changes the user work stats in the profile section (start) -----
+function workStatsTally() {
+    completedTally.textContent = completedProjects;
+    ongoingTally.textContent = ongoingProjects;
+    nysTally.textContent = nysProjects;
+}
+// Changes the user work stats in the profile section (end) -----

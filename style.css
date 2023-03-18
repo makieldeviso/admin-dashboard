@@ -310,8 +310,9 @@ section#sidebar button#exit-side {
     border: 2px solid var(--bamboo-green);
     border-radius: 50%;
     box-shadow: 0 0 5px var(--yellow-dark);
+    padding: 1px;
      
-    justify-self: end;
+    justify-content: center;
 
     position: absolute;
     left: 85vw;
@@ -346,15 +347,21 @@ section#sidebar button {
     color: black;
     text-decoration: none;
     
+    width: 100%;
     padding: var(--common-padding);
     padding-right: 0;
+    margin-bottom: 3px;
 
     display: flex;
-    width: 100%; 
-
+    align-items: center;
+     
     border: none;
     border-radius:  var(--content-header-font-size) 0 0 var(--content-header-font-size);
     background-color: transparent;
+}
+
+section#sidebar nav button.clicked {
+    background-color: var(--background);
 }
 
 section#sidebar button:hover,
@@ -365,31 +372,6 @@ section#sidebar button:focus {
 section#sidebar button:active {
     background-color: var(--background);
 }
-
-/* section#sidebar a {
-    color: black;
-    text-decoration: none;
-    
-    padding: var(--common-padding);
-    padding-right: 0;
-
-    display: block;
-    width: 100%; 
-}
-
-section#sidebar a:visited {
-    color: black;
-}
-
-section#sidebar a:hover,
-section#sidebar a:focus{
-    background-color: var(--light-green);
-    border-radius:  var(--content-header-font-size) 0 0 var(--content-header-font-size);
-}
-
-section#sidebar a:active {
-    color: var(--dark-base);
-} */
 
 section#sidebar span {
     margin-left: var(--common-margin);
@@ -492,6 +474,7 @@ section#content-dash {
 
     overflow-x: hidden; 
 }
+
 
 section#content-dash > section {
     flex: 0 0 100%;
@@ -1070,11 +1053,6 @@ section#profile {
     background-color: var(--background);
 }
 
-section#profile.minimized {
-    display: none;
-}
-
-
 section#profile h3 {
     background-color: var(--light-green);
     font-size: calc(var(--content-header-font-size) * 1.2);
@@ -1083,8 +1061,6 @@ section#profile h3 {
     min-width: 150px;
     width: 200px;
 }
-
-
 
 section#profile img {
     height: 30vw;
@@ -1143,6 +1119,13 @@ div#contacts p span[data-class="label"] {
     min-width: max-content;
     width: 15vw;
 }
+
+div#work-stats p span {
+    display: inline-block;
+
+    padding-left: 5px;
+}
+
 
 div#contacts p, 
 div#work-stats p,
@@ -1738,4 +1721,16 @@ div#team-grid:hover::-webkit-scrollbar-thumb {
 }
 
 
+/* section display toggler */
+section#content-dash.minimized {
+    display: none;
+}
 
+section#sub-header.minimized,
+section#content-divider.minimized {
+    display: none;
+}
+
+section#profile.minimized {
+    display: none;
+}

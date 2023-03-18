@@ -74,11 +74,10 @@ class Sections {
             sectionElement.classList.remove("minimized");
 
             if (id === "content-dash") {
-                if (screenWidth <= 768) {
+                if (subHeader.hasAttribute("class")){
                     subHeader.classList.remove("minimized");
                     contentDividerBar.classList.remove("minimized");
                 }
-                
             }
         }
 

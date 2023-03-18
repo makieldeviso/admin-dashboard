@@ -1480,6 +1480,22 @@ button[data-message="message"]:active {
 
 /* scroll-bar styling */
 
+/* firefox scrollbar */
+section#projects > div#projects-grid,
+section#announcements > div#announce-grid,
+section#team > div#team-grid {
+    /* scrollbar-color: var(--light-green) var(--dark-base); */
+    scrollbar-color: transparent transparent;
+    scrollbar-width: thin;
+  }
+
+section#projects > div#projects-grid:hover,
+section#announcements > div#announce-grid:hover,
+section#team > div#team-grid:hover {
+    scrollbar-color: var(--light-green) var(--dark-base);
+}
+
+/* Webkit scroll-bar */
 /* Initially hides scroll-bar */
 ::-webkit-scrollbar {
     width: 5px;
@@ -1514,3 +1530,6 @@ div#announce-grid:hover::-webkit-scrollbar-thumb,
 div#team-grid:hover::-webkit-scrollbar-thumb {
     visibility: visible;
 }
+
+
+

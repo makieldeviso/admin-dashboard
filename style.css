@@ -1089,6 +1089,9 @@ section#profile img {
 }
 
 div#profile-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--common-margin);
     overflow-y: auto;
 }
 
@@ -1098,6 +1101,11 @@ div#profile-grid > div {
 
     display: grid;
     grid-template-rows: max-content;
+}
+
+div#profile-grid > div:not(div#main-identify) {
+    border: 1px solid var(--light-green);
+    border-radius: 10px;
 }
 
 div#profile-grid > div#main-identify {
@@ -1642,7 +1650,7 @@ section#profile a:active {
         padding: 1px;
     }
 
-
+/* projects-grid (start) -----*/
     div#projects-grid {
         grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
         grid-template-rows: minmax(250px, 45%);
@@ -1667,6 +1675,80 @@ section#profile a:active {
 
         font-size: calc(var(--content-main-font-size) * 0.8);
     }
+/* profile-grid (start) -----*/
+
+    div#profile-grid {
+        display: grid;
+        grid-template-columns: 40% 1fr;
+        grid-template-rows: repeat(auto-fit, calc(100px + 5vw));
+        grid-template-areas: 
+            "main contacts"
+            "main stats"
+            "main time";
+        gap: var(--common-margin);
+        row-gap: calc(var(--common-margin) * 2) ;
+        width: 98%;
+
+        flex: 1;
+
+        position: relative;
+    }
+
+    div#profile-grid > div#main-identify {
+        grid-area: main;
+
+        position: absolute;
+    }
+
+    div#profile-grid > div#contacts {
+        grid-area: contacts;
+    }
+
+    section#profile img {
+        height: auto;
+        max-height: none;
+        width: 50%;
+        max-width: none;
+    }
+
+    div#profile-grid > div#work-stats {
+        grid-area: stats;
+    }
+    
+    div#profile-grid > div#time-record {
+        grid-area: time;
+    }
+
+
+    div#profile-grid > div h4 {
+        font-size: calc(var(--content-header-font-size) * 0.9);
+    }
+
+
+    div#profile-grid > div p {
+        font-size: calc(var(--content-main-font-size) * 1.1);
+    }
+
+    div#contacts p span[data-class="label"] {
+        width: calc(35px + 1.1vw);
+    }
+    div#profile-grid > div p {
+        padding-left: 1vw;
+        font-size: calc(var(--content-main-font-size) * 1);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+/* profile-grid (end) -----*/
 
     dialog.projectModal, dialog.announceModal {
         height: 80vh;

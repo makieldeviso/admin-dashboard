@@ -78,7 +78,7 @@
                 <nav>
                     <ul>
                         <li>
-                            <button data-id="content-dash" class="clicked">
+                            <button data-id="projects" class="clicked">
                                 <i class="fa-solid fa-house"></i>
                                 <span>Home</span>
                             </button>
@@ -150,7 +150,7 @@
                 <nav>
                     <ul>
                         <li>
-                            <button id="projects-button" class="clicked" data-page="projects"> Your Projects</button>
+                            <button id="content-main-button" class="clicked" data-page="content-main"> Your Projects</button>
                         </li>
                         <li>
                             <button id="announcements-button" data-page="announcements">Announcements</button>
@@ -165,10 +165,13 @@
 
         <section id="content-dash">
 
-            <section id="projects" data-page="projects">
-                <h3>Your projects</h3>
-                <div id="projects-grid"></div>
-            </section> <!-- #main-content end -->
+            <section id="content-main" data-page="content-main">
+                <section id="projects" data-page="projects">
+                    <h3>Your projects</h3>
+                    <div id="projects-grid"></div>
+                </section>
+            </section>
+             <!-- #main-content end -->
 
 
             <section id="announcements" data-page="announcements" class="swiped">
@@ -183,73 +186,76 @@
             </section>
         </section>
 
-        <section id="profile" class="minimized">
-            <h3>Profile</h3>
-            <div id="profile-grid">
-
-                <div id="main-identify">
-                    <img src="./images/profile.png" alt="User profile picture"
-                height="50px">
-                    <h4>Fred Mark Baldeviso</h4>
-                    <p>Division: Development Team</p>
-                    <p>Designation: Web Developer</p>
-                </div>
-                
-                
-                <div id="contacts">
-                    <h4> Contact Info</h4>
-                    <p>
-                        <i class="fa-brands fa-github"></i>
-                        <span data-class="label"> Github: </span> 
-                        <a href="https://github.com/makieldeviso">https://github.com/makieldeviso</a>
-                    </p>
-                    <p>
-                        <i class="fa-solid fa-envelope"></i>
-                        <span data-class="label">E-mail: </span> 
-                        <span>fred_trashpanda@email.co</span>
-                    </p>
-                    <p>
-                        <i class="fa-solid fa-mobile-screen"></i>
-                        <span data-class="label">Phone: </span> 
-                        <tel>+63 123 456 789</tel>
-                    </p>
+        <div id="library">
+            <section id="profile" class="minimized">
+                <h3>Profile</h3>
+                <div id="profile-grid">
+    
+                    <div id="main-identify">
+                        <img src="./images/profile.png" alt="User profile picture"
+                    height="50px">
+                        <h4>Fred Mark Baldeviso</h4>
+                        <p>Division: Development Team</p>
+                        <p>Designation: Web Developer</p>
+                    </div>
+                    
+                    
+                    <div id="contacts">
+                        <h4> Contact Info</h4>
+                        <p>
+                            <i class="fa-brands fa-github"></i>
+                            <span data-class="label"> Github: </span> 
+                            <a href="https://github.com/makieldeviso">https://github.com/makieldeviso</a>
+                        </p>
+                        <p>
+                            <i class="fa-solid fa-envelope"></i>
+                            <span data-class="label">E-mail: </span> 
+                            <span>fred_trashpanda@email.co</span>
+                        </p>
+                        <p>
+                            <i class="fa-solid fa-mobile-screen"></i>
+                            <span data-class="label">Phone: </span> 
+                            <tel>+63 123 456 789</tel>
+                        </p>
+                    </div>
+        
+                    <div id="work-stats">
+                        <h4>Work Statistics</h4>
+                        <p>
+                            <i class="fa-solid fa-circle-check"></i>
+                            Completed: <span id="completed-task"></span>
+                        </p>
+    
+                        <p>
+                            <i class="fa-regular fa-hourglass-half"></i>
+                            Ongoing: <span id="ongoing-task"></span>
+                        </p>
+    
+                        <p>
+                            <i class="fa-solid fa-spinner"></i>
+                            Not Yet Started: <span id="nys-task"></span>
+                        </p>
+                    </div>
+        
+                    <div id="time-record">
+                        <h4>Monthly Time Record</h4>
+                        <p data-class="month">
+                            <i class="fa-regular fa-calendar-days"></i>
+                            March 2023
+                        </p>
+                        <p>
+                            <i class="fa-solid fa-clock"></i>
+                            31 hrs, 15 minutes
+                        </p>
+                    </div>
                 </div>
     
-                <div id="work-stats">
-                    <h4>Work Statistics</h4>
-                    <p>
-                        <i class="fa-solid fa-circle-check"></i>
-                        Completed: <span id="completed-task"></span>
-                    </p>
-
-                    <p>
-                        <i class="fa-regular fa-hourglass-half"></i>
-                        Ongoing: <span id="ongoing-task"></span>
-                    </p>
-
-                    <p>
-                        <i class="fa-solid fa-spinner"></i>
-                        Not Yet Started: <span id="nys-task"></span>
-                    </p>
-                </div>
     
-                <div id="time-record">
-                    <h4>Monthly Time Record</h4>
-                    <p data-class="month">
-                        <i class="fa-regular fa-calendar-days"></i>
-                        March 2023
-                    </p>
-                    <p>
-                        <i class="fa-solid fa-clock"></i>
-                        31 hrs, 15 minutes
-                    </p>
-                </div>
-            </div>
-
-
-        </section>
-
-        <div id="modal-container"></div>
+            </section>
+    
+            <div id="modal-container"></div>
+        </div>
+        
 
         <!-- <section id="community"></section> -->
     </div>

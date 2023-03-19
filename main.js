@@ -12,13 +12,17 @@ const closeSideBarButton = document.querySelector("button#exit-side");
 
 const contentDividerBar = document.querySelector("section#content-divider");
 const contentDividerButtons = document.querySelectorAll("section#content-divider button");
+const contentMainButton = document.querySelector("button#content-main-button")
     contentDividerButtons.forEach(button => {
         checkElementAddEvent(button, "click", toggleContentPage);
     });
 
-const contentDash = document.querySelector("section#content-dash")
+const contentDash = document.querySelector("section#content-dash");
+const contentMain = document.querySelector("section#content-main");
     window.addEventListener("scroll", checkScroll);
 
+
+const projects = document.querySelector("section#projects");
 const projectGrid = document.querySelector("div#projects-grid");
 const modalContainer = document.querySelector("div#modal-container");
 
@@ -46,49 +50,65 @@ const completedTally = document.querySelector("span#completed-task");
 const ongoingTally = document.querySelector("span#ongoing-task");
 const nysTally = document.querySelector("span#nys-task");
 
-
+const library = document.querySelector("div#library");
 
 // toggle content Sections (start) -----
 
 // Sections Object Constructor (start) ----
-let sectionsArray = [];
+let sectionsObjArray = [];
 let screenWidth;
 
 class Sections {
-    constructor (id, sectionElement) {
+    constructor (id, sectionElement, name) {
         this.id = id;
         this.sectionElement = sectionElement;
         this.minimize = function() {
             sectionElement.classList.add("minimized");
 
-            if (id === "content-dash") {
-                if (screenWidth <= 768) {
-                    subHeader.classList.add("minimized");
-                    contentDividerBar.classList.add("minimized");
-                }
-                
-            }
+            // if (id === "projects") {
+            //     if (screenWidth <= 768) {
+            //         minMaxSection("minimize", subHeader, contentDividerBar);
+            //     }
+            // }
         }
 
         this.maximize = function() {
             sectionElement.classList.remove("minimized");
 
-            if (id === "content-dash") {
-                if (subHeader.hasAttribute("class")){
-                    subHeader.classList.remove("minimized");
-                    contentDividerBar.classList.remove("minimized");
-                }
-            }
+            // if (id === "projects") {
+            //     minMaxSection("maximize", subHeader, contentDividerBar);
+            // }
         }
 
-        sectionsArray.push(this);
+        this.renameButton = function () {
+            contentMainButton.textContent = name;
+        }
+
+        sectionsObjArray.push(this);
     }
 }
+// This function is linked to class Section constructor
+function minMaxSection(action, ...sections) {
+    if (action === "minimize") {
+        sections.forEach(section => {
+            section.classList.add("minimized");
+        });
+    } else if (action === "maximize") {
+        sections.forEach(section => {
+            if (section.hasAttribute("class")) {
+                section.classList.remove("minimized");
+            }
+        });
+    }
+}
+
 // Sections Object Constructor (start) ----
 
 // Creates Section Object Area (start) -----
-let homeSection = new Sections ("content-dash", contentDash);
-let profileSection = new Sections ("profile", profile);
+
+// let homeSection = new Sections ("content-dash", contentDash);
+let projectsSection = new Sections ("projects", projects, "Your Projects");
+let profileSection = new Sections ("profile", profile, "Profile");
 // Creates Section Object Area (start) -----
 
 // Toggle content section function (start) ----
@@ -100,22 +120,35 @@ function toggleSection() {
 
     // Searches for the array of Section objects that match the 
     // button and save it into the targetObject variable
-    sectionsArray.some(section => {
+    sectionsObjArray.some(section => {
         if (section["id"] === buttonId){
             targetObject = section;
             return true;
         }
     });
 
-    // Minimize all sections first
+
+    
+    // Minimize all content sections first
     // Note: Home is the default maximized on load
-    sectionsArray.forEach(section => {
+    sectionsObjArray.forEach(section => {
         section.minimize();
-    })
+
+        // Appends section to library from contentMain
+        if (section.parentElement === contentMain) {
+            library.appendChild(section);
+        }
+    });
 
     // Then maximize corresponding section
     targetObject.maximize();
 
+    // Appends section to contentMain from library
+    contentMain.appendChild(targetObject["sectionElement"]);
+
+    // Renames contentMain button to correspond to current visible section
+    targetObject.renameButton();
+   
     //Adds styling to clicked sidebar button 
     //Checks if there are clicked button first
 
@@ -189,7 +222,7 @@ function checkScroll() {
 
 
 // Toggles the content page between projects, announcement and team (start) ---
-let currentPage = document.querySelector("section[data-page='projects']");
+let currentPage = document.querySelector("section[data-page='content-main']");
 const contentPages = document.querySelectorAll("section#content-dash > section");
 
 function toggleContentPage() {
@@ -956,7 +989,7 @@ function reposition() {
         menuContainer.appendChild(contentDash);
         contentDash.style.height = `calc(99vh - ${topHeightPlus}px)`;
     } else if (window.innerWidth <= 768){
-        dashContainer.insertBefore(contentDash, modalContainer);
+        dashContainer.insertBefore(contentDash, library);
         contentDash.style.height = "";
     }
 

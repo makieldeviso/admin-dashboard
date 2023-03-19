@@ -10,6 +10,11 @@
     font-family: var(--content-font-family);
 }
 
+body {
+    height: 100vh;
+    background-color: var(--background);
+}
+
 :root {
     --content-div-height: 5.5vh;
     --header-bar-height: calc(55px + 2vw);
@@ -443,7 +448,7 @@ section#content-divider button {
     clip-path: polygon(0 0, 95% 0, 100% 100%, 5% 100%);
 }
 
-section#content-divider button#projects-button {
+section#content-divider button#content-main-button {
     -webkit-clip-path: polygon(0 0, 95% 0, 100% 100%, 0 100%);
     clip-path: polygon(0 0, 95% 0, 100% 100%, 0 100%);
 }
@@ -487,7 +492,17 @@ section#content-dash > section {
         height 0.2s ease-in-out;
 } 
 
-section#content-dash > section#projects.swiped {
+section#content-dash > section#content-main.swiped {
+    height: 0;
+    transform: translateX(-110%);
+} 
+
+section#content-dash > section#content-main{
+    height: 100%;
+    transform: translateX(0);
+}
+
+/* section#content-dash > section#projects.swiped {
     height: 0;
     transform: translateX(-110%);
 } 
@@ -495,7 +510,7 @@ section#content-dash > section#projects.swiped {
 section#content-dash > section#projects{
     height: 100%;
     transform: translateX(0);
-}
+} */
 
 section#content-dash > section#announcements.swiped {
     height: 0;
@@ -844,7 +859,10 @@ section#announcements > div#announce-grid {
     border-bottom: 1px solid var(--light-green);
 }
 
-section#announcements h3, section#team h3, section#projects h3 {
+section#announcements h3, 
+section#team h3, 
+section#projects h3,
+section#profile h3 {
     background-color: var(--light-green);
     font-size: calc(var(--content-header-font-size) * 0.9);
 
@@ -1041,25 +1059,17 @@ section#content-dash {
 
 
 section#profile {
-    padding-top: 10vh;
-    height: 100vh;
+    flex: 0 0 100%;
+
+    /* padding-top: 10vh; */
+    height: 100%;
     /* width: 100vw; */
     position: relative;
-    /* overflow: hidden; */
 
     display: flex;
     flex-direction: column;
     gap: 5px;
     background-color: var(--background);
-}
-
-section#profile h3 {
-    background-color: var(--light-green);
-    font-size: calc(var(--content-header-font-size) * 1.2);
-    padding: 3px;
-    clip-path: polygon(0px 0px, 95% 0px, 100% 100%, 0px 100%);
-    min-width: 150px;
-    width: 200px;
 }
 
 section#profile img {
@@ -1078,6 +1088,9 @@ section#profile img {
     object-fit: cover;
 }
 
+div#profile-grid {
+    overflow-y: auto;
+}
 
 div#profile-grid > div {
     padding: var(--common-padding);
@@ -1520,21 +1533,24 @@ section#profile a:active {
         grid-template-columns: 1fr minmax(20%, 300px);
         grid-template-rows: 50% 50%;
         grid-template-areas: 
-            "projects announcements"
-            "projects team";
+            "main announcements"
+            "main team";
         gap: 1vw;
 
         height:78vh;
         overflow: unset;
     }
     
-    section#announcements h3, section#team h3, section#projects h3 {
+    section#announcements h3, 
+    section#team h3, 
+    section#projects h3,
+    section#profile h3 {
         display: unset;
     }
 
-    section#content-dash > section#projects,
-    section#content-dash > section#projects.swiped {
-        grid-area: projects;
+    section#content-dash > section#content-main,
+    section#content-dash > section#content-main.swiped {
+        grid-area: main;
 
         height: 100%;
 
@@ -1708,6 +1724,7 @@ section#team > div#team-grid:hover {
 /* Shows scroll-bar on hover */
 section#content-dash:hover::-webkit-scrollbar-track,
 div#projects-grid:hover::-webkit-scrollbar-track,
+div#profile-grid:hover::-webkit-scrollbar-track,
 div#announce-grid:hover::-webkit-scrollbar-track,
 div#team-grid:hover::-webkit-scrollbar-track {
     visibility: visible;
@@ -1715,6 +1732,7 @@ div#team-grid:hover::-webkit-scrollbar-track {
 
 section#content-dash:hover::-webkit-scrollbar-thumb,
 div#projects-grid:hover::-webkit-scrollbar-thumb,
+div#profile-grid:hover::-webkit-scrollbar-thumb,
 div#announce-grid:hover::-webkit-scrollbar-thumb,
 div#team-grid:hover::-webkit-scrollbar-thumb {
     visibility: visible;
@@ -1722,7 +1740,7 @@ div#team-grid:hover::-webkit-scrollbar-thumb {
 
 
 /* section display toggler */
-section#content-dash.minimized {
+section#projects.minimized {
     display: none;
 }
 

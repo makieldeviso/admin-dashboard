@@ -1,4 +1,8 @@
-
+// const body = document.querySelector("body");
+const dashContainer = document.querySelector("div#dash-container");
+const menuContainer = document.querySelector("div#menu"); 
+    window.addEventListener("resize", reposition);
+    window.addEventListener("load", reposition);
 
 const headerBar = document.querySelector("section#header-bar");
 
@@ -21,8 +25,7 @@ const contentDash = document.querySelector("section#content-dash");
 const contentMain = document.querySelector("section#content-main");
     window.addEventListener("scroll", checkScroll);
 
-
-const projects = document.querySelector("section#projects");
+// Note: Profile Section querySelector grouped with library
 const projectGrid = document.querySelector("div#projects-grid");
 const modalContainer = document.querySelector("div#modal-container");
 
@@ -32,12 +35,6 @@ const announceGrid = document.querySelector("div#announce-grid");
 const teamSection = document.querySelector("section#team");
 const teamGrid = document.querySelector("div#team-grid");
 
-const body = document.querySelector("body");
-const menuContainer = document.querySelector("div#menu"); 
-const dashContainer = document.querySelector("div#dash-container");
-
-    window.addEventListener("resize", reposition);
-    window.addEventListener("load", reposition);
 
 const sideBarButtons = document.querySelectorAll("section#sidebar nav button");
     sideBarButtons.forEach(button => {
@@ -45,70 +42,57 @@ const sideBarButtons = document.querySelectorAll("section#sidebar nav button");
         checkElementAddEvent(button, "click", toggleSidebar);
     });
 
-const profile = document.querySelector("section#profile");
 const completedTally = document.querySelector("span#completed-task");
 const ongoingTally = document.querySelector("span#ongoing-task");
 const nysTally = document.querySelector("span#nys-task");
 
 const library = document.querySelector("div#library");
+const projects = document.querySelector("section#projects");
+const profile = document.querySelector("section#profile");
+
+const widgetPlacement = document.querySelector("div#widget-placement");
+const widgets = document.querySelector("div#widgets");
+const projectsWidget = document.querySelector("div#projects-widget");
+const profileWidget = document.querySelector("div#profile-widget");
+
+
+
 
 // toggle content Sections (start) -----
-
 // Sections Object Constructor (start) ----
 let sectionsObjArray = [];
 let screenWidth;
 
 class Sections {
-    constructor (id, sectionElement, name) {
+    constructor (id, sectionElement, sectionWidget, name) {
         this.id = id;
         this.sectionElement = sectionElement;
-        this.minimize = function() {
+        this.sectionWidget = sectionWidget;
+        this.minimize = (()=>{
             sectionElement.classList.add("minimized");
+            sectionWidget.classList.add("minimized");
+        });
 
-            // if (id === "projects") {
-            //     if (screenWidth <= 768) {
-            //         minMaxSection("minimize", subHeader, contentDividerBar);
-            //     }
-            // }
-        }
 
-        this.maximize = function() {
+        this.maximize = (()=>{
             sectionElement.classList.remove("minimized");
+            sectionWidget.classList.remove("minimized");
+        });
 
-            // if (id === "projects") {
-            //     minMaxSection("maximize", subHeader, contentDividerBar);
-            // }
-        }
+        // Used for smaller screens where content divider is displayed
+        this.renameButton = ()=>{contentMainButton.textContent = name};
 
-        this.renameButton = function () {
-            contentMainButton.textContent = name;
-        }
 
         sectionsObjArray.push(this);
     }
 }
-// This function is linked to class Section constructor
-function minMaxSection(action, ...sections) {
-    if (action === "minimize") {
-        sections.forEach(section => {
-            section.classList.add("minimized");
-        });
-    } else if (action === "maximize") {
-        sections.forEach(section => {
-            if (section.hasAttribute("class")) {
-                section.classList.remove("minimized");
-            }
-        });
-    }
-}
-
-// Sections Object Constructor (start) ----
+// Sections Object Constructor (end) ----
 
 // Creates Section Object Area (start) -----
 
 // let homeSection = new Sections ("content-dash", contentDash);
-let projectsSection = new Sections ("projects", projects, "Your Projects");
-let profileSection = new Sections ("profile", profile, "Profile");
+let projectsSection = new Sections ("projects", projects, projectsWidget, "Your Projects");
+let profileSection = new Sections ("profile", profile, profileWidget, "Profile");
 // Creates Section Object Area (start) -----
 
 // Toggle content section function (start) ----
@@ -127,17 +111,14 @@ function toggleSection() {
         }
     });
 
-
-    
-    // Minimize all content sections first
-    // Note: Home is the default maximized on load
+    // Minimize all content sections and widgets first
+    // Note: Home/Projects is the default maximized on load
     sectionsObjArray.forEach(section => {
         section.minimize();
 
-        // Appends section to library from contentMain
-        if (section.parentElement === contentMain) {
-            library.appendChild(section);
-        }
+        // Appends section and widgets to library from contentMain
+        library.appendChild(section["sectionElement"]);
+        widgets.appendChild(section["sectionWidget"]);
     });
 
     // Then maximize corresponding section
@@ -145,6 +126,7 @@ function toggleSection() {
 
     // Appends section to contentMain from library
     contentMain.appendChild(targetObject["sectionElement"]);
+    widgetPlacement.appendChild(targetObject["sectionWidget"]);
 
     // Renames contentMain button to correspond to current visible section
     targetObject.renameButton();

@@ -210,13 +210,24 @@ div#user-detail h3 {
 }
 
 /* div#profiler (start) ----- */
-/* div#actions (start) ----- */
-div#actions {
+
+/* div#widget-placement (start) - */
+div#widget-placement {
     grid-area: actions;
     justify-self: center;
 
     width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
+
+/* projects-widget (start) -- */
+div#projects-widget {
+    width: 100%;
+    height: 100%;
+}
+
 
 ul#action-buttons {
     display: grid;
@@ -256,7 +267,45 @@ ul#action-buttons button {
 ul#action-buttons button span {
     font-size: calc(var(--brand-font-size) * 0.6);
 }
-/* div#actions (end) ----- */
+/* projects-widget (end) --*/
+
+/* profile-widget (start) --*/
+div#profile-widget {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 5px;
+
+    background-color: var(--bamboo-green);
+    padding: 3px;
+    border: 1px solid var(--yellow-contrast);
+    border-radius: 5px;
+    align-items: center;
+
+    min-height: 80%;
+    height: max-content;
+}
+
+div#profile-widget i {
+    color: var(--yellow-contrast);
+    font-size: var(--brand-font-size);
+}
+
+div#profile-widget i#icon-gears {
+    font-size: calc(var(--brand-font-size) * 0.5);
+}
+
+div#profile-widget p {
+    font-size: calc(var(--brand-font-size) * 0.6);
+    color: var(--yellow-contrast);
+}
+
+
+
+
+
+
+/* profile-widget (start)*/
+/* div#widget-placement (end) - */
 
 
 /* section#sidebar (start) ----- */
@@ -1498,7 +1547,7 @@ section#profile a:active {
         font-size: calc(var(--content-main-font-size) * 0.8);
     }
 
-    div#actions {
+    div#widget-placement {
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 1fr;
@@ -1506,10 +1555,17 @@ section#profile a:active {
         height: 100%;
     }
 
+    /* projects widget (start) -- */
+
+    div#projects-widget {
+        width: 70%;
+    }
+
     ul#action-buttons {
         align-items: center;
         justify-self: center;
-        width: 70%;
+        width: 100%;
+        height: 100%;
     }
 
     ul#action-buttons li {
@@ -1535,6 +1591,28 @@ section#profile a:active {
     ul#action-buttons button span {
         font-size: calc(var(--content-main-font-size) * 0.9);
     }
+
+    /* projects widget (end) -- */
+
+    /* profile widget (start) -- */
+    div#profile-widget {
+        width: max-content;
+        /* width: 70%; */
+        padding: var(--common-padding);
+        gap: 1vw;
+    }
+
+    div#profile-widget p {
+        font-size: calc(var(--content-main-font-size) * 0.9);
+    }
+
+
+
+
+
+    /* profile widget (end) -- */
+
+
 
     section#content-dash {
         display: grid;
@@ -1629,14 +1707,8 @@ section#profile a:active {
         border: calc(1px + 0.1vw) solid var(--background);
     }
 
-    p[data-profile="username"] {
-        font-size: calc(var(--content-main-font-size) * 0.7);
-    }
-
-    p[data-profile="address"] {
-        font-size: calc(var(--content-main-font-size) * 0.7);
-    }
-
+    p[data-profile="username"],
+    p[data-profile="address"],
     p[data-profile="status"] {
         font-size: calc(var(--content-main-font-size) * 0.7);
     }
@@ -1832,5 +1904,11 @@ section#content-divider.minimized {
 }
 
 section#profile.minimized {
+    display: none;
+}
+
+/* widgets toggler */
+div#profile-widget.minimized,
+div#projects-widget.minimized {
     display: none;
 }

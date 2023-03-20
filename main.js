@@ -241,11 +241,11 @@ class UserProjects {
         this.projectName = projectName;
         this.description = description;
         this.preview = preview;
-        this.commendIcon = `<i class="fa-solid fa-leaf">`;
+        // this.commendIcon = `<i class="fa-solid fa-leaf">`;
         this.commend = commend;
-        this.feedbackIcon = `<i class="fa-regular fa-message">`;
+        // this.feedbackIcon = `<i class="fa-regular fa-message">`;
         this.feedback = feedback;
-        this.forkIcon = `<i class="fa-solid fa-code-fork">`;
+        // this.forkIcon = `<i class="fa-solid fa-code-fork">`;
         this.fork = fork;
         this.progress = progress;
         this.codeSite = codeSite;
@@ -257,55 +257,55 @@ class UserProjects {
 // Project constructor: Constructs projects as objects
 // Comments for easier production of objects
 let sampleProject = new UserProjects(
-    "sample-project", //id
-    "Sample Project", //projectName
+    "rock-paper-scissors", //id
+    "JANKEN!", //projectName
     "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni eaque iste, aliquid hic nemo suscipit fugiat dolorum laborum aliquam impedit facere provident dignissimos esse illum rerum saepe quam sint. Quisquam!", //description
     "profile.png", //preview
     1, //commend
     20, //feedback
     5, //fork
     45, // progress
-    "https://www.youtube.com/watch?v=FWTNMzK9vG4&t=185s", //code Site
-    "https://www.youtube.com/watch?v=dItUGF8GdTw" //live site
+    "https://github.com/makieldeviso/rock-paper-scissor", //code Site
+    "https://makieldeviso.github.io/rock-paper-scissor/" //live site
 );
 
 let sampleProject2 = new UserProjects(
-    "sample-project-2", //id
-    "Sample Project 2", //projectName
+    "etch-a-sketch", //id
+    "PIXEL SLATE", //projectName
     "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni eaque iste, aliquid hic nemo suscipit fugiat dolorum laborum aliquam impedit facere provident dignissimos esse illum rerum saepe quam sint. Quisquam!", //description
     "profile.png", //preview
     11, //commend
     25, //feedback
     8, //fork
-    80, // progress
-    "https://www.youtube.com/watch?v=FWTNMzK9vG4&t=185s", //code Site
-    "https://www.youtube.com/watch?v=dItUGF8GdTw" //live site
+    100, // progress
+    "https://github.com/makieldeviso/sketch", //code Site
+    "https://makieldeviso.github.io/sketch/" //live site
 );
 
 let sampleProject3 = new UserProjects(
-    "sample-project-3", //id
-    "Sample Project 3", //projectName
+    "calculator", //id
+    "PMC", //projectName
     "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni eaque iste, aliquid hic nemo suscipit fugiat dolorum laborum aliquam impedit facere provident dignissimos esse illum rerum saepe quam sint. Quisquam!", //description
     "profile.png", //preview
     8, //commend
     26, //feedback
     9, //fork
-    96, // progress
-    "https://www.youtube.com/watch?v=FWTNMzK9vG4&t=185s", //code Site
-    "https://www.youtube.com/watch?v=dItUGF8GdTw" //live site
+    90, // progress
+    "https://github.com/makieldeviso/calculator", //code Site
+    "https://makieldeviso.github.io/calculator/" //live site
 );
 
 let sampleProject4 = new UserProjects(
-    "sample-project-4", //id
-    "Sample Project 4", //projectName
+    "sign-in", //id
+    "Waryur Helmets - Create Account", //projectName
     "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni eaque iste, aliquid hic nemo suscipit fugiat dolorum laborum aliquam impedit facere provident dignissimos esse illum rerum saepe quam sint. Quisquam!", //description
     "profile.png", //preview
     8, //commend
     26, //feedback
     9, //fork
-    100, // progress
-    "https://www.youtube.com/watch?v=FWTNMzK9vG4&t=185s", //code Site
-    "https://www.youtube.com/watch?v=dItUGF8GdTw" //live site
+    89, // progress
+    "https://github.com/makieldeviso/sign-up-form", //code Site
+    "https://makieldeviso.github.io/sign-up-form/" //live site
 );
 
 
@@ -544,6 +544,7 @@ function addUserProject(projectArray) {
 
             let site = document.createElement("a");
             site.setAttribute("href", `${thisSite}`);
+            site.setAttribute("target", "_blank");
             site.textContent = ("Link Here");
             container.appendChild(site);
 

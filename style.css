@@ -832,6 +832,7 @@ dialog.projectModal div[data-link] > a {
     font-size: calc(var(--content-main-font-size) * 1.2);
     height: 100%;
     text-decoration: none;
+    color: var(--bamboo-green);
 }
 
 dialog.projectModal div[data-link] > a:visited {

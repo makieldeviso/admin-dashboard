@@ -40,10 +40,6 @@
                         </button>
                     </div>
                 </div> <!-- #options-icons end -->
-    
-                <!-- <div id="user">
-                    <div id="profile-picture"></div>
-                </div> -->
 
             </section> <!-- header-bar (end)-->
 
@@ -57,7 +53,7 @@
                 </div>
     
                 <div id="widget-placement">
-                    <div id="projects-widget">
+                    <div id="projects-widget" data-widget="projects">
                         <ul id="action-buttons">
                             <li><button><i class="fa-solid fa-plus"></i><span>New</span></button></li>
                             <li><button><i class="fa-solid fa-file-arrow-up"></i><span>Upload</span></button></li>
@@ -167,7 +163,7 @@
         <section id="content-dash">
 
             <section id="content-main" data-page="content-main">
-                <section id="projects" data-page="projects">
+                <section id="projects" data-page="projects" data-section="projects">
                     <h3>Your projects</h3>
                     <div id="projects-grid"></div>
                 </section>
@@ -188,7 +184,7 @@
         </section>
 
         <div id="library">
-            <section id="profile" class="minimized">
+            <section id="profile" class="minimized" data-section="profile">
                 <h3>Profile</h3>
                 <div id="profile-grid">
     
@@ -252,12 +248,17 @@
     
     
             </section>
+
+            <section id="messages" class="minimized" data-section="messages">
+                <h3>Messages</h3>
+                <div id="messages-grid"></div>
+            </section>
     
             <div id="modal-container"></div>
         </div>
 
         <div id="widgets">
-            <div id="profile-widget" class="minimized">
+            <div id="profile-widget" class="minimized" data-widget="profile">
                 <div id="admin-icon">
                     <i class="fa-solid fa-user" id="icon-person"></i>
                     <i class="fa-solid fa-gear" id="icon-gears"></i>
@@ -265,6 +266,8 @@
                 
                 <p>Coordinate with Admin Division To Update Profile</p>
             </div>
+
+            <div id="messages-widget" class="minimized" data-widget="messages"></div>
 
         </div>
         

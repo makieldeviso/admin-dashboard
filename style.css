@@ -34,6 +34,7 @@ body {
     --yellow-dark: #FED049;
     --yellow-contrast: #F5DF99;
     --background: #F6FBF4;
+    --light-font: #7E97A6;
 
     --brand-font: 'Tilt Neon', cursive;
     --brand-font-size: calc(1rem + 1vw);
@@ -227,7 +228,6 @@ div#projects-widget {
     width: 100%;
     height: 100%;
 }
-
 
 ul#action-buttons {
     display: grid;
@@ -551,16 +551,6 @@ section#content-dash > section#content-main{
     transform: translateX(0);
 }
 
-/* section#content-dash > section#projects.swiped {
-    height: 0;
-    transform: translateX(-110%);
-} 
-
-section#content-dash > section#projects{
-    height: 100%;
-    transform: translateX(0);
-} */
-
 section#content-dash > section#announcements.swiped {
     height: 0;
     transform: translateX(-210%);
@@ -626,6 +616,7 @@ div#projects-grid div[data-class="project-box"].hovered {
 div#projects-grid div[data-class="project-box"] h4 {
     font-size: var(--content-header-font-size);
     height: 10%;
+    overflow: hidden;
 }
 
 div#projects-grid div[data-class="project-box"] div[data-detail="details"] {
@@ -845,6 +836,7 @@ dialog.projectModal div[data-link] > a:focus {
 }
 
 dialog.projectModal div[data-link] > a:active {
+    color: var(--dark-green);
     transform: scale(0.95);
 }
 
@@ -910,9 +902,8 @@ section#announcements > div#announce-grid {
 }
 
 section#announcements h3, 
-section#team h3, 
-section#projects h3,
-section#profile h3 {
+section#team h3,
+section[data-section] h3 {
     background-color: var(--light-green);
     font-size: calc(var(--content-header-font-size) * 0.9);
 
@@ -957,7 +948,7 @@ div[data-box="announcement"] p {
 }
 
 div[data-post] {
-    color: #7E97A6;
+    color: var(--light-font);
     font-size: var(--content-main-font-size);
    
     display: flex;
@@ -1059,7 +1050,7 @@ p[data-profile="address"] {
 p[data-profile="status"] {
     grid-area: status;
 
-    color: #7E97A6;
+    color: var(--light-font);
     font-size: var(--content-main-font-size);
 }
 
@@ -1091,29 +1082,12 @@ button[data-message="message"]:active {
     transform: scale(0.95);
 }
 
-/* Profile (start) ------ */
-
-/* section#content-divider.fixed,
-section#content-divider,
-section#content-dash,
-section#sub-header {
-    display: none;
-} */
-
-/* section#content-divider.fixed,
-section#content-divider,
-section#content-dash {
-    display: unset;
-} */
-
-
+/* Profile (start) -- */
 
 section#profile {
     flex: 0 0 100%;
 
-    /* padding-top: 10vh; */
     height: 100%;
-    /* width: 100vw; */
     position: relative;
 
     display: flex;
@@ -1235,6 +1209,80 @@ section#profile a:focus {
 section#profile a:active {
     color: var(--dark-green);
 }
+
+/* Profile (end) -- */
+
+/* Messages (start) - */
+section#messages {
+    flex: 0 0 100%;
+
+    height: 100%;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: var(--background);
+}
+div#messages-grid {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--common-margin));
+
+}
+
+
+div#messages-grid div {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: 
+        "author date"
+        "subject subject"
+        "message message";
+    padding: var(--common-padding);
+    border: 1px solid var(--bamboo-green);
+    
+}
+section#messages p {
+    
+    font-size: var(--content-main-font-size);
+}
+
+section#messages p[data-author]{
+    grid-area: author;
+
+    font-size: var(--content-header-font-size);
+    font-weight: bold;
+}
+
+section#messages p[data-time-date]{
+    grid-area: date;
+
+    font-size: calc(var(--content-main-font-size) * 0.8);
+    color: var(--light-font);
+    justify-self: end;
+
+    display: flex;
+    gap: 5px;
+}
+
+section#messages p[data-subject]{
+    grid-area: subject;
+
+    font-size: var(--content-header-font-size);
+    font-weight: bold;
+}
+
+section#messages p[data-message]{
+    grid-area: message;
+
+    height: max-content;
+    overflow: hidden;
+}
+
+
+
+
 
 
 
@@ -1455,6 +1503,10 @@ section#profile a:active {
 
     section#sidebar nav {
         width:100%;
+
+        flex: unset;
+        height: calc(80vh - 2vw);
+        overflow-y: auto;
     }
 
     section#content-dash.offset,
@@ -1501,6 +1553,10 @@ section#profile a:active {
 
     section#sidebar {
         width: 100%;
+    }
+
+    section#sidebar nav {
+        flex: 1;
     }
 
     div#user-detail {
@@ -1629,9 +1685,8 @@ section#profile a:active {
     }
     
     section#announcements h3, 
-    section#team h3, 
-    section#projects h3,
-    section#profile h3 {
+    section#team h3,
+    section[data-section] h3 {
         display: unset;
     }
 
@@ -1810,18 +1865,26 @@ section#profile a:active {
         font-size: calc(var(--content-main-font-size) * 1);
     }
 
-
-
-
-
-
-
-
-
-
-
-
 /* profile-grid (end) -----*/
+
+
+/* messages-grid (start) - */
+div#messages-grid {
+    width: 98%;
+
+    flex: 1;
+
+    position: relative;
+    overflow-y: auto;
+}
+
+div#messages-grid div {
+    width: 98%;
+}
+
+/* messages-grid (end) - */
+
+
 
     dialog.projectModal, dialog.announceModal {
         height: 80vh;
@@ -1843,7 +1906,8 @@ section#profile a:active {
 /* firefox scrollbar */
 section#projects > div#projects-grid,
 section#announcements > div#announce-grid,
-section#team > div#team-grid {
+section#team > div#team-grid,
+section#messages > div#messages-grid {
     /* scrollbar-color: var(--light-green) var(--dark-base); */
     scrollbar-color: transparent transparent;
     scrollbar-width: thin;
@@ -1851,7 +1915,8 @@ section#team > div#team-grid {
 
 section#projects > div#projects-grid:hover,
 section#announcements > div#announce-grid:hover,
-section#team > div#team-grid:hover {
+section#team > div#team-grid:hover,
+section#messages > div#messages-grid:hover {
     scrollbar-color: var(--light-green) var(--dark-base);
 }
 
@@ -1881,7 +1946,8 @@ section#content-dash:hover::-webkit-scrollbar-track,
 div#projects-grid:hover::-webkit-scrollbar-track,
 div#profile-grid:hover::-webkit-scrollbar-track,
 div#announce-grid:hover::-webkit-scrollbar-track,
-div#team-grid:hover::-webkit-scrollbar-track {
+div#team-grid:hover::-webkit-scrollbar-track,
+div#messages-grid:hover::-webkit-scrollbar-track {
     visibility: visible;
 }
 
@@ -1889,27 +1955,26 @@ section#content-dash:hover::-webkit-scrollbar-thumb,
 div#projects-grid:hover::-webkit-scrollbar-thumb,
 div#profile-grid:hover::-webkit-scrollbar-thumb,
 div#announce-grid:hover::-webkit-scrollbar-thumb,
-div#team-grid:hover::-webkit-scrollbar-thumb {
+div#team-grid:hover::-webkit-scrollbar-thumb,
+div#messages-grid:hover::-webkit-scrollbar-thumb {
     visibility: visible;
 }
 
 
 /* section display toggler */
-section#projects.minimized {
+section#projects.minimized,
+section#profile.minimized,
+section#messages.minimized {
+    display: none;
+}
+/* widgets toggler */
+div#projects-widget.minimized,
+div#profile-widget.minimized,
+div#messages-widget.minimized {
     display: none;
 }
 
 section#sub-header.minimized,
 section#content-divider.minimized {
-    display: none;
-}
-
-section#profile.minimized {
-    display: none;
-}
-
-/* widgets toggler */
-div#profile-widget.minimized,
-div#projects-widget.minimized {
     display: none;
 }

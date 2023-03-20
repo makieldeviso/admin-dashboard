@@ -35,6 +35,7 @@ const announceGrid = document.querySelector("div#announce-grid");
 const teamSection = document.querySelector("section#team");
 const teamGrid = document.querySelector("div#team-grid");
 
+const messagesGrid = document.querySelector("div#messages-grid");
 
 const sideBarButtons = document.querySelectorAll("section#sidebar nav button");
     sideBarButtons.forEach(button => {
@@ -49,13 +50,13 @@ const nysTally = document.querySelector("span#nys-task");
 const library = document.querySelector("div#library");
 const projects = document.querySelector("section#projects");
 const profile = document.querySelector("section#profile");
+const messages = document.querySelector("section#messages");
 
 const widgetPlacement = document.querySelector("div#widget-placement");
 const widgets = document.querySelector("div#widgets");
 const projectsWidget = document.querySelector("div#projects-widget");
 const profileWidget = document.querySelector("div#profile-widget");
-
-
+const messagesWidget = document.querySelector("div#messages-widget");
 
 
 // toggle content Sections (start) -----
@@ -93,6 +94,7 @@ class Sections {
 // let homeSection = new Sections ("content-dash", contentDash);
 let projectsSection = new Sections ("projects", projects, projectsWidget, "Your Projects");
 let profileSection = new Sections ("profile", profile, profileWidget, "Profile");
+let messagesSection = new Sections ("messages", messages, messagesWidget, "Messages");
 // Creates Section Object Area (start) -----
 
 // Toggle content section function (start) ----
@@ -260,7 +262,7 @@ let sampleProject = new UserProjects(
     "rock-paper-scissors", //id
     "JANKEN!", //projectName
     "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni eaque iste, aliquid hic nemo suscipit fugiat dolorum laborum aliquam impedit facere provident dignissimos esse illum rerum saepe quam sint. Quisquam!", //description
-    "profile.png", //preview
+    "janken-prev.png", //preview
     1, //commend
     20, //feedback
     5, //fork
@@ -273,7 +275,7 @@ let sampleProject2 = new UserProjects(
     "etch-a-sketch", //id
     "PIXEL SLATE", //projectName
     "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni eaque iste, aliquid hic nemo suscipit fugiat dolorum laborum aliquam impedit facere provident dignissimos esse illum rerum saepe quam sint. Quisquam!", //description
-    "profile.png", //preview
+    "sketch-prev.png", //preview
     11, //commend
     25, //feedback
     8, //fork
@@ -286,7 +288,7 @@ let sampleProject3 = new UserProjects(
     "calculator", //id
     "PMC", //projectName
     "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni eaque iste, aliquid hic nemo suscipit fugiat dolorum laborum aliquam impedit facere provident dignissimos esse illum rerum saepe quam sint. Quisquam!", //description
-    "profile.png", //preview
+    "calc-prev.png", //preview
     8, //commend
     26, //feedback
     9, //fork
@@ -299,7 +301,7 @@ let sampleProject4 = new UserProjects(
     "sign-in", //id
     "Waryur Helmets - Create Account", //projectName
     "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni eaque iste, aliquid hic nemo suscipit fugiat dolorum laborum aliquam impedit facere provident dignissimos esse illum rerum saepe quam sint. Quisquam!", //description
-    "profile.png", //preview
+    "sign-in-prev.png", //preview
     8, //commend
     26, //feedback
     9, //fork
@@ -591,8 +593,6 @@ function hoverEvent(event) {
 
 // Isolates hover UI effect to header and description only (end) ----
 // Project Maker Function (end) -----------
-
-
 
 // Announcement Constructor
 let announcementsArr = [];
@@ -939,6 +939,131 @@ function addMember(teamArray) {
     }
 }
 // Adds Member Function (end) ----
+
+
+// Messages Maker Function (placeholder) (start) -
+let baseDate = Date.parse(new Date("March 21, 2023")); // this is timeStamp
+let oneDay = 86400000; // one day in milliseconds
+
+console.log(new Date(baseDate));
+makeMessage();
+function makeMessage() {
+    let messageNumber = 50;
+    
+    for (let i = 0; i < messageNumber; i++) {
+
+        // Creates container for ONE message
+        let messageContainer = document.createElement("div");
+        messageContainer.setAttribute("data-id",`msg${messageNumber - i}`);
+
+        // Creates author p
+        let author = document.createElement("p");
+        author.setAttribute("data-author", `msg${messageNumber - i}-author`);
+        let name = teamMembersArray[Math.floor(Math.random() * teamMembersArray.length)]["username"];
+        author.textContent = name;
+        messageContainer.appendChild(author);
+
+        //Creates date time
+        let timeDate = document.createElement("p");
+        timeDate.setAttribute("data-time-date", `msg${messageNumber - i}-time-date`);
+
+        let dateSpan = document.createElement("span");
+        dateSpan.setAttribute("data-class", "date");
+        // let dateMonth = unixDate.getMonth();
+
+        let randomDescent = baseDate - (Math.floor(Math.random() * 5 + 1) * oneDay);
+                
+        let date = new Date(randomDescent);
+        let dateMonthLong = new Intl.DateTimeFormat("en-US", {month: "long"}).format(date);
+
+        let dateDay = new Date(randomDescent).getDate();
+
+        let dateYear = new Date(randomDescent).getFullYear();
+
+        let dateString = `${dateMonthLong} ${dateDay}, ${dateYear}`;
+        baseDate = randomDescent;
+
+        // console.log(baseDate);
+
+        dateSpan.textContent = dateString;
+        timeDate.appendChild(dateSpan);
+
+        let timeSpan = document.createElement("span");
+        timeSpan.setAttribute("data-class", "time");
+        let hours = (Math.floor(Math.random() * 12) + 1);
+        let minutes = Math.floor(Math.random() * 59);
+
+            if (minutes.toString().length === 1) {
+                minutes = `0${minutes}`;
+            }
+        
+        let halfTime = ["AM", "PM"];
+        let half = halfTime[Math.floor(Math.random() * 2)];
+        let timeString = `${hours}:${minutes} ${half}`;
+
+        timeSpan.textContent = timeString;
+        timeDate.appendChild(timeSpan);
+
+        messageContainer.appendChild(timeDate);
+
+        // Creates Subject p 
+        let subject = document.createElement("p");
+        subject.setAttribute("data-subject", `msg${messageNumber - i}-subject`);
+        let subjectText =  `Subject ${messageNumber - i}: Lorem ipsum dolor sit amet`;
+        subject.textContent = subjectText;
+        messageContainer.appendChild(subject);
+
+        // Creates Message p 
+        let message = document.createElement("p");
+        message.setAttribute("data-message", `msg${messageNumber - i}-message`);
+        let messageText =  `This is a placeholder message. The authors are randomized in every page reload. The date descends in random day increment and the subject is numbered descendingly.`;
+        message.textContent = messageText;
+        messageContainer.appendChild(message);
+
+
+
+
+        messagesGrid.appendChild(messageContainer);
+
+
+
+
+
+
+
+
+
+
+    }
+   
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Expands and close Modal (start) -------
 function expandModal() {

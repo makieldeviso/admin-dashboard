@@ -1623,6 +1623,10 @@ p[data-class="joined"] {
         grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
     }
 
+    div#communities-grid {
+        grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    }
+
     img#icon-logo {
         height: calc(var(--icon-main-size) * 0.8);
         width: calc(var(--icon-main-size) * 0.8);

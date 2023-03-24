@@ -96,13 +96,6 @@
                         </li>
 
                         <li>
-                            <button data-id="history">
-                                <i class="fa-solid fa-clock"></i>
-                                <span>History</span>
-                            </button>
-                        </li>
-
-                        <li>
                             <button data-id="tasks">
                                 <i class="fa-solid fa-rectangle-list"></i>
                                 <span>Tasks</span>
@@ -253,8 +246,29 @@
                 <h3>Messages</h3>
                 <div id="messages-grid"></div>
             </section>
+
+            <section id="tasks" class="minimized" data-section="tasks">
+                <h3>Tasks</h3>
+                <div id="tasks-grid">
+                </div>
+            </section>
     
-            <div id="modal-container"></div>
+            <div id="modal-container">
+                <dialog class="errorModal" data-id="error">
+                    <div class="modalDiv">
+                        <button data-id="error"><i class="fa-solid fa-xmark"></i>
+                        </button>
+
+                        <h4>Site Maintenance</h4>
+
+                        <i class="fa-solid fa-screwdriver-wrench" data-id="fix-icon"></i>
+
+                        <p>Site is undergoing system maintenance. The dashboard still works with limited function. So if you are seeing this message it means that you can't use this feature. I hope that you can still be productive. Good day and keep up the good work. </p>
+                        <p id="error-author">-I.T.</p>
+
+                    </div>
+                </dialog>
+            </div>
         </div>
 
         <div id="widgets">
@@ -267,7 +281,15 @@
                 <p>Coordinate with Admin Division To Update Profile</p>
             </div>
 
-            <div id="messages-widget" class="minimized" data-widget="messages"></div>
+            <div id="messages-widget" class="minimized" data-widget="messages">
+                <i class="fa-solid fa-inbox"></i>
+                <p>Inbox</p>
+                <p id="unread"></p>
+            </div>
+
+            <div id="tasks-widget" class="minimized" data-widget="tasks">
+
+            </div>
 
         </div>
         

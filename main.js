@@ -1,4 +1,3 @@
-// const body = document.querySelector("body");
 const dashContainer = document.querySelector("div#dash-container");
 const menuContainer = document.querySelector("div#menu"); 
     window.addEventListener("resize", reposition);
@@ -25,8 +24,6 @@ const contentDash = document.querySelector("section#content-dash");
 const contentMain = document.querySelector("section#content-main");
     window.addEventListener("scroll", checkScroll);
 
-// Note: Profile Section querySelector grouped with library
-const projectGrid = document.querySelector("div#projects-grid");
 const modalContainer = document.querySelector("div#modal-container");
 
 const announcementSection = document.querySelector("section#announcements");
@@ -34,8 +31,6 @@ const announceGrid = document.querySelector("div#announce-grid");
 
 const teamSection = document.querySelector("section#team");
 const teamGrid = document.querySelector("div#team-grid");
-
-const messagesGrid = document.querySelector("div#messages-grid");
 
 const sideBarButtons = document.querySelectorAll("section#sidebar nav button");
     sideBarButtons.forEach(button => {
@@ -51,15 +46,34 @@ const library = document.querySelector("div#library");
 const projects = document.querySelector("section#projects");
 const profile = document.querySelector("section#profile");
 const messages = document.querySelector("section#messages");
+const tasks = document.querySelector("section#tasks");
 
 const widgetPlacement = document.querySelector("div#widget-placement");
 const widgets = document.querySelector("div#widgets");
 const projectsWidget = document.querySelector("div#projects-widget");
 const profileWidget = document.querySelector("div#profile-widget");
 const messagesWidget = document.querySelector("div#messages-widget");
+const tasksWidget = document.querySelector("div#tasks-widget");
+
+const projectGrid = document.querySelector("div#projects-grid");
+const messagesGrid = document.querySelector("div#messages-grid");
+const tasksGrid = document.querySelector("div#tasks-grid");
 
 
-// toggle content Sections (start) -----
+const projectButtons = document.querySelectorAll("ul#action-buttons button");
+    projectButtons.forEach(button => {
+        button.addEventListener("click", errorModalShow);
+    });
+
+// Messages placeholder global variables (start) -
+let baseDate = Date.parse(new Date("March 21, 2023")); // this is timeStamp
+let oneDay = 86400000; // one day in milliseconds
+let inboxUnopened;
+let messageNumber = 50;
+// Messages placeholder global variables (end) -
+
+
+// Toggle content Sections (start) -----
 // Sections Object Constructor (start) ----
 let sectionsObjArray = [];
 let screenWidth;
@@ -95,6 +109,7 @@ class Sections {
 let projectsSection = new Sections ("projects", projects, projectsWidget, "Your Projects");
 let profileSection = new Sections ("profile", profile, profileWidget, "Profile");
 let messagesSection = new Sections ("messages", messages, messagesWidget, "Messages");
+let tasksSection = new Sections ("tasks", tasks, tasksWidget, "Tasks");
 // Creates Section Object Area (start) -----
 
 // Toggle content section function (start) ----
@@ -146,18 +161,11 @@ function toggleSection() {
 
 
 }
-// Toggle content section function (end) ----
-// toggle content Sections (end) -----
+// Toggle content section function (end) -
+// toggle content Sections (end) -
 
 
-
-
-
-
-
-
-
-// Checks element first if it exist, then add event listener (start) ---
+// Checks element first if it exist, then add event listener (start) -
 function checkElementAddEvent(element, eventListener, linkedFunction) {
     if (element != null) {
         element.addEventListener(eventListener, linkedFunction);
@@ -165,9 +173,10 @@ function checkElementAddEvent(element, eventListener, linkedFunction) {
         return
     }
 }
-// Checks element first if it exist, then add event listener (end) ---
+// Checks element first if it exist, then add event listener (end) -
 
-// Hides or Show Side Bar (start) ----
+
+// Hides or Show Side Bar (start) -
 function toggleSidebar() {
     // console.log(this);
     if (sidebar.hasAttribute("class")) {
@@ -183,9 +192,9 @@ function toggleSidebar() {
         hamburger.addEventListener("click", toggleSidebar);
     }
 }
-// Hides or Show Side Bar (end) ----
+// Hides or Show Side Bar (end) -
 
-// Sticks divider button at top (start) ----
+// Sticks divider button at top (start) -
 function checkScroll() {
     let headerBarHeight = Math.ceil(headerBar.clientHeight);
     let subHeaderHeight = Math.ceil(subHeader.clientHeight);
@@ -202,10 +211,10 @@ function checkScroll() {
     }
 
 }
-// Sticks divider button at top (end) ----
+// Sticks divider button at top (end) -
 
 
-// Toggles the content page between projects, announcement and team (start) ---
+// Toggles the content page between contents, announcement and team (start) -
 let currentPage = document.querySelector("section[data-page='content-main']");
 const contentPages = document.querySelectorAll("section#content-dash > section");
 
@@ -227,7 +236,7 @@ function toggleContentPage() {
     currentPage = contentPage;
 
 }
-// Toggles the content page between projects, announcement and team (end) ---
+// Toggles the content page between projects, announcement and team (end) -
 
 
 // Project Constructor function
@@ -569,7 +578,7 @@ function addUserProject(projectArray) {
 const projectHeader = document.querySelectorAll(`div[data-class="project-box"] h4`);
 const projectDetails = document.querySelectorAll(`div[data-class="project-box"] div[data-detail]`);
 
-// Isolates hover UI effect to header and description only (start) ----
+// Isolates hover UI effect to header and description only (start) --
 projectHeader.forEach(element => {
     checkElementAddEvent(element, "mouseover", hoverEvent);
     checkElementAddEvent(element, "mouseout", hoverEvent);
@@ -591,8 +600,8 @@ function hoverEvent(event) {
     }
 }   
 
-// Isolates hover UI effect to header and description only (end) ----
-// Project Maker Function (end) -----------
+// Isolates hover UI effect to header and description only (end) --
+// Project Maker Function (end) -
 
 // Announcement Constructor
 let announcementsArr = [];
@@ -615,7 +624,7 @@ let announcement1 = new Announcement(
     "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat earum sapiente perferendis veritatis corrupti eaque nemo ullam animi et, ut repellat mollitia amet quas beatae, totam temporibus necessitatibus adipisci consequatur.", // Content
     "2023-03-14", // dateTime YYYY-MM-DD
     "March 14, 2023",
-    "Fred R. Pailjar"
+    "May R. Pailjar"
 );
 
 let announcement2 = new Announcement(
@@ -647,7 +656,7 @@ let announcement4 = new Announcement(
 
 let announcement5 = new Announcement(
     "announcement5", // id
-    "Fred R. Pailjar Birthday!", // Subject
+    "May R. Pailjar Birthday!", // Subject
     "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat earum sapiente perferendis veritatis corrupti eaque nemo ullam animi et, ut repellat mollitia amet quas beatae, totam temporibus necessitatibus adipisci consequatur.", // Content
     "2023-03-02", // dateTime YYYY-MM-DD
     "March 02, 2023",
@@ -753,7 +762,6 @@ function addAnnouncement(announcements) {
         announceBox.appendChild(message);
         dialogDiv.appendChild(messageModal);
 
-
         // Creates author/ post details container
         let postDiv = document.createElement("div");
         postDiv.setAttribute("data-post", "post");
@@ -808,8 +816,8 @@ class member {
 let member1 = new member(
     "member1", // id
     "profile.png", // profilePicture
-    "Fred R. Pailjar", // userName
-    "@fred", // address
+    "May R. Pailjar", // userName
+    "@may", // address
     "online" // status
 );
 
@@ -857,7 +865,7 @@ let member6 = new member(
 // Runs addMember Function 
 addMember(teamMembersArray);
 
-// Adds Member Function (start) ----
+// Adds Member Function (start) -
 function addMember(teamArray) {
     for (let i = 0; i < teamArray.length; i++) {
         // Creates teamMember container
@@ -921,10 +929,11 @@ function addMember(teamArray) {
             memberBox.appendChild(data);
         }
 
-
         // Create button for message
         let sendMessageButton = document.createElement("button");
         sendMessageButton.setAttribute("data-message", "message");
+
+        sendMessageButton.addEventListener("click", errorModalShow);
 
         let messageIcon = document.createElement("i");
         messageIcon.setAttribute("class", "fa-solid fa-message");
@@ -938,23 +947,23 @@ function addMember(teamArray) {
         teamGrid.appendChild(memberBox);
     }
 }
-// Adds Member Function (end) ----
+// Adds Member Function (end) -
 
 
 // Messages Maker Function (placeholder) (start) -
-let baseDate = Date.parse(new Date("March 21, 2023")); // this is timeStamp
-let oneDay = 86400000; // one day in milliseconds
+addMessage();
 
-console.log(new Date(baseDate));
-makeMessage();
-function makeMessage() {
-    let messageNumber = 50;
-    
+function addMessage() {
     for (let i = 0; i < messageNumber; i++) {
 
         // Creates container for ONE message
         let messageContainer = document.createElement("div");
+        let openStatus = ["opened", ""];
+        let randomOpenStatus = openStatus[Math.floor(Math.random() * 2)];
         messageContainer.setAttribute("data-id",`msg${messageNumber - i}`);
+        messageContainer.setAttribute("class", `${randomOpenStatus}`);
+
+        messageContainer.addEventListener("click", errorModalShow);
 
         // Creates author p
         let author = document.createElement("p");
@@ -969,7 +978,6 @@ function makeMessage() {
 
         let dateSpan = document.createElement("span");
         dateSpan.setAttribute("data-class", "date");
-        // let dateMonth = unixDate.getMonth();
 
         let randomDescent = baseDate - (Math.floor(Math.random() * 5 + 1) * oneDay);
                 
@@ -982,8 +990,6 @@ function makeMessage() {
 
         let dateString = `${dateMonthLong} ${dateDay}, ${dateYear}`;
         baseDate = randomDescent;
-
-        // console.log(baseDate);
 
         dateSpan.textContent = dateString;
         timeDate.appendChild(dateSpan);
@@ -1020,52 +1026,81 @@ function makeMessage() {
         message.textContent = messageText;
         messageContainer.appendChild(message);
 
-
-
-
+        // Appends the message container to the messageGrid
         messagesGrid.appendChild(messageContainer);
 
-
-
-
-
-
-
-
-
-
+        //Counts unopened messages
+        countUnopened();
     }
-   
-
 }
 
+// Counts unopened messages function for inbox
+function countUnopened() {
+    let openedMessages = document.querySelectorAll("div#messages-grid div.opened");
+    inboxUnopened = messageNumber - openedMessages.length;
+
+    const unreadText = document.querySelector("p#unread");
+    unreadText.textContent = inboxUnopened;
+}
+// Messages Maker Function (placeholder) (end) -
 
 
+// Tasks Maker Function (placeholder) (start) -
+let taskNumber = 10;
+addTasks();
+function addTasks() {
+    for (let i = 0; i < taskNumber; i++) {
+        let taskContainer = document.createElement("div");
+        taskContainer.setAttribute("data-id", `task${taskNumber - i}`);
+
+        // Reusable element maker
+        function addElement(element, dataClass, content) {
+            let newElement = document.createElement(element);
+            newElement.setAttribute("data-class", `${dataClass}`);
+            newElement.textContent = `${content}`;
+           
+            if (element === "button") {
+                newElement.addEventListener("click", errorModalShow);
+            }
+
+            taskContainer.appendChild(newElement);
+        }
+
+        addElement("p", "task-id-label", "Task ID:");
+        addElement("p", "task-id", `TID#${120 + (taskNumber - i)}`);
+        addElement("p", "task-title-label", "Title:");
+        addElement("p", "task-title", `Lorem Ipsum Title ${taskNumber - i}`);
+        addElement("button", "accept", "Accept");
+        addElement("button", "decline", "Decline");
+    
+        tasksGrid.appendChild(taskContainer);
+    }
+}
+
+// Tasks Maker Function (placeholder) (end) -
 
 
+// Dedicated Error Modal (start) -
+const errorModal = document.querySelector("dialog[data-id='error']");
+const errorExit = document.querySelector("button[data-id='error']");
+    errorExit.addEventListener("click", errorModalShow);
+
+function errorModalShow() {
+    if (this === errorExit) {
+        errorModal.close();
+    } else {
+        if (this.getAttribute("class") != "opened") {
+            this.classList.add("opened");
+            countUnopened();
+        }
+
+        errorModal.showModal();
+    } 
+}
+// Dedicated Error Modal (end) -
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Expands and close Modal (start) -------
+// Expands and close Modal (start) -
 function expandModal() {
     let detailsId = this.getAttribute("data-id");
     let thisModal = document.querySelector(`dialog[data-id="${detailsId}"]`);
@@ -1078,11 +1113,10 @@ function closeModal() {
     
     thisModal.close();
 }
-// Expands and close Modal (end) -------
+// Expands and close Modal (end) -
 
 
-
-// Content dash re-position (start) -----
+// Content dash re-position (start) -
 function reposition() {
     let headerBarHeight = Math.ceil(headerBar.clientHeight);
     let subHeaderHeight = Math.ceil(subHeader.clientHeight);
@@ -1105,12 +1139,12 @@ function reposition() {
         contentDash.style.height = `calc(99vh - ${topHeight}px)`;
     }
 }
-// Content dash re-position (end) -----
+// Content dash re-position (end) -
 
-// Changes the user work stats in the profile section (start) -----
+// Changes the user work stats in the profile section (start) -
 function workStatsTally() {
     completedTally.textContent = completedProjects;
     ongoingTally.textContent = ongoingProjects;
     nysTally.textContent = nysProjects;
 }
-// Changes the user work stats in the profile section (end) -----
+// Changes the user work stats in the profile section (end) -

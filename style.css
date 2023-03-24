@@ -421,6 +421,7 @@ section#sidebar nav button.clicked {
 section#sidebar button:hover,
 section#sidebar button:focus {
     background-color: var(--light-green);
+    cursor: pointer;
 }
 
 section#sidebar button:active {
@@ -505,6 +506,7 @@ section#content-divider button#content-main-button {
 section#content-divider button:hover,
 section#content-divider button:focus {
     background-color: #d3d6bf;
+    cursor: pointer;
 }
 
 section#content-divider button:active {
@@ -611,6 +613,7 @@ div#projects-grid div[data-class="project-box"] {
 
 div#projects-grid div[data-class="project-box"].hovered {
     filter: brightness(0.95);
+    cursor: pointer;
 }
 
 div#projects-grid div[data-class="project-box"] h4 {
@@ -685,7 +688,9 @@ div#modal-container {
     width: 0;
 }
 
-dialog.projectModal, dialog.announceModal {
+dialog.projectModal, 
+dialog.announceModal,
+dialog.errorModal {
     height: 60%;
     min-width: 250px;
     width: 90%; 
@@ -721,12 +726,14 @@ dialog.announceModal {
 }
 
 dialog.projectModal::backdrop,
-dialog.announceModal::backdrop {
+dialog.announceModal::backdrop,
+dialog.errorModal::backdrop {
     background: rgba(0, 0, 0, 0.5);
 }
 
 dialog.projectModal div.modalDiv,
-dialog.announceModal div.modalDiv {
+dialog.announceModal div.modalDiv,
+dialog.errorModal div.modalDiv {
     padding: var(--common-padding);
 
     height: 100%;
@@ -743,7 +750,8 @@ dialog.announceModal div.modalDiv {
 }
 
 dialog.projectModal button,
-dialog.announceModal button {
+dialog.announceModal button,
+dialog.errorModal button{
     height: calc(var(--brand-font-size) * 1.5);
     width: calc(var(--brand-font-size) * 1.5);
     
@@ -759,12 +767,28 @@ dialog.announceModal button {
 }
 
 dialog.projectModal h4,
-dialog.announceModal h4 {
+dialog.announceModal h4,
+dialog.errorModal h4 {
     font-size: calc(var(--content-header-font-size) * 1.5);
     word-wrap: break-word;
 
     max-width: 100%;
     min-height: max-content;
+}
+
+dialog.errorModal i[data-id='fix-icon'] {
+    font-size: calc(var(--brand-font-size) * 5);
+    text-align: center;
+    margin: calc(var(--common-margin) * 5) 0;
+    color: var(--light-font);
+}
+
+dialog.errorModal p#error-author {
+    text-align: end;
+    font-weight: bolder;
+}
+dialog.errorModal {
+    border: 2px solid red;
 }
 
 dialog.projectModal div[data-detail="details"] {
@@ -833,6 +857,7 @@ dialog.projectModal div[data-link] > a:visited {
 dialog.projectModal div[data-link] > a:hover,
 dialog.projectModal div[data-link] > a:focus {
     color: var(--dark-green);
+    cursor: pointer;
 }
 
 dialog.projectModal div[data-link] > a:active {
@@ -935,6 +960,7 @@ div[data-box="announcement"] {
 div[data-box="announcement"]:hover,
 div[data-box="announcement"]:focus {
     filter: brightness(0.95);
+    cursor: pointer;
 }
 
 div[data-box="announcement"] h4 {
@@ -1076,6 +1102,7 @@ button[data-message="message"] {
 button[data-message="message"]:hover,
 button[data-message="message"]:focus {
     filter: brightness(0.95);
+    cursor: pointer;
 }
 
 button[data-message="message"]:active {
@@ -1204,6 +1231,7 @@ section#profile a:visited {
 section#profile a:hover,
 section#profile a:focus {
     color: var(--dark-green);
+    cursor: pointer;
 }
 
 section#profile a:active {
@@ -1227,7 +1255,8 @@ section#messages {
 div#messages-grid {
     display: flex;
     flex-direction: column;
-    gap: calc(var(--common-margin));
+    gap: 1px;
+    border-bottom: 1px solid var(--light-green);
 
 }
 
@@ -1240,9 +1269,25 @@ div#messages-grid div {
         "subject subject"
         "message message";
     padding: var(--common-padding);
-    border: 1px solid var(--bamboo-green);
-    
+    border: 1px solid var(--bamboo-green);  
+    background-color: #dceddd;
 }
+
+div#messages-grid div.opened {
+    background-color: var(--background);
+}
+
+div#messages-grid div.opened > p[data-time-date] {
+    font-weight: unset;
+    color: var(--light-font);
+}
+
+div#messages-grid div:hover,
+div#messages-grid div:focus{
+    filter: brightness(0.95);
+    cursor: pointer;
+}
+
 section#messages p {
     
     font-size: var(--content-main-font-size);
@@ -1259,7 +1304,7 @@ section#messages p[data-time-date]{
     grid-area: date;
 
     font-size: calc(var(--content-main-font-size) * 0.8);
-    color: var(--light-font);
+    font-weight: bold;
     justify-self: end;
 
     display: flex;
@@ -1278,6 +1323,129 @@ section#messages p[data-message]{
 
     height: max-content;
     overflow: hidden;
+}
+
+div#messages-widget {
+    display: grid;
+    grid-template-columns: max-content 1fr 1fr;
+    gap: 10px;
+    background-color: var(--bamboo-green);
+    padding: 3px;
+    border: 1px solid var(--yellow-contrast);
+    border-radius: 5px;
+    align-items: center;
+    min-height: 80%;
+    height: max-content;
+    margin: auto;
+}
+
+div#messages-widget i {
+    color: var(--yellow-contrast);
+    font-size: var(--brand-font-size);
+    padding-left: var(--common-padding);
+}
+
+div#messages-widget p {
+    color: var(--yellow-contrast);
+    font-size: calc(var(--brand-font-size) * 0.9);
+}
+
+div#messages-widget p#unread {
+    margin-left: var(--common-margin);
+}
+/* Messages (end) - */
+
+/* Tasks (start) - */
+section#tasks {
+    flex: 0 0 100%;
+
+    height: 100%;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: var(--background);
+}
+
+div#tasks-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--common-margin);
+    border-bottom: 1px solid var(--light-green);
+
+    overflow-y: auto;
+}
+
+
+div#tasks-grid div {
+    display: grid;
+    grid-template-columns: max-content 1fr 20% 20%;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas:
+        "id-label id accept decline"
+        "title-label title accept decline";
+    padding: var(--common-padding);
+    border: 1px solid var(--bamboo-green);
+}
+
+div#tasks-grid div p {
+    font-size: var(--content-main-font-size);
+}
+
+div#tasks-grid div button {
+    font-size: var(--content-main-font-size);
+    justify-self: center;
+    align-self: center;
+    width: 80%;
+    height: 80%;
+    border: 2px solid var(--yellow-contrast);
+    border-radius: 5px;
+    color: var(--background);
+    font-weight: bold;
+}
+
+div#tasks-grid div button:hover,
+div#tasks-grid div button:focus {
+    cursor: pointer;
+}
+
+
+
+div#tasks-grid div button:active {
+    transform: scale(0.95);
+}
+
+
+p[data-class="task-id-label"] {
+    grid-area: id-label;
+    
+}
+
+p[data-class="task-id"] {
+    grid-area: id;
+    margin-left: var(--common-margin);
+}
+
+p[data-class="task-title-label"] {
+    grid-area: title-label;
+}
+
+p[data-class="task-title"] {
+    grid-area: title;
+    margin-left: var(--common-margin);
+    overflow: hidden;
+}
+
+button[data-class="accept"] {
+    grid-area: accept;
+    background-color: green;
+}
+
+button[data-class="decline"] {
+    grid-area: decline;
+    background-color: red;
+    
 }
 
 
@@ -1662,11 +1830,6 @@ section#messages p[data-message]{
     div#profile-widget p {
         font-size: calc(var(--content-main-font-size) * 0.9);
     }
-
-
-
-
-
     /* profile widget (end) -- */
 
 
@@ -1880,24 +2043,54 @@ div#messages-grid {
 
 div#messages-grid div {
     width: 98%;
+
+    padding: calc(var(--common-padding) * 0.5);
+}
+
+section#messages p[data-author],
+section#messages p[data-subject] {
+    font-size: calc(var(--content-header-font-size) * 0.8);
+}
+section#messages p[data-message] {
+    font-size: calc(var(--content-main-font-size) * 0.8);
+}
+section#messages p[data-time-date] {
+    font-size: calc(var(--content-main-font-size) * 0.7);
+}
+
+div#messages-widget p {
+    font-size: calc(var(--content-main-font-size) * 0.9);
 }
 
 /* messages-grid (end) - */
 
+/* tasks-grid (end) - */
+div#tasks-grid div {
+    width: 98%;
+}
 
 
-    dialog.projectModal, dialog.announceModal {
+
+
+
+/* modal styling */
+    dialog.projectModal, 
+    dialog.announceModal,
+    dialog.errorModal {
         height: 80vh;
         max-height: 1000px;
         width: 50vw;
         max-width: 700px;
     }
 
-    dialog.projectModal h4, dialog.announceModal h4 {
+    dialog.projectModal h4, 
+    dialog.announceModal h4,
+    dialog.errorModal h4 {
         font-size: calc(var(--content-header-font-size) * 1.3);
     }
     
 }
+
 
 
 
@@ -1947,7 +2140,8 @@ div#projects-grid:hover::-webkit-scrollbar-track,
 div#profile-grid:hover::-webkit-scrollbar-track,
 div#announce-grid:hover::-webkit-scrollbar-track,
 div#team-grid:hover::-webkit-scrollbar-track,
-div#messages-grid:hover::-webkit-scrollbar-track {
+div#messages-grid:hover::-webkit-scrollbar-track,
+div#tasks-grid:hover::-webkit-scrollbar-track {
     visibility: visible;
 }
 
@@ -1956,7 +2150,8 @@ div#projects-grid:hover::-webkit-scrollbar-thumb,
 div#profile-grid:hover::-webkit-scrollbar-thumb,
 div#announce-grid:hover::-webkit-scrollbar-thumb,
 div#team-grid:hover::-webkit-scrollbar-thumb,
-div#messages-grid:hover::-webkit-scrollbar-thumb {
+div#messages-grid:hover::-webkit-scrollbar-thumb,
+div#tasks-grid:hover::-webkit-scrollbar-thumb {
     visibility: visible;
 }
 
@@ -1964,13 +2159,15 @@ div#messages-grid:hover::-webkit-scrollbar-thumb {
 /* section display toggler */
 section#projects.minimized,
 section#profile.minimized,
-section#messages.minimized {
+section#messages.minimized,
+section#tasks.minimized {
     display: none;
 }
 /* widgets toggler */
 div#projects-widget.minimized,
 div#profile-widget.minimized,
-div#messages-widget.minimized {
+div#messages-widget.minimized,
+div#tasks-widget.minimized {
     display: none;
 }
 

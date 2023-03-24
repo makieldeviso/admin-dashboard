@@ -29,6 +29,7 @@ body {
     --bamboo-green: #609966;
     --dark-green: #5FD068;  
     --dark-green-contrast: #ADE792;
+    --green-background: #dceddd;
     --light-green: #89d38f;
     --light-green-contrast: #EDF1D6;
     --yellow-dark: #FED049;
@@ -264,6 +265,16 @@ ul#action-buttons button {
     align-items: end;
 }
 
+ul#action-buttons button:hover,
+ul#action-buttons button:focus {
+    filter: brightness(0.95);
+    cursor: pointer;
+}
+
+ul#action-buttons button:active {
+    transform: scale(0.95);
+}
+
 ul#action-buttons button span {
     font-size: calc(var(--brand-font-size) * 0.6);
 }
@@ -300,15 +311,10 @@ div#profile-widget p {
 }
 
 
-
-
-
-
-/* profile-widget (start)*/
+/* profile-widget (end) - */
 /* div#widget-placement (end) - */
 
-
-/* section#sidebar (start) ----- */
+/* section#sidebar (start) - */
 
 section#sidebar {
     background-color: rgba(0, 0, 0, 0.7);
@@ -581,6 +587,7 @@ section#projects {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    height: 100%;
 }
 
 div#projects-grid {
@@ -996,7 +1003,7 @@ div#team-grid {
 }
 
 div[data-class="member"] {
-    background-color: #dceddd;
+    background-color: var(--green-background);
     
     border-bottom: 1px solid var(--light-green);
     padding: var(--common-padding);
@@ -1143,7 +1150,6 @@ div#profile-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--common-margin);
-    overflow-y: auto;
 }
 
 div#profile-grid > div {
@@ -1270,7 +1276,7 @@ div#messages-grid div {
         "message message";
     padding: var(--common-padding);
     border: 1px solid var(--bamboo-green);  
-    background-color: #dceddd;
+    background-color: var(--green-background);
 }
 
 div#messages-grid div.opened {
@@ -1374,9 +1380,8 @@ div#tasks-grid {
     gap: var(--common-margin);
     border-bottom: 1px solid var(--light-green);
 
-    overflow-y: auto;
+    /* overflow-y: auto; */
 }
-
 
 div#tasks-grid div {
     display: grid;
@@ -1447,34 +1452,129 @@ button[data-class="decline"] {
     background-color: red;
     
 }
+/* Tasks (end) - */
+
+/* Communities (start) - */
+section#communities {
+    flex: 0 0 100%;
+
+    height: 100%;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: var(--background);
+}
+
+div#communities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-rows: minmax(250px, 45%);
+    grid-auto-rows: minmax(250px, 45%);
+    gap: var(--common-margin);
+    flex: 1;
+}
+
+div#communities-grid > div {
+    border: 1px solid var(--bamboo-green);
+    display: flex;
+    flex-direction: column;
+    gap: var(--common-margin);
+    text-align: center;
+    padding: var(--common-padding);
+
+    height: 100%;
+}
+
+div[data-class="team-photo"] {
+    height: calc(var(--icon-main-size) * 3);
+    width: calc(var(--icon-main-size) * 3);
+    border: 2px solid var(--yellow-dark);
+    margin: var(--common-margin) auto; 
+    border-radius: 50%;
+
+    background-color: var(--green-background);
+    background-position: center;
+    background-size: contain;
+}
+
+div#dev {
+    background-image: url(./images/dev-team.svg);
+}
+
+div#finance {
+    background-image: url(./images/finance-team.svg);
+}
+
+div#legal {
+    background-image: url(./images/legal-team.svg);
+}
+
+div#it {
+    background-image: url(./images/it-team.svg);
+}
+
+div#admin {
+    background-image: url(./images/admin-team.svg);
+}
+
+div#director {
+    background-image: url(./images/director-team.svg);
+}
+
+
+h4[data-class="team-name"] {
+    font-size: calc(var(--content-header-font-size));
+}
+
+p[data-class="team-number"] {
+    font-size: calc(var(--content-main-font-size));
+    color: var(--light-font);
+}
+
+div[data-class="container"] {
+    flex: 1;
+
+    display: flex;
+    align-items: end;
+}
+
+
+p[data-class="joined"],
+button[data-class="connect"] {
+    font-size: calc(var(--content-main-font-size) );
+    font-weight: bold;
+    width: max-content;
+    padding: calc(var(--common-padding) * 0.8);
+    margin: calc(var(--common-margin) * 1.5) auto 0;
+    background-color: var(--dark-green);
+    border: 1px solid var(--light-green);
+    border-radius: 5px;
+}
+
+button[data-class="connect"]:hover,
+button[data-class="connect"]:focus{
+    filter: brightness(0.95);
+    cursor: pointer;
+}
+
+button[data-class="connect"]:active{
+    transform: scale(0.95);
+}
 
 
 
+p[data-class="joined"] {
+    width: 100%;
+    background-color: var(--light-green-contrast);
+    border: unset;
+    border-radius: unset;
+}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* Communities (end) - */
 
 
 
@@ -1983,6 +2083,7 @@ button[data-class="decline"] {
         flex: 1;
 
         position: relative;
+        overflow-y: auto;
     }
 
     div#profile-grid > div#main-identify {
@@ -2064,14 +2165,51 @@ div#messages-widget p {
 
 /* messages-grid (end) - */
 
-/* tasks-grid (end) - */
+/* tasks-grid (start) - */
+div#tasks-grid {
+    overflow-y: auto;
+    width: 98%; 
+}
+
 div#tasks-grid div {
+    width: 98%; 
+}
+/* tasks-grid (end) - */
+
+/* communities-grid (start) - */
+div#communities-grid {
+    grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+    grid-template-rows: max-content;
+    grid-auto-rows: max-content;
     width: 98%;
+    overflow-y: auto;
+    gap: var(--common-margin);
+}
+
+div[data-class="team-photo"] {
+    height: calc(var(--icon-main-size) * 1.5);
+    width: calc(var(--icon-main-size) * 1.5);
+    border: 2px solid var(--yellow-dark);
+    margin: var(--common-margin) auto; 
+}
+
+h4[data-class="team-name"] {
+    font-size: calc(var(--content-header-font-size) * 0.8);
+}
+
+p[data-class="team-number"] {
+    font-size: calc(var(--content-main-font-size) * 0.8);
+}
+
+p[data-class="joined"],
+button[data-class="connect"] {
+    font-size: calc(var(--content-main-font-size) *0.8);
+    padding: calc(var(--common-padding) * 0.8);
 }
 
 
 
-
+/* communities-grid (end) - */
 
 /* modal styling */
     dialog.projectModal, 
@@ -2089,14 +2227,19 @@ div#tasks-grid div {
         font-size: calc(var(--content-header-font-size) * 1.3);
     }
     
+    dialog.announceModal {
+        min-height: 300px;
+        height: 50%;
+        overflow: auto;
+    }
 }
 
 
 
 
-/* scroll-bar styling */
+/* scroll-bar styling (start) - */
 
-/* firefox scrollbar */
+/* firefox scrollbar -- */
 section#projects > div#projects-grid,
 section#announcements > div#announce-grid,
 section#team > div#team-grid,
@@ -2113,8 +2256,8 @@ section#messages > div#messages-grid:hover {
     scrollbar-color: var(--light-green) var(--dark-base);
 }
 
-/* Webkit scroll-bar */
-/* Initially hides scroll-bar */
+/* Webkit scroll-bar -- */
+/* Initially hides scroll-bar --- */
 ::-webkit-scrollbar {
     width: 5px;
 }
@@ -2134,14 +2277,15 @@ section#messages > div#messages-grid:hover {
     visibility: hidden;
 }
 
-/* Shows scroll-bar on hover */
+/* Shows scroll-bar on hover -- */
 section#content-dash:hover::-webkit-scrollbar-track,
 div#projects-grid:hover::-webkit-scrollbar-track,
 div#profile-grid:hover::-webkit-scrollbar-track,
 div#announce-grid:hover::-webkit-scrollbar-track,
 div#team-grid:hover::-webkit-scrollbar-track,
 div#messages-grid:hover::-webkit-scrollbar-track,
-div#tasks-grid:hover::-webkit-scrollbar-track {
+div#tasks-grid:hover::-webkit-scrollbar-track,
+div#communities-grid:hover::-webkit-scrollbar-track {
     visibility: visible;
 }
 
@@ -2151,23 +2295,26 @@ div#profile-grid:hover::-webkit-scrollbar-thumb,
 div#announce-grid:hover::-webkit-scrollbar-thumb,
 div#team-grid:hover::-webkit-scrollbar-thumb,
 div#messages-grid:hover::-webkit-scrollbar-thumb,
-div#tasks-grid:hover::-webkit-scrollbar-thumb {
+div#tasks-grid:hover::-webkit-scrollbar-thumb,
+div#communities-grid:hover::-webkit-scrollbar-thumb {
     visibility: visible;
 }
 
 
-/* section display toggler */
+/* section display toggler --- */
 section#projects.minimized,
 section#profile.minimized,
 section#messages.minimized,
-section#tasks.minimized {
+section#tasks.minimized,
+section#communities.minimized {
     display: none;
 }
-/* widgets toggler */
+/* widgets toggler --- */
 div#projects-widget.minimized,
 div#profile-widget.minimized,
 div#messages-widget.minimized,
-div#tasks-widget.minimized {
+div#tasks-widget.minimized,
+div#communities-widget.minimized {
     display: none;
 }
 
@@ -2175,3 +2322,4 @@ section#sub-header.minimized,
 section#content-divider.minimized {
     display: none;
 }
+/* scroll-bar styling (end) - */

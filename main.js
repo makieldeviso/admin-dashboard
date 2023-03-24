@@ -47,6 +47,7 @@ const projects = document.querySelector("section#projects");
 const profile = document.querySelector("section#profile");
 const messages = document.querySelector("section#messages");
 const tasks = document.querySelector("section#tasks");
+const communities = document.querySelector("section#communities");
 
 const widgetPlacement = document.querySelector("div#widget-placement");
 const widgets = document.querySelector("div#widgets");
@@ -54,6 +55,7 @@ const projectsWidget = document.querySelector("div#projects-widget");
 const profileWidget = document.querySelector("div#profile-widget");
 const messagesWidget = document.querySelector("div#messages-widget");
 const tasksWidget = document.querySelector("div#tasks-widget");
+const communitiesWidget = document.querySelector("div#tasks-widget");
 
 const projectGrid = document.querySelector("div#projects-grid");
 const messagesGrid = document.querySelector("div#messages-grid");
@@ -110,6 +112,7 @@ let projectsSection = new Sections ("projects", projects, projectsWidget, "Your 
 let profileSection = new Sections ("profile", profile, profileWidget, "Profile");
 let messagesSection = new Sections ("messages", messages, messagesWidget, "Messages");
 let tasksSection = new Sections ("tasks", tasks, tasksWidget, "Tasks");
+let communitiesSection = new Sections ("communities", communities, communitiesWidget, "Communities");
 // Creates Section Object Area (start) -----
 
 // Toggle content section function (start) ----

@@ -77,13 +77,19 @@ const projectButtons = document.querySelectorAll("ul#action-buttons button");
         button.addEventListener("click", errorModalShow);
     });
 
-// Messages placeholder global variables (start) -
-let baseDate = Date.parse(new Date("March 21, 2023")); // this is timeStamp
+// Some global variables (start) -
+// Gets currentDate
+let toDate = new Date();
+let todayMonth = new Intl.DateTimeFormat("en-US", {month: "long"}).format(toDate);
+let todayDay = new Date(toDate).getDate();
+let todayYear = new Date(toDate).getFullYear();
+let fullDate = `${todayMonth} ${todayDay}, ${todayYear}`;
+
+let baseDate = Date.parse(new Date(fullDate)); // this is timeStamp
 let oneDay = 86400000; // one day in milliseconds
 let inboxUnopened;
 let messageNumber = 50;
-// Messages placeholder global variables (end) -
-
+// Some global variables (end) -
 
 // Toggle content Sections (start) -----
 // Sections Object Constructor (start) ----
@@ -632,7 +638,7 @@ let announcement1 = new Announcement(
     "Site Maintenance", // Subject
     "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat earum sapiente perferendis veritatis corrupti eaque nemo ullam animi et, ut repellat mollitia amet quas beatae, totam temporibus necessitatibus adipisci consequatur.", // Content
     "2023-03-14", // dateTime YYYY-MM-DD
-    "March 14, 2023",
+    fullDate,
     "May R. Pailjar"
 );
 

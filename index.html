@@ -25,7 +25,6 @@
                         <button>
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
-                        <!-- <input type="text"> -->
                     </div>
 
                     <div id="notification">
@@ -73,7 +72,7 @@
                 
                 <h3>Dashboard</h3>
                 <nav>
-                    <ul>
+                    <ul id="sections">
                         <li>
                             <button data-id="projects" class="clicked">
                                 <i class="fa-solid fa-house"></i>
@@ -111,7 +110,7 @@
                     </ul>
 
 
-                    <ul>
+                    <ul id="settings">
                         <li>
                             <button data-id="settings">
                                 <i class="fa-solid fa-gear"></i>
@@ -137,6 +136,7 @@
             </section> <!-- #sidebar (end)-->
 
             <section id="content-divider">
+            <h3 style="display:none">content-divider</h3>
                 <nav>
                     <ul>
                         <li>
@@ -154,8 +154,10 @@
         </div>
 
         <section id="content-dash">
+        <h3 style="display:none">content-dash</h3>
 
             <section id="content-main" data-page="content-main">
+            <h3 style="display:none">content-main</h3>
                 <section id="projects" data-page="projects" data-section="projects">
                     <h3>Your projects</h3>
                     <div id="projects-grid"></div>
@@ -204,7 +206,7 @@
                         <p>
                             <i class="fa-solid fa-mobile-screen"></i>
                             <span data-class="label">Phone: </span> 
-                            <tel>+63 123 456 789</tel>
+                            <span>+63 123 456 789</span>
                         </p>
                     </div>
         
@@ -311,13 +313,6 @@
                             <button data-class="connect">Connect</button>
                         </div>
                     </div>
-
-
-
-
-
-
-
                 </div>
             </section>
     
@@ -365,8 +360,6 @@
 
         </div>
         
-
-        <!-- <section id="community"></section> -->
     </div>
 </body>
 </html>

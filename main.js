@@ -4,6 +4,11 @@ const menuContainer = document.querySelector("div#menu");
     window.addEventListener("load", reposition);
 
 const headerBar = document.querySelector("section#header-bar");
+const searchButton = document.querySelector("div#search button");
+    searchButton.addEventListener("click", errorModalShow);
+const notificationButton = document.querySelector("div#notification button");
+    notificationButton.addEventListener("click", errorModalShow);
+
 
 const subHeader = document.querySelector("section#sub-header");
 
@@ -32,11 +37,16 @@ const announceGrid = document.querySelector("div#announce-grid");
 const teamSection = document.querySelector("section#team");
 const teamGrid = document.querySelector("div#team-grid");
 
-const sideBarButtons = document.querySelectorAll("section#sidebar nav button");
+const sideBarButtons = document.querySelectorAll("ul#sections button");
     sideBarButtons.forEach(button => {
         checkElementAddEvent(button, "click", toggleSection);
         checkElementAddEvent(button, "click", toggleSidebar);
     });
+
+const settingsButtons = document.querySelectorAll("ul#settings button");
+settingsButtons.forEach(button => {
+    checkElementAddEvent(button, "click", errorModalShow);
+});
 
 const completedTally = document.querySelector("span#completed-task");
 const ongoingTally = document.querySelector("span#ongoing-task");
@@ -161,8 +171,6 @@ function toggleSection() {
     });
 
     this.classList.add("clicked");
-
-
 }
 // Toggle content section function (end) -
 // toggle content Sections (end) -
@@ -542,8 +550,6 @@ function addUserProject(projectArray) {
         //Appends ProgressDiv to dialogDiv
         dialogDiv.appendChild(progressDiv);
 
-
-
         // Reusable function to Add link to modal
         // dataAttribute -> adds dataset.link attribute, you specify attribute value
         // labelText -> Specify label for the link eg. "Code:"
@@ -818,7 +824,7 @@ class member {
 // Adds a Member
 let member1 = new member(
     "member1", // id
-    "profile.png", // profilePicture
+    "pic1.jpg", // profilePicture
     "May R. Pailjar", // userName
     "@may", // address
     "online" // status
@@ -826,7 +832,7 @@ let member1 = new member(
 
 let member2 = new member(
     "member2", // id
-    "profile.png", // profilePicture
+    "pic2.jpg", // profilePicture
     "Arvin R. Noyrin", // userName
     "@arvin", // address
     "offline" // status
@@ -834,7 +840,7 @@ let member2 = new member(
 
 let member3 = new member(
     "member3", // id
-    "profile.png", // profilePicture
+    "pic3.jpg", // profilePicture
     "Joshua A. Hwang", // userName
     "@joshua", // address
     "do not disturb" // status
@@ -842,7 +848,7 @@ let member3 = new member(
 
 let member4 = new member(
     "member4", // id
-    "profile.png", // profilePicture
+    "pic4.jpg", // profilePicture
     "Christian J. Bardz", // userName
     "@christian", // address
     "idle" // status
@@ -850,7 +856,7 @@ let member4 = new member(
 
 let member5 = new member(
     "member5", // id
-    "profile.png", // profilePicture
+    "pic5.jpg", // profilePicture
     "Rain R. Nature", // userName
     "@rain", // address
     "online" // status
@@ -858,7 +864,7 @@ let member5 = new member(
 
 let member6 = new member(
     "member6", // id
-    "profile.png", // profilePicture
+    "pic6.jpg", // profilePicture
     "Charles O. Stephen", // userName
     "@charles", // address
     "offline" // status

@@ -131,6 +131,13 @@ div#options-icons button { /* buttons*/
     font-size: var(--brand-font-size);
     text-shadow: 0 0 3px var(--dark-base); 
 }
+
+div#options-icons button:hover,
+div#options-icons button:focus {
+    filter: brightness(0.95);
+    cursor: pointer;
+}
+
 /* div#options-icons (end)*/
 /* section#header-bar (end)*/
 
@@ -210,7 +217,6 @@ div#user-detail h3 {
 div#user-detail h3 {
     grid-column: 1/3;
 }
-
 /* div#profiler (start) ----- */
 
 /* div#widget-placement (start) - */
@@ -601,7 +607,6 @@ div#projects-grid {
 }
 
 div#projects-grid div[data-class="project-box"] {
-    
     border: 1px solid var(--bamboo-green);
     border-left: 10px double var(--yellow-dark);
     border-radius: 10px 0 0 10px;
@@ -781,6 +786,7 @@ dialog.errorModal h4 {
 
     max-width: 100%;
     min-height: max-content;
+    padding: 0 var(--common-padding);
 }
 
 dialog.errorModal i[data-id='fix-icon'] {
@@ -790,10 +796,25 @@ dialog.errorModal i[data-id='fix-icon'] {
     color: var(--light-font);
 }
 
+dialog.errorModal {
+    min-height: max-content;
+    height: max-content;
+    padding-bottom: var(--common-padding);
+}
+
+dialog.errorModal p {
+    font-size: calc(var(--content-main-font-size) * 1.2);
+    padding: 0 var(--common-padding);
+}
+
+
 dialog.errorModal p#error-author {
     text-align: end;
     font-weight: bolder;
+    padding: 0 var(--common-padding);
 }
+
+
 dialog.errorModal {
     border: 2px solid red;
 }
@@ -805,6 +826,7 @@ dialog.projectModal div[data-detail="details"] {
     flex-direction: column;
 
     height: 50%;
+    padding: 0 var(--common-padding);
 
     margin-bottom: calc(var(--common-margin) * 5);
 }
@@ -813,11 +835,15 @@ dialog.projectModal div[data-detail="details"] p,
 dialog.announceModal p,
 dialog.announceModal time {
     font-size: calc(var(--content-main-font-size) * 1.2);
+
     margin-bottom: calc(var(--common-margin) * 2);
+    padding: 0 var(--common-padding);
 }
 
 dialog.announceModal div.modalDiv p[data-message="message"] {
     flex: 1;
+
+    padding: 0 var(--common-padding);
 }
 
 dialog.projectModal div[data-preview="preview"] {
@@ -831,6 +857,7 @@ dialog.projectModal div[data-preview="preview"] {
     border-left: 10px double var(--dark-green);
     border-radius: 5px 0 0 5px;
     margin: auto;
+    padding: 0 var(--common-padding);
 }
 
 dialog.projectModal div[data-link] {
@@ -839,6 +866,7 @@ dialog.projectModal div[data-link] {
     gap: 1rem;
 
     height: max-content;
+    padding: 0 var(--common-padding);
 }
 
 
@@ -848,6 +876,7 @@ dialog.projectModal div[data-link] > p {
     height: 100%;
     min-width: max-content;
     width: calc(115px + 1vw);
+    padding: 0 var(--common-padding);
 }
 
 dialog.projectModal div[data-link] > a {
@@ -1571,20 +1600,7 @@ p[data-class="joined"] {
     border: unset;
     border-radius: unset;
 }
-
-
-
 /* Communities (end) - */
-
-
-
-
-
-
-
-
-
-
 
 
 /* Small screen-size, galaxy fold as reference */
@@ -1793,6 +1809,7 @@ p[data-class="joined"] {
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: var(--common-margin);
     }
+    
 }
 
 /* Desktop */
@@ -2048,6 +2065,7 @@ p[data-class="joined"] {
         grid-auto-rows:  minmax(250px, 45%);
 
         width: 98%;
+        padding-right: var(--common-padding);
         overflow-y: auto;
     }
 
@@ -2078,7 +2096,9 @@ p[data-class="joined"] {
             "main time";
         gap: var(--common-margin);
         row-gap: calc(var(--common-margin) * 2) ;
+
         width: 98%;
+        padding-right: var(--common-padding);
 
         flex: 1;
 
@@ -2184,6 +2204,7 @@ div#communities-grid {
     width: 98%;
     overflow-y: auto;
     gap: var(--common-margin);
+    padding-right: var(--common-padding);
 }
 
 div[data-class="team-photo"] {
@@ -2231,6 +2252,11 @@ button[data-class="connect"] {
         min-height: 300px;
         height: 50%;
         overflow: auto;
+    }
+
+    dialog.errorModal {
+        min-height: max-content;
+        height: max-content;
     }
 }
 

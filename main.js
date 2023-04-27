@@ -96,29 +96,31 @@ let messageNumber = 50;
 let sectionsObjArray = [];
 let screenWidth;
 
-class Sections {
-    constructor (id, sectionElement, sectionWidget, name) {
-        this.id = id;
-        this.sectionElement = sectionElement;
-        this.sectionWidget = sectionWidget;
-        this.minimize = (()=>{
-            sectionElement.classList.add("minimized");
-            sectionWidget.classList.add("minimized");
-        });
 
-
-        this.maximize = (()=>{
-            sectionElement.classList.remove("minimized");
-            sectionWidget.classList.remove("minimized");
-        });
-
-        // Used for smaller screens where content divider is displayed
-        this.renameButton = ()=>{contentMainButton.textContent = name};
-
-
-        sectionsObjArray.push(this);
-    }
+function Sections (id, sectionElement, sectionWidget, name) {
+    this.id = id;
+    this.sectionElement = sectionElement;
+    this.sectionWidget = sectionWidget;
+    this.name = name;
+   
+    sectionsObjArray.push(this);
 }
+
+Sections.prototype.minimize = function () {
+    this.sectionElement.classList.add("minimized");
+    this.sectionWidget.classList.add("minimized");
+}
+
+Sections.prototype.maximize = function () {
+    this.sectionElement.classList.remove("minimized");
+    this.sectionWidget.classList.remove("minimized");
+}
+
+// Rename tab label on smaller screens
+Sections.prototype.renameButton = function () {
+    contentMainButton.textContent = `${this.name}`;
+}
+
 // Sections Object Constructor (end) ----
 
 // Creates Section Object Area (start) -----
@@ -134,7 +136,6 @@ let communitiesSection = new Sections ("communities", communities, communitiesWi
 // Toggle content section function (start) ----
 function toggleSection() {
     let buttonId = this.dataset.id;
-    console.log(buttonId);
 
     let targetObject;
 
@@ -263,23 +264,18 @@ let ongoingProjects = 0;
 let nysProjects = 0;
 
 let userProjectsArray = [];
-class UserProjects {
-    constructor(id, projectName, description, preview, commend, feedback, fork, progress, codeSite, liveSite) {
-        this.id = id;
-        this.projectName = projectName;
-        this.description = description;
-        this.preview = preview;
-        // this.commendIcon = `<i class="fa-solid fa-leaf">`;
-        this.commend = commend;
-        // this.feedbackIcon = `<i class="fa-regular fa-message">`;
-        this.feedback = feedback;
-        // this.forkIcon = `<i class="fa-solid fa-code-fork">`;
-        this.fork = fork;
-        this.progress = progress;
-        this.codeSite = codeSite;
-        this.liveSite = liveSite;
-        userProjectsArray.push(this);
-    }
+function UserProjects (id, projectName, description, preview, commend, feedback, fork, progress, codeSite, liveSite) {
+    this.id = id;
+    this.projectName = projectName;
+    this.description = description;
+    this.preview = preview;
+    this.commend = commend;
+    this.feedback = feedback;
+    this.fork = fork;
+    this.progress = progress;
+    this.codeSite = codeSite;
+    this.liveSite = liveSite;
+    userProjectsArray.push(this);
 }
 
 // Project constructor: Constructs projects as objects
@@ -439,15 +435,13 @@ function addUserProject(projectArray) {
 
         // Creates reusable button creator object
         let buttonSpec = [];
-        class buttonSpecObj {
-            constructor (action, class1, class2) {
-                this.action = action;
-                this.class1 = class1;
-                this.class2 = class2;
-                buttonSpec.push(this);
-            }
+        function buttonSpecObj (action, class1, class2) {
+            this.action = action;
+            this.class1 = class1;
+            this.class2 = class2;
+            buttonSpec.push(this);
         }
-
+        
         let commendSpec = new buttonSpecObj("commend", "fa-solid", "fa-leaf");
         let feedbackSpec = new buttonSpecObj("feedback", "fa-regular", "fa-message");
         let forkSpec = new buttonSpecObj("fork", "fa-solid", "fa-code-fork");
@@ -620,16 +614,14 @@ function hoverEvent(event) {
 
 // Announcement Constructor
 let announcementsArr = [];
-class Announcement {
-    constructor (id, subject, content, dateTime, dateText, author) {
-        this.id = id;
-        this.subject = subject;
-        this.content = content;
-        this.dateTime = dateTime;
-        this.dateText = dateText;
-        this.author = author;
-        announcementsArr.push(this);
-    }
+function Announcement (id, subject, content, dateTime, dateText, author) {
+    this.id = id;
+    this.subject = subject;
+    this.content = content;
+    this.dateTime = dateTime;
+    this.dateText = dateText;
+    this.author = author;
+    announcementsArr.push(this);
 }
 
 // Announcement Constructor: Creates announcements
@@ -816,19 +808,17 @@ function addAnnouncement(announcements) {
 
 // Team Constructor
 let teamMembersArray = [];
-class member {
-    constructor (id, profilePicture, username, address, status) {
-        this.id = id;
-        this.profilePicture = profilePicture;
-        this.username = username;
-        this.address = address;
-        this.status = status;
-        teamMembersArray.push(this);
-    }
+function Member (id, profilePicture, username, address, status) {
+    this.id = id;
+    this.profilePicture = profilePicture;
+    this.username = username;
+    this.address = address;
+    this.status = status;
+    teamMembersArray.push(this);
 }
 
 // Adds a Member
-let member1 = new member(
+let member1 = new Member(
     "member1", // id
     "pic1.jpg", // profilePicture
     "May R. Pailjar", // userName
@@ -836,7 +826,7 @@ let member1 = new member(
     "online" // status
 );
 
-let member2 = new member(
+let member2 = new Member(
     "member2", // id
     "pic2.jpg", // profilePicture
     "Arvin R. Noyrin", // userName
@@ -844,7 +834,7 @@ let member2 = new member(
     "offline" // status
 );
 
-let member3 = new member(
+let member3 = new Member(
     "member3", // id
     "pic3.jpg", // profilePicture
     "Joshua A. Hwang", // userName
@@ -852,7 +842,7 @@ let member3 = new member(
     "do not disturb" // status
 );
 
-let member4 = new member(
+let member4 = new Member(
     "member4", // id
     "pic4.jpg", // profilePicture
     "Christian J. Bardz", // userName
@@ -860,7 +850,7 @@ let member4 = new member(
     "idle" // status
 );
 
-let member5 = new member(
+let member5 = new Member(
     "member5", // id
     "pic5.jpg", // profilePicture
     "Rain R. Nature", // userName
@@ -868,7 +858,7 @@ let member5 = new member(
     "online" // status
 );
 
-let member6 = new member(
+let member6 = new Member(
     "member6", // id
     "pic6.jpg", // profilePicture
     "Charles O. Stephen", // userName
